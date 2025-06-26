@@ -1,0 +1,122 @@
+
+GIT 
+#######################
+(1) Install git in local system.
+(2) Configure name & email using following commands (One time configuration).
+(3) To see all Git configurations (both global and local):
+           git config --list
+(4) To Git Configurations :
+-> git config --global user.name "<your-username>"
+-> git config --global user.email "<your-email>"
+(5) To delete username and email (globally) :
+-> git config --global --unset user.name    (just run this much only no need to give username or email becoz it's global which will apply on all to unset)
+-> git config --global --unset user.email
+(6) Unset (delete) the local user config for the current repository:  Make sure you are inside the repository folder
+-> git config --unset user.name
+-> git config --unset user.email
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GIT COMMANDS:=
+#################################
+
+(1) git init
+------------------
+
+(2) git status
+-----------------
+
+(3) git add:
+-> git add <file -name/ A.txt> 
+-> git add <all file / . > 
+--------------------------------
+
+(4) git reset : used before commit to back into staging file to untrack
+-> git reset A.txt
+----------------------------------------------------------------------------
+
+(5) git Commit:
+-> git commit -m "Commit message describing changes"
+-----------------------------------------------------
+
+
+(6) git push:
+-> git branch -M main : This renames your current branch (usually master by default) to main, -M stands for move/rename forcefully, even if main already exists.
+
+-> git remote add origin https://github.com/mera786/test5.git:  Adds a remote repository with the name origin pointing to your GitHub repo URL, where origin is just a conventional alias — you can 
+                                                                absolutely give it your own name, ex- git remote add github-prod https://github.com/mera786/test5.git
+
+-> git push -u github-prod main  : now Now instead of origin, you'd push like this: git push -u github-prod main
+
+-> git push   :  and -u sets up a tracking relationship, so future pushes can just use:  git push
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+(7) to check remote :
+-> git remote -v : output like, origin  https://github.com/meraz786/test5.git (fetch)
+                                origin  https://github.com/meraz786/test5.git (push)
+--------------------------------------------------------------------------------------
+(8) git restore (at least once needed commit):
+->  git restore <file-name/ A.txt> : Discard local (uncommitted) changes
+-> git restore --staged <file-name / A.txt > : staged to Unstage using restore.
+-------------------------------------------------------------------------------------
+
+(9) git log:
+-> git log
+-> git log --oneline
+---------------------------- 
+
+(10) git clone :
+-> git clone <repository-url>
+-------------------------------
+
+(11) git rm : once you have uploaded code on github but from there also want to remove
+-> git rm <file_name.txt>
+-> git commit -m "Remove test.txt"
+-> git push origin main
+----------------------------------------------
+
+(12) git pull:  once clone then point to current directory of project and open it using git bash
+-> git pull origin main (first this one) 
+-> git pull ( next time this if same work space)
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+(13) Git With Intellij
+###################################################
+
+FOR PUSH :
+(1) create a spring boot project -> open project in intellij
+(2) if not enabled git in intellij then enable it ( in my intellij idea enabled)
+(3) beside project find version control -> create local repo pointing to same folder of project
+(4) do commit -> git push ( provide url of remote repo )
+
+FOR PULL:
+(1) open same project and point to same branch where you have work on like, main or master
+(2) OPTION 1: Commit Your Local Changes First (if you want to keep them) : 
+git add .
+git commit -m "Saving my local changes"
+git pull origin main
+
+(3) OPTION 2: Discard Your Local Changes (if you don’t need them):
+git restore src/main/resources/application.properties
+git pull origin main
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+(14) git pull versus git fetch
+
+
+
+
+
+
+-----------------------------------------The End------------------------------------------------------------------------------
+
+
+
+
+

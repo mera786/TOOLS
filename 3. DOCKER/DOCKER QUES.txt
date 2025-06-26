@@ -1,0 +1,15 @@
+(1) what is Docker?
+(2) Advantage Of Docker?
+(3) Disadvantage Of Docker?
+(4) Explain Docker Architecture?
+(5) What is containerization?
+(6) Explain Docker Component / Docker EcoSystem?
+(7) what is difference between Docker Component and Docker Architecture?
+(8) How many ways to create Docker image?
+(9) what is container?
+(10) Tell How to Install Docker In Amazon Linux?
+(11) Tell some Important Docker Commands?
+(12) What is Port Mapping Docker?
+(13) How to Run Image and access from browser?
+(14) How to create docker file? Create Docker Image? push that to docker hub?
+(15) i want to do Dockerizing Spring boot application tells the steps (real scinario)?

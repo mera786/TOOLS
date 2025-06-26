@@ -1,0 +1,10 @@
+(1) What is maven?
+(2) How to set up maven in local system ?
+(4) What is groupId? 
+(5) what is artifact ?
+(6) what is the difference between groupId and artifactId?
+(7) what is SNAPSHOT?
+(8) What are the types of Repositories?
+(9) What are Maven Goals?
+(10) What is Dependency Exclusion?
+(11) What is the difference between transitive dependencies and starter depenecies?

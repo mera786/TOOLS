@@ -1,0 +1,6 @@
+(1) Build and deployment process?
+(2) what is Jenkins CI/CD?
+(3) Explain Jenkins CI/CD Workflow?
+(4) can you explain Pipeline Structure of Groovy-based syntax?
+(5) Tell steps for Jenkins Server Setup in Linux VM?
+(4) Tell steps Setup Docker in Jenkins?

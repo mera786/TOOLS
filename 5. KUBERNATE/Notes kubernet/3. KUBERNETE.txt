@@ -1,0 +1,742 @@
+
+for validiting yml indentation use this url : https://www.yamllint.com/
+
+######################################################################################################################################################################
+                                                                       Minikube Setup
+######################################################################################################################################################################
+
+## Step-1 : Setup Linux VM
+
+1) Login into AWS Cloud account
+2) Create Linux VM with Ubuntu AMI (t2.medium or t3.medium)
+3) Select Storage as 50 GB (Default is 8 GB only for Linux)
+2) Create Linux VM and connect to it using SSH Client
+------------------------------------------------------------------------------------------------------------
+
+## Step-2 : Install Docker In Ubuntu VM
+
+sudo apt update
+curl -fsSL get.docker.com | /bin/bash
+sudo usermod -aG docker ubuntu 
+exit
+
+
+## Step-3 : Updating system packages and installing Minikube dependencies
+
+sudo apt update
+sudo apt install -y curl wget apt-transport-https
+------------------------------------------------------------------------------------------------------------
+
+## Step-4 : Installing Minikube
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+minikube version
+
+
+## Step-5 : Install Kubectl (Kubernetes Client)
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+kubectl version -o yaml
+
+
+
+## Step-6 : Start MiniKube Server
+
+minikube start — driver=docker
+
+
+
+
+## Step-7 : Check MiniKube status
+
+(a) 
+
+minikube status
+
+(b) 
+minikube stop
+
+(c) 
+
+minikube delete
+
+
+
+
+
+## Step-8 : Access K8S Cluster
+
+kubectl cluster-info
+
+
+
+## Step-9 : Access K8S Nodes
+
+kubectl get nodes
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Setup Completed $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+              ((POD)) : USING POD DEPLOYE ON KUBERNETES
+
+# step-1: Pod Manifest YAML to see a simple Pod definition
+
+(a) create .yml file any named like, pod-service.yml and Save bellow content in .yml file
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod           # ( it's given name for our pod through which kubernetes will interact )
+  labels:
+    app: demoapp          # ( it's spring boot project name )
+spec:
+  containers:
+    - name: test
+      image: psait/pankajsiracademy:latest
+      ports:
+        - containerPort: 9090
+...
+
+
+(b) now use bellow commands to work on .yml file 
+
+# execute manifest yml
+kubectl apply -f <manifest-yml-file>     /  kubectl apply -f pod-service.yml
+
+
+# check pods
+kubectl get pods
+
+
+# check pod logs
+kubectl logs <pod-name>           / kubectl logs testpod
+
+
+# Describe pods
+kubectl describe pod <pod-name>       / kubectl describe pod testpod
+
+# Delete Pod
+kubectl delete pod testpod
+
+
+
+***************************TO TEST THIS POD *****************
+
+-> run this command to go inside the container of the Pod testpod :  kubectl exec -it testpod -- /bin/bash now will get like this, bash-4.4#
+-> now run curl http://localhost:9090   or curl http://localhost:9090/hello/welcome
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+                      ((SERVICE)) : USING SERVICE DEPLOYE ON KUBERNETES
+
+# step-1: K8s Service Manifest YAML (for your Pod)
+
+(a) create .yml file any named like, service.yml and Save bellow content in .yml file
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: testpod-service
+spec:
+  type: NodePort
+  selector:
+    app: demoapp           # This must match the Pod's label
+  ports:
+    - port: 80             # Exposed port for external access
+      targetPort: 9090     # Port on which the app is running inside the container
+      nodePort: 30080      # External port exposed on each node
+...
+
+
+
+(b) now use bellow commands to work on .yml file
+
+# 📦 Create the service using the YAML
+kubectl apply -f service.yml
+
+# 🔁 Verify that the service is created / Check existing services
+kubectl get svc
+
+# for Test
+#Get address
+
+minikube ip
+
+
+Test this in same local network
+
+curl http://<mini-kube-ip>:3080
+curl http://192.168.49.2:30080
+
+
+# To see all resources running
+kubectl get all
+
+# To Delete Service 
+kubectl delete svc testpod-service
+
+# To delete all resources use
+kubectl delete all --all
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                           How to create name space in k8s ( namespace= folder )
+
+
+1. Using kubectl command-
+kubectl create namespace backend-ns
+
+
+2.using manifest yml file . (created vi test-space.yml)
+
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: backend-ns
+... 
+
+
+
+
+
+COMPLETE EXAMPLE: Namespace with POD with Service creation yml file
+
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: backend-ns
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod
+  namespace: backend-ns
+  labels:
+    app: demoapp
+spec:
+  containers:
+    - name: test
+      image: psait/pankajsiracademy:latest
+      ports:
+        - containerPort: 9090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: testpod-service
+  namespace: backend-ns
+spec:
+  type: NodePort
+  selector:
+    app: demoapp           # This must match the Pod's label
+  ports:
+    - port: 80             # Exposed port for external access
+      targetPort: 9090     # Port on which the app is running inside the container
+      nodePort: 30080      # External port exposed on each node
+...
+
+
+# to find ip
+minikube ip
+
+Note:- to test url is  curl http://<192.168.49.2>:30080
+
+# execute manifest yml
+kubectl apply -f <yml-file-name>
+
+#list all name spaces
+kubectl get ns
+
+
+
+#list all pods in given name space
+kubectl get pods -n <name-space>
+
+
+# get all resources belongs to backend-ns namespace
+kubectl get all -n backend-ns
+
+#get all worker nodes
+kubectl get nodes
+
+
+#delete name space - All resource related to that will be deleted
+kubectl delete ns backend-ns
+
+#Open tunnel
+minikube service <service-name>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+                                                    PRACTICLE ON ReplicationController :
+                                                   #########################################
+
+(a) create one rc.yml file using vi command
+
+(b) paste bellow yml content :
+
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+ name: webapp
+spec:
+ replicas: 3
+ selector:
+  app: demoapp
+ template:
+  metadata:
+   name: testpod
+   labels: 
+    app: demoapp
+  spec:
+   containers:
+    - name: webappcontainer
+      image: psait/pankajsiracademy:latest
+      ports:
+      - containerPort: 9090
+...
+
+(c) use below commands :
+
+kubectl apply -f rc.yml
+
+kubectl get all
+
+kubectl get pods
+
+kubectl delete pod <pod-name>
+
+kubectl get pods
+
+kubectl scale rc webapp --replicas=5    # ✅ Correct
+
+kubectl scale rc webapp --replicas=1   # ✅ Correct - Explanation: reduces replicas to 1
+
+# After Testing Delete RC
+kubectl delete -f rc.yml
+
+# OR
+kubectl delete rc webapp
+
+Note:- your pods should exact match with either, service selector or replicas selector matchLabels .... if many service,resource with pod then it should mathc etc
+       here In operator not work.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                     PRACTICLE ON REPLICASET
+                                 ##################################
+
+(1) create one rs.yml file using vi command and it is without In operator 
+
+
+(2) paste bellow yml content :
+
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demoapp         # Must match pod template labels
+  template:
+    metadata:
+      labels:
+        app: demoapp
+    spec:
+      containers:
+        - name: webappcontainer
+          image: psait/pankajsiracademy:latest
+          ports:
+            - containerPort: 9090
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webappservice
+spec:
+  type: NodePort
+  selector:
+    app: demoapp           # Must match pod labels
+  ports:
+    - port: 80
+      targetPort: 9090
+      nodePort: 30095
+
+(c) use below commands :
+
+kubectl apply -f rs.yml
+
+kubectl get all
+
+kubectl get pods
+
+kubectl delete pod <pod-name>
+
+kubectl get pods
+
+kubectl scale rs webapp --replicas=9    # ✅ Correct - scales pods to 9
+
+kubectl scale rs webapp --replicas=1    # ✅ Correct - reduces to 1
+
+# Delete RS
+kubectl delete -f rs.yml
+# OR
+kubectl delete rs webapp
+
+
+
+(1.1) create one rs.yml file using vi command and it is with In operator ( only see example because In operator helpful for various reason )
+
+# -------- Manually created Pod with label app: myapp --------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+    - name: myappcontainer
+      image: psait/pankajsiracademy:latest
+      ports:
+        - containerPort: 80
+
+---
+# -------- Manually created Pod with label app: demoapp --------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demoapp-pod
+  labels:
+    app: demoapp
+spec:
+  containers:
+    - name: demoappcontainer
+      image: psait/pankajsiracademy:latest
+      ports:
+        - containerPort: 80
+
+---
+# -------- ReplicaSet that manages both app: demoapp and app: myapp --------
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-webapp
+spec:
+  replicas: 2
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - demopapp
+          - myapp
+  template:
+    metadata:
+      labels:
+        app: demoapp   # Pods created by RS will have this label
+    spec:
+      containers:
+        - name: webappcontainer
+          image: psait/pankajsiracademy:latest
+          ports:
+            - containerPort: 80 
+
+
+
+
+                                    ##################################
+                                    PRACTICLE ON deployment-service
+                                    #################################
+
+(1) create a vi deployment-service.yml file
+
+(2) paste bellow content in it:
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demoapp         # Must match pod template labels
+  template:
+    metadata:
+      labels:
+        app: demoapp
+    spec:
+      containers:
+        - name: webappcontainer
+          image: psait/pankajsiracademy:latest
+          ports:
+            - containerPort: 9090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webappservice
+spec:
+  type: NodePort
+  selector:
+    app: demoapp           # Must match pod labels
+  ports:
+    - port: 80
+      targetPort: 9090
+      nodePort: 30095
+
+
+(c) use below commands :
+
+kubectl apply -f deployment-service.yml
+
+kubectl get all
+
+kubectl get pods
+
+kubectl delete pod <pod-name>
+
+kubectl get pods
+
+kubectl scale deployment webapp --replicas=5    # ✅ Correct - scales deployment to 5 pods
+
+kubectl scale deployment webapp --replicas=1    # ✅ Correct - reduces to 1 pod
+
+# Delete Deployment + Service
+kubectl delete -f deployment-service.yml
+# OR
+kubectl delete deployment webapp
+kubectl delete service webappservice
+
+
+
+                                                  ########################################
+                                                    Deployment Service with load balancer
+                                                  #########################################
+
+(1) create vi file named deploymet-serLbr
+
+(2) paste bellow content in it:
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dempapp         # Must match pod template labels
+  template:
+    metadata:
+      labels:
+        app: dempapp
+    spec:
+      containers:
+        - name: webappcontainer
+          image: psait/pankajsiracademy:latest
+          ports:
+            - containerPort: 9090
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webappservice
+spec:
+  type: LoadBalancer     # ✅ Changed from NodePort to LoadBalancer
+  selector:
+    app: dempapp
+  ports:
+    - port: 80
+      targetPort: 9090
+
+
+(c) use below commands :
+
+# Apply the deployment and service
+kubectl apply -f deployment-service.yml
+
+# See all Kubernetes resources
+kubectl get all
+
+# List all pods
+kubectl get pods
+
+# Delete a single pod (K8s will auto-recreate it)
+kubectl delete pod <pod-name>
+
+# Confirm pods are re-created
+kubectl get pods
+
+# Scale the Deployment to 5 replicas
+kubectl scale deployment webapp --replicas=5
+
+# Scale the Deployment down to 1 replica
+kubectl scale deployment webapp --replicas=1
+
+# Delete everything created from YAML
+kubectl delete -f deployment-service.yml
+
+# OR delete individually
+kubectl delete deployment webapp
+kubectl delete service webappservice
+
+
+
+
+#######################################################################
+PRACTICAL ON yml file to deploy application in eks with loadbalancer 
+#######################################################################
+
+
+
+### Step - 1 : Create EKS Management Host in AWS ###
+
+
+
+(1) Launch new Ubuntu VM using AWS Ec2 ( t2.micro )
+	
+(2) Connect to machine and install kubectl using below commands:
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin
+kubectl version --short --client
+
+(3) Install AWS CLI latest version using below commands:
+sudo apt install unzip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+
+(4) Install eksctl using below commands:
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+
+
+
+
+
+###  Step - 2 : Create IAM role & attach to EKS Management Host ###
+
+
+(1) Create New Role using IAM service ( Select Usecase - ec2 ).
+(2) Add below permissions for the role:
+     - Administrator - acces
+(3) Enter Role Name (eksrole).
+(4) Attach created role to EKS Management Host (Select EC2 => Click on Security => Modify IAM Role => attach IAM role we have created).
+
+
+
+
+
+### Step - 3 : Create EKS Cluster using eksctl ###
+(1) Syntax:
+eksctl create cluster --name cluster-name  \
+--region region-name \
+--node-type instance-type \
+--nodes-min 2 \
+--nodes-max 2 \ 
+--zones
+
+example for mumbai: eksctl create cluster --name psait-cluster1 --region ap-south-1 --node-type t2.medium  --zones ap-south-1a,ap-south-1b
+
+(2) After cluster created we can check nodes using below command:
+kubectl get nodes
+
+
+yml file to deploy application in eks with loadbalancer
+#############################################################
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: webapp
+spec:
+ replicas: 2
+ strategy: 
+  type: RollingUpdate
+ selector:
+  matchLabels:
+   app: javawebapp
+ template:
+  metadata:
+   name: javawebpod
+   labels:
+    app: javawebapp
+  spec:
+   containers:
+   - name: webappcontainer
+     image: psait/pankajsiracademy:latest
+     ports:
+     - containerPort: 9090
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: websvc
+spec:
+ type: LoadBalancer
+ selector:
+  app: javawebapp
+ ports:
+  - port: 80
+    targetPort: 9090
+...
+
+Note: now use api url with loadbalancer url like, http://ad081cd721d234def85fc31283a0b29d-1638714899.ap-south-1.elb.amazonaws.com/api/message
+
+(3) After your practise, delete Cluster and other resources we have used in AWS Cloud to avoid billing:
+eksctl delete cluster --name psait-cluster4 --region ap-south-1 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

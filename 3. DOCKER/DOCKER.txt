@@ -1,0 +1,106 @@
+How to create docker file in spring boot?then Create Docker Image then? push that to docker hub?
+#################################################################################################
+STEP-1:
+(1) create spring boot project by adding spring-web dependency.
+(2) develop only restController -> create one getMapping method named printMessage() and return message like "hello-world".
+(3) add finalName tag inside build tag for getting jar as clear name:  <build>
+		                                                               <finalName>demo-app</finalName>
+                                                                       </build>
+
+
+
+STEP-2: 
+(1) create one docker file in root path of spring boot project name should be Dockerfile.
+
+(2) inside file add below things:
+
+FROM openjdk:17
+LABEL maintainer="Meraz Alam <merazalam987654@example.com>" // note: dimond operator should as it is.
+COPY target/demo-app.jar  /usr/app/
+WORKDIR /usr/app/
+EXPOSE 9092
+ENTRYPOINT ["java", "-jar", "demo-app.jar"]
+
+(3) now pushed the project on github
+
+
+
+STEP-3:
+(1) create one Amazon Linux
+ 
+(2) in that install following tools:
+
+Docker Install And Varify:
+-----------------------------
+(a) sudo yum install docker -y
+(b) sudo yum update docker -y
+(c) sudo usermod -aG <package-name> <group-name> / sudo usermod -aG docker ec2-user 
+(d) docker -v / docker --version
+(e) sudo systemctl start docker
+(f) sudo systemctl status docker
+(g) sudo systemctl stop docker
+
+
+
+Maven Install and varify :
+-----------------------------
+(a) sudo yum install maven -y
+(b) sudo yum upgrade maven -y
+(c) mvn --version
+
+Git Install and Varify:
+-------------------------
+(a) sudo yum install git -y
+(b) sudo yum update git -y
+(c) git --version
+(d) whereis git
+
+(3) Clone git repo in docker host machine (linux): 
+    git clone <http-url>
+
+(4) Point to project root folder: cd <app-name> 
+(5) run to generate jar: mvn clean package
+(6) Create docker image from .jar file following command:
+      docker build -t meraz786/myhub:dev-v1 .   (here . dot is used to find that .jar file is in same path)
+(7) docker images 
+
+(8) run docker container: docker run -d -p 9092:9092 --name psa psait/your-app
+
+(9)See the image is running or not: docker ps
+
+(10) docker logs <container-id>
+
+(11) Access application URL in browser: http://public-ip:9092/
+
+STEP-4:
+Steps to push docker image to docker hub:-
+(a) login into docker hub account from bash of same linux just run below command:
+-> docker login -> (Enter username,  Enter password )
+
+(b) push docker image:
+-> docker push meraz786/myhub:<tag>
+ 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Important Docker Commands:=
+###################################
+(1) docker pull <image-name>                 / ex image:- psait/pankajsiracademy:latest
+(2) docker images
+(3) docker run <image-name / image-id> / docker run <hello-world / 74cc54e27dc4>
+(4) docker ps
+(5) docker ps -a
+(6) docker stop <container-id>
+(7) docker start <container-id>
+(8) docker rm <container-id>
+(9) docker rmi <image-name / image-id> 
+(10) docker system prune -a
+(11) 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Port Mapping / Port forwarding concept (How to create Docker Image and run that to access from browser?):=
+##########################################################################################################
+(1) Docker run -p host-port:container-port [image-name]  / docker run -p 9090:9090 [image-name]
+(2) http://public-ip:host-port(linux-vm)
+(3) Docker run -d -p host-port:container-port [image-name]
+ 

@@ -1,0 +1,165 @@
+####################################
+Jenkins Server Setup in Linux VM
+####################################
+
+Step - 1 : Create Linux VM in AWS
+
+Create Ubuntu VM using AWS EC2 (t2.medium, because jenkins require minimum 4gb RAM)
+
+Note: Enable 8080 Port Number in Security Group Inbound Rules, jenkins by default run on port: 8080
+-------------------------------------------------------------------------------------------------------
+
+
+Step-2 : Install Java using below commands
+
+sudo apt update
+sudo apt install fontconfig openjdk-17-jre
+java -version
+---------------------------------------------------------
+
+
+Step-3 : To Install Jenkins use the below commands
+
+-> Download the Jenkins GPG key: 
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+-> Add the Jenkins apt repository:
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | \
+sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+-> Update your local package index, It reads all .list files, including jenkins.list:
+sudo apt-get update
+
+->  Install Jenkins:
+sudo apt-get install jenkins
+------------------------------------------------------
+
+
+
+Step-4 : Start Jenkins services using below commands
+
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+-----------------------------------------------
+
+
+
+Step-5 : Verify Jenkins setup
+
+sudo systemctl status jenkins
+-----------------------------------------
+
+
+
+Step-6 : Open jenkins server in browser using VM public ip of linux vm
+
+http://public-ip:8080/
+--------------------------------------
+
+
+Step-7 : Copy jenkins admin pwd
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+---------------------------------------------------------
+
+
+Step-8 : Create Admin Account & Install Required Plugins in Jenkins
+--------------------------------------------------------------------
+
+
+############################################
+Configure Maven as Global Tool in Jenkins
+############################################
+
+Manage Jenkins -> Tools -> Maven Installation -> Add maven
+---------------------------------------------------------------
+
+
+
+###############################
+Setup Docker in Jenkins
+###############################
+
+-> curl -fsSL get.docker.com | /bin/bash
+
+Note-1:-This downloads and runs an official Docker installation script.It automatically detects your OS (like Ubuntu/Debian) and installs:
+Docker Engine
+Docker CLI
+Docker daemon (service)
+Note-2:- Why it's needed: Jenkins can only use Docker if Docker is installed on the same host.
+
+
+-> sudo usermod -aG docker jenkins
+Note-1:-  Add jenkins user to Docker group
+Note-2:-  Why it's needed: Jenkins runs as the jenkins user. Without this, Jenkins jobs will get permission denied when trying to run Docker commands.
+
+-> sudo usermod -aG docker ubuntu
+Note-1:-Add your own user (e.g., ubuntu) to the Docker group.
+Note-2:-  Why it's helpful: This lets you run docker commands without sudo.
+
+-> sudo systemctl restart jenkins
+Note:- Why it's needed: Without a restart, Jenkins might still not have Docker access.
+
+-> sudo docker version
+Note:- Verifies that Docker is correctly installed and running.
+
+
+
+###################################
+Create Jenkins Job
+###################################
+Note: The sh command in a Jenkins Declarative Pipeline is used to execute shell (bash)
+
+choose Triggers: 
+-> Build periodically : * * * * *  for every minutes.
+-> Poll SCM : * * * * * whenevery github project will change it will build for that it will check every minutes.
+
+
+EXAMPLE:
+
+pipeline {
+    agent any
+    
+    tools {
+        maven 'x-3.9.10'  
+    }
+
+    stages {
+        stage('git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/pankajmutha14/docker-test.git'
+            }
+        }
+
+        stage('mvn') {
+            steps {
+                sh 'mvn clean test package'
+            }
+        }
+
+        stage('build image') {
+            steps {
+                sh 'docker build -t psait/test1 .'
+            }
+        }
+
+        stage('Deployment') {
+            steps {
+                script {
+                    sh '''
+                    docker stop psait || true
+                    docker rm psait || true
+                    docker pull psait/test1 || true
+                    docker run -d -p 9090:8080 --name psait psait/test1
+                    '''
+                }
+            }
+        }
+    }
+}
+
+Note: enable port 9090 inbound rule and use =  http://<public-ip>:9090
+
+
+
+

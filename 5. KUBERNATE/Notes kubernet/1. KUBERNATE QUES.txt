@@ -1,0 +1,26 @@
+(1) What is Kubernetes?
+(2) Why use Kubernetes? or Kubernetes Advantages (Detailed Explanation)?
+(3) Conclusion (difference between docker & kubernets)?
+(4) Kubernetes (K8s) Architecture - Explained in Detail ?
+(5) Explanation k8S working ?
+(6) How many ways to do Kubernetes (K8s) Cluster Setup?
+(7) Tell steps to setup minikube?
+(8)  What is a POD in Kubernetes?
+(9) Kubernetes Services &  Why Do We Use Services?
+(10) How many Types of Kubernetes Services?
+(11) Explain ClusterIP Service with it Access Scope & use case ?
+(12) What is a NodePort Service in Kubernetes & Why Use NodePort?
+(13) What is a LoadBalancer Service in Kubernetes?
+(14) What is a Kubernetes Manifest YAML & explain each-one key of main sections (key-value pair)?
+(15) Tell commands to execute manifest yml, check pods, check pod logs & Describe pods?
+(16) What are name spaces in k8s?
+(17) How to create name space in k8s?
+(18) what is k8s resource & tell some of it resource type?
+(19) What is ReplicationController (RC)?
+(20) Explain ReplicaSet in Kubernetes?
+(21) Explain Deployment resource type in Kubernetes?
+(22) difference bt ReplicaSet & Deployement?
+(23) 
+
+
+

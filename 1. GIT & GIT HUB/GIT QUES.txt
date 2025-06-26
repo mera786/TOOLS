@@ -1,0 +1,7 @@
+(1) What is Source code management tool?
+(2) Explain of Git Architecture in detail?
+(3) Explain git pull versus git fetch?
+(4) what is gitstash ?
+(5) How Much Branches was there in your projects?
+(6) How many branches you have created ( at a given time )?
+(7) How did you resolve conflict ?
