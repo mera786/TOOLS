@@ -38,7 +38,7 @@ What is Archetype?
 web-app: This archetype is used to create a web application project. It sets up the necessary files and structure for a web-based project, often including directories for WEB-INF, and configurations for servlets, JSPs, etc.
 
 What is groupId? 
-- The groupId is a unique identifier for the group or organization that is creating the project. It typically represents the domain name of the company or the organization in reverse. This helps in distinguishing projects between different organizations.
+- The groupId is a unique identifier for the group or organization that is creating the project. It typically represents the domain name of the company or the organization in reverse. This helps in separating projects between different organizations.
 
 Examples:
 com.cisco
