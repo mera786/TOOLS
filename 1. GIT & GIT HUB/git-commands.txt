@@ -251,6 +251,49 @@ Answer: git cherrypic
 
 Note: git merge will merge all the commit to a particular branch
 
+-------------
+PRACTICAL :
+------------
+Step 1: Create a new repo:
+-> git init
+Step 2: Create initial commit on main:
+-> git add .
+-> git commit -m "initial commit"
+Step 3: Create and switch to a new branch:
+-> git checkout -b feature
+Step 4: Make 5 commits :
+
+echo "first change" >> file.txt
+git add .
+git commit -m "commit 1"
+
+echo "second change" >> file.txt
+git add .
+git commit -m "commit 2"
+
+echo "third change" >> file.txt
+git add .
+git commit -m "commit 3"
+
+echo "fourth change" >> file.txt
+git add .
+git commit -m "commit 4"
+
+echo "fifth change" >> file.txt
+git add .
+git commit -m "commit 5"
+
+Step 5: View the commit history and copy the hash of commit 3:
+-> git log --oneline
+Step 6: Switch back to main :
+-> git checkout main
+Step 7: Cherry-pick the 3rd commit only :
+-> git cherry-pick c1d2345
+Step 8 : You can verify :
+-> git log --oneline
+-> cat file.txt
+
+
 _______________
 
 BRANCHES:=
@@ -319,6 +362,43 @@ git reset --soft HEAD~1 (for recent commit)
 
 hard reset : it will undo from stagging and also removed file.
 git reset --hard HEAD~3
+
+(14) difference between revert and reset :
+git revert : 
+-> revert adds a new commit.
+git reset :
+-> reset removes history (risky if pushed).
+
+| Feature                      | `git revert` | `git reset`                 |
+| ---------------------------- | ------------ | --------------------------- |
+| Safe for shared branches     | ✅ Yes        | ❌ No                        |
+| Removes commits from history | ❌ No         | ✅ Yes                       |
+| Creates a new commit         | ✅ Yes        | ❌ No (unless `--soft` used) |
+
+REVERT practical :
+ Step 1: Create a repo and add some commits:
+git init revert-demo
+cd revert-demo
+
+echo "line 1" > file.txt
+git add .
+git commit -m "commit 1"
+
+echo "line 2" >> file.txt
+git add .
+git commit -m "commit 2"
+
+echo "line 3" >> file.txt
+git add .
+git commit -m "commit 3"
+
+Step 2: See history :
+git log --oneline
+
+ Step 3: Revert commit 2 :
+git revert b2f3abc
+
+
 
 * What is Fork ?
 taking another github code in  your github repository.
