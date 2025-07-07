@@ -223,7 +223,7 @@ git merge
 ______________________________________________________________________________________________________________________
 12. git stash:
 _______________
--> git stash is a command used in Git to temporarily save changes that are not yet committed to work on something else without losing your modifications.
+-> git stash is a command used in Git to temporarily save changes that are not yet committed to work on something else without losing your modifications. but make sure at least once commit has been done.
 -> when you run git stash, all your modified but unstaged or staged changes are temporarily stored in a hidden area
 
 example: 
