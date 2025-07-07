@@ -115,6 +115,9 @@ Git will:
 
 -> to check remote: git remote -v
 
+Note: before commiting also we can see branch if not showing git branch then use, git symbolic-ref --short HEAD
+
+
 ________________________________________________________________________________________________________________________
 
 6) git restore
