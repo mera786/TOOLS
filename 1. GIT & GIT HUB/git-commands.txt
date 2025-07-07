@@ -227,8 +227,15 @@ _______________
 -> when you run git stash, all your modified but unstaged or staged changes are temporarily stored in a hidden area
 
 example: 
-git stash - to store changes in temp area
-git stash apply - to get the changes from temp area back
+| Command                      | Description                                                                          |
+| ---------------------------- | ------------------------------------------------------------------------------------ |
+| `git stash push a.txt`       | ✅ Stashes **only `a.txt`**, if it's a tracked or staged file                         |
+| `git stash push a.txt b.txt` | ✅ Stashes **only those specific files**                                              |
+| `git stash`                  | ✅ Stashes **all modified tracked** and **staged files**, but **not untracked** files |
+| `git stash -u`               | ✅ Stashes tracked **+ untracked** files                                              |
+| `git stash pop`              | ✅ Applies the **most recent stash** and **removes it** from the stash list           |
+| `git stash list`             | ✅ Lists **all saved stashes**                                                        |
+| `git stash apply`            | ✅ Applies the most recent stash **without deleting** it from the list                |
 
 
 
