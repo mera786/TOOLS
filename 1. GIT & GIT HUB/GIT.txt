@@ -23,70 +23,131 @@ GIT
 GIT COMMANDS:=
 #################################
 
-(1) git init
+(1) git clone : Copies the entire remote repository (including history) to your local machine.
+-> git clone <repository-url>
+-------------------------------
+
+(2) git pull: Downloads and automatically merges changes from the remote branch into your current branch(locally).
+-> git pull origin main                # first time this one
+-> git pull                            # next time this if same work space
+-----------------------------------------------------
+
+(3) git fetch : Downloads changes from the remote repository without merging, allowing you to review them first.
+-> git fetch origin
+-> git diff origin/main  /git diff origin/dev               # Check diff
+-> git merge origin/main                                    # git merge origin/main
+
+
+(4) GIT BRANCHE :
+######################
+(1) before commit if still you want to see branch but at least git init should be done:
+-> git symbolic-ref --short HEAD
+
+(2) To see local branches:
+-> git branch
+
+(3) To see remote branches:
+-> git branch -r
+
+(4) To see both branches :
+-> git branch -a
+
+(5) To switch to an existing branch:
+-> git switch <branch-name>    / git checkout <branch-name>
+
+(6) To create a new branch and switch to it:
+-> git switch -c <new-branch-name>  / git checkout -b <new-branch-name>
+
+(7) to create new branch through git :
+-> git branch <branch-name>        eg. git branch bug-fix-jira-3456-login-error
+-------------------------------------------------------------------------------------
+
+(5) git init
 ------------------
 
-(2) git status
+(6) git status
 -----------------
 
-(3) git add:
+(7) git add:
 -> git add <file -name/ A.txt> 
 -> git add <all file / . > 
 --------------------------------
 
-(4) git reset : used before commit to back into staging file to untrack
+(8) git reset : used before commit to back into staging file to untrack
 -> git reset A.txt
 ----------------------------------------------------------------------------
 
-(5) git Commit:
+(9) git Commit:
 -> git commit -m "Commit message describing changes"
 -----------------------------------------------------
 
 
-(6) git push:
--> git branch -M main : This renames your current branch (usually master by default) to main, -M stands for move/rename forcefully, even if main already exists.
+(10) GIT PUSH:
+################
+(1) This renames your current branch (usually master by default) to main, -M stands for move/rename forcefully, even if main already exists.
+-> git branch -M main 
 
--> git remote add origin https://github.com/mera786/test5.git:  Adds a remote repository with the name origin pointing to your GitHub repo URL, where origin is just a conventional alias — you can 
-                                                                absolutely give it your own name, ex- git remote add github-prod https://github.com/mera786/test5.git
+(2) Adds a remote repository with the name origin pointing to your GitHub repo URL, where origin is just a conventional alias — you can absolutely give it your own name, ex- git remote add github-prod https://github.com/mera786/test5.git
+-> git remote add origin https://github.com/mera786/test5.git
 
--> git push -u github-prod main  : now Now instead of origin, you'd push like this: git push -u github-prod main
+(3) now Now instead of origin, you'd push like this:
+-> git push -u github-prod main
 
--> git push   :  and -u sets up a tracking relationship, so future pushes can just use:  git push
+(4) and -u sets up a tracking relationship, so future pushes can just use:
+-> git push 
+
+(5) by your self created branch , git push will not work instead use this one : 
+-> git push --set-upstream origin bug-fix-jira-3456-login-error
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-(7) to check remote :
+(11) to check remote :
 -> git remote -v : output like, origin  https://github.com/meraz786/test5.git (fetch)
                                 origin  https://github.com/meraz786/test5.git (push)
 --------------------------------------------------------------------------------------
-(8) git restore (at least once needed commit):
+(12) git restore (at least once needed commit):
 ->  git restore <file-name/ A.txt> : Discard local (uncommitted) changes
 -> git restore --staged <file-name / A.txt > : staged to Unstage using restore.
 -------------------------------------------------------------------------------------
 
-(9) git log:
+(13) git log:
 -> git log
 -> git log --oneline
 ---------------------------- 
 
-(10) git clone :
--> git clone <repository-url>
--------------------------------
 
-(11) git rm : once you have uploaded code on github but from there also want to remove
+
+(14) git rm : once you have uploaded code on github but from there also want to remove
 -> git rm <file_name.txt>
 -> git commit -m "Remove test.txt"
 -> git push origin main
 ----------------------------------------------
 
-(12) git pull:  once clone then point to current directory of project and open it using git bash
--> git pull origin main (first this one) 
--> git pull ( next time this if same work space)
+
+(15) GIT STASH :
+
+-> git stash push a.txt                 # only for 1 file.
+-> git stash push a.txt b.txt           # for multiple files.
+-> git stash                            # for all files unstaged.
+-> git stash pop                        # applies and deletes for all.
+-> git stash list                       # see all listed stash files.
+-> git stash apply                      # restored without removing.
 
 
+(16) GIT CHERRYPIC :
+-> git cherry-pick c1d2345
+
+(17) GIT REVERT :
+-> git revert b2f3abc
+
+(18) SOFT RESET :
+-> git reset --soft HEAD~1
+
+(19) HARD RESET :
+-> git reset --hard HEAD~3
 
 ----------------------------------------------------------------------------------------------------------------------
 
-(13) Git With Intellij
+(20) Git With Intellij
 ###################################################
 
 FOR PUSH :
@@ -107,7 +168,6 @@ git restore src/main/resources/application.properties
 git pull origin main
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------
-(14) git pull versus git fetch
 
 
 
