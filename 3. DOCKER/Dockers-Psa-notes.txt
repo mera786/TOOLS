@@ -1,6 +1,6 @@
 (1) what is Docker?
 ____________________
--> docker is a tool which is open-source centlised platform designed to deploye & run application.
+-> docker is a tool which is open-source centlised platform, designed to deploye & run application.
 -> docker written in 'go' language.
 -> docker uses container on the host O.S to run application, it allows applications to use the same linux kernel as a system on the host computer
    rather than creating a whole Virtual O.S 
@@ -59,9 +59,10 @@ Dockerfile														%%%%%%%%
 
 (5) What is containerization?
 
-containers package an application along with its dependencies (libraries, configuration files, etc.), ensuring that it runs consistently across different computing environments.
+Containerization is a way to pack an application and everything it needs (like libraries, code, and settings) into one portable box called a container, so it runs the same everywhere — on your laptop, server, or cloud.
+ex- when you build a Docker image using a Dockerfile.
 
-															Linux Server
+														
 (6) Explain Docker Component / Docker EcoSystem?
 -> Docker Demon : it is responsible for running containers to manages docker services.
 -> Docker Client: docker client uses commands and Rest-API to communicate with the docker demon.
