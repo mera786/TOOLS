@@ -80,9 +80,9 @@ How those tools interact and are structured.
 
 
 (8) How many ways to create Docker image?
--> take image from docker hub.
--> Create image from docker file.
--> Create image from existing docker containers.
+-> (Existing image to docker image) : take image from docker hub. 
+-> (Docker file -> Docker Image) : Create image from docker file.
+-> (Docker Container -> Docker Image): Create image from existing docker containers.
 
 
 (9) what is container?
