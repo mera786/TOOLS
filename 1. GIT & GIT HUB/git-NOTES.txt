@@ -1,4 +1,5 @@
-What is Source code management tool?
+(1). What is Source code management tool?
+################################################
 
 - Version Control: It allows teams of developers to keep track of changes to their codebase.
 
@@ -9,51 +10,521 @@ It integrates with various CI/CD tools (like GitHub Actions, Jenkins, and Travis
 
 Example:
 
-1. Git hub
-2. Bit Bucket
-3. Clear case
-4. SVN
+-  Git hub
+-  Bit Bucket
+-  Clear case
+-  SVN
+
+
+(2). What is Git, and how is it different from GitHub?
+#######################################################
+Git :
+----
+- Git is a distributed version control system (DVCS).
+- It helps you track changes in your code, go back to previous versions, and collaborate with others.
+- Example: You can save different versions of your project and switch between them easily.
+Github :
+--------
+- GitHub is a cloud-based platform that hosts Git repositories.
+- It allows you to store your code online, collaborate with teams, and manage projects.
+- Think of it as social media for code (with repos, stars, pull requests).
+
+(3) Explain the difference between Git and other version control systems like SVN.?
+#####################################################################################
+SVN (Centralized VCS):
+-----------------------
+- Has a central server that stores the complete repository.
+- Developers check out files, make changes, then commit back to the central server.
+- Without server access → you can’t commit.
+Git (Distributed VCS):
+----------------------
+- Every developer has a full copy of the repository, including complete history.
+- You can commit locally without internet.
+- Later you push to a remote server (like GitHub) for collaboration.
+
+Note: Offline Work
+- SVN: Needs internet/server connection for most actions.
+- Git: Works offline; you only need internet for push/pull.
 
 ________________________
 Git Hub and git 
 ________________________
 
-1. Create git hub account
-2. Install git in local system
-3. Configure name & email using following commands (One time configuration)
+-  Create git hub account
+-  Install git in local system
+-  Configure name & email using following commands (One time configuration)
 
 git config --global user.name ""
 git config --gloabl user.email ""
 
-Let's go over the explanation of Git Architecture in detail:
+(4) Let's go over the explanation of Git Architecture in detail:
+#######################################################################
 
-1) Working Tree
+a) Working Tree
 The Working Tree (also called the Working Directory or Workspace) is where all the files for your project are stored on your local machine.
 
-2) Staging Area
+b) Staging Area
 The Staging Area (also called the Index) is where files are prepared before being committed to the repository.
 When you make changes in your working directory and want to save them to the local repository, you first add them to the staging area using the git add command.
 Once files are in the staging area, they are ready to be committed. The staging area holds a snapshot of your changes and prepares them for the next commit.
 In short, it's a "pre-commit" area where you gather all the changes you want to be part of the next commit.
 
-3) Local Repository
+c) Local Repository
 The Local Repository is the place where Git stores all your project’s history. It's stored on your local machine.
 When you commit changes (git commit), the changes are recorded into your local repository.
 This local repository contains a .git folder that holds all of the project’s version history, configuration settings, and other important Git-related data.
 Commits in the local repository allow you to revert to previous versions, branch out, and compare changes locally without affecting the central repository.
 
-4) Central Repository
+d) Central Repository
 The Central Repository (also called the Remote Repository) is usually hosted on a platform like GitHub, GitLab, or Bitbucket.
 It is shared by multiple contributors and serves as the main repository that everyone pulls from and pushes to.
 Developers clone this repository to create their local copies and regularly push their commits to share their changes, as well as pull others' changes from the central repository.
 This central repository is accessible to all team members.
 
 
+(5) What is the difference between git clone, git pull, and git fetch?
+#######################################################################
+Git clone :
+------------
+- Purpose: Downloads a copy of an existing Git repository (usually from a remote central repository) to your local system.
+- Usage: This command is typically used when you want to start working on an existing project and need a copy of the central repository on your machine.
+
+Git pull :
+-----------
+- Purpose: Fetches and merges changes from the central repository to your local repository.
+- Usage: Use this to keep your local repository up to date with changes made by other collaborators. However, conflicts may arise if your local changes clash with those on the central repo.
+- Note: Conflicts occur when there are changes in the same part of a file in both your local and the central repository. You’ll need to manually resolve these conflicts.
+
+Git fetch :
+------------
+- Downloads the latest changes from the remote repository but does not merge them into your working branch.
+- This is a safe operation because it allows you to review the changes before merging.
+- The fetched changes are stored in origin/<branch>, and you can manually merge them when ready.
+
+(6) What is the difference between git merge and git rebase?
+##############################################################
+Git Merge :
+------------
+- Combines changes from one branch into another.
+- Creates an extra commit (merge commit).
+- Preserves the history of both branches as they are.
+Git Rebase :
+-------------
+- Moves (re-applies) commits of one branch on top of another branch.
+- Rewrites history (no merge commit).
+- Makes the commit history linear and clean.
+
+Note: 
+🔹 When to Use?
+Use Merge → When working in teams, and you want to keep the true history.
+Use Rebase → When you want a clean, linear history (often before pushing code, or in personal branches).
 
 
-##############
-Git Commands
-#############
+(7) What is the difference between git checkout and git switch?
+################################################################
+git checkout :
+----------------
+- A multi-purpose command (old way).
+- Can do two different things:
+   a. Switch between branches.
+   b. Restore files to a previous state.
+ex:-
+# Switch branch
+git checkout feature
+# Restore file from last commit
+git checkout -- index.html
+
+git switch :
+- Dedicated only for switching branches (not restoring files)/create branches.
+ex:-
+# Switch to an existing branch
+git switch feature
+# Create and switch to a new branch
+git switch -c new-feature
+
+(8) Explain git reset vs git revert vs git checkout. ?
+##########################################################
+git checkout :
+--------------
+- switch branches or restore working tree.
+git reset :
+------------
+-  The purpose of git reset is to take the current branch and reset it to point somewhere else.
+- piche wala commit pe chla jata hai
+- there are different modes of git reset :
+        a. --soft := moves head but does't touch the staging area or the working tree.
+        b. --mixed := moves head and updates the staging area but not the working tree.
+        c. --hard := moves head and adjust your staging area and working tree to the new head, throwing away everything.
+Note :- head ? => HEAD in Git is a pointer that shows the current branch or commit you are working on.
+  ex- Jab aap git commit karte ho → naya page add hota hai aur HEAD automatically us page par move ho jata hai. Jab aap checkout karte ho → HEAD us branch par point            karne lagta hai.
+git revert :
+--------------
+- git rever creates a new commit with the changes that are rolled back.
+- piche wala commit shi hai usse leke neya commit bna deta hai.
+- there are different flags/options git revert :
+      a. --no-commit
+      b. --edit
+      c. --no-edit etc.
+
+(9) What is the difference between a commit, branch, tag, and HEAD in Git?
+###########################################################################
+
+🔹 Commit
+------------
+- A snapshot of your project at a point in time.
+- Think of it like saving a file version with a unique ID (SHA hash).
+- Example: "This commit saved the code after fixing a bug."
+🔹 Branch
+------------
+- A pointer (or label) to a series of commits.
+- The default branch is usually main or master.
+- Used to develop features separately without disturbing the main code.
+- Example: feature/login branch for login functionality.
+🔹 Tag
+--------
+- A pointer to a specific commit (usually a release point).
+- Unlike branches, tags don’t move — they’re fixed.
+- Commonly used for marking versions like v1.0, v2.0.
+🔹 HEAD
+----------
+- A special pointer that tells where you currently are in the repo.
+- Usually, it points to the latest commit of the current branch.
+- Example: If you’re on branch main, HEAD points to the tip of main.
+
+(10) What is the difference between git stash and git stash pop?
+##################################################################
+git stash :
+-----------
+- Saves your uncommitted changes (both staged + unstaged) into a hidden stack.
+- Cleans your working directory so you can switch branches or do other work safely.
+- Changes are still stored in Git’s stash memory, but not applied.
+git stash pop :
+----------------
+- Restores (applies) the most recent stashed changes back to your working directory.
+- After applying, it removes that stash from the stash list.
+
+(11) What is a detached HEAD state in Git?
+##############################################
+Normally, HEAD points to the latest commit of a branch (e.g., main, dev).
+But sometimes you checkout a commit directly (instead of a branch). Then HEAD points to a commit, not a branch.
+This is called detached HEAD state.
+ex- git checkout a1b2c3d(commit hash)
+Note:- If you make commits in detached HEAD and want to keep them: git checkout -b new-branch-name
+- Normal HEAD → Points to a branch (which points to a commit).
+- Detached HEAD → Points directly to a commit, not a branch.
+
+(12) How do you check the history of commits for a file in Git?
+##################################################################
+- git log -- file.txt  :  See commits that changed the file.
+- git log --oneline -- <filename> : Show commit history in one line
+- git log -p -- file.txt :  See changes inside the file.
+- git blame file.txt :  See which commit/author last modified each line.
+
+(13) How do you create a new branch and switch to it?
+#########################################################
+creating a new branch and switching to it can be done in two ways:
+a. Using git checkout (old way) :
+    ex- git checkout -b new-branch-name  , here -b → create a new branch.
+b. Using git switch (recommended modern way) :
+    ex- git switch -c new-branch-name   , here -c → create a new branch.
+
+
+(14) What is the difference between a local branch and a remote-tracking branch?
+###################################################################################
+Local Branch :
+---------------
+- A branch that exists on your local machine.
+- You can commit, switch, and modify it freely.
+- Example: main, feature/login on your computer.
+- Commands:
+    git branch          # lists all local branches
+    git checkout main   # switch to a local branch
+    git commit -m "..." # commit on a local branch
+Remote-Tracking Branch :
+-------------------------
+- A branch that tracks a branch on a remote repository (like GitHub).
+- You cannot commit directly to it locally.
+- Used to see the latest state of the remote branch.
+- Naming: origin/main, origin/feature/login
+- Commands:
+     git fetch           # update remote-tracking branches
+     git merge origin/main   # merge remote changes into local
+
+(15) How do you delete a branch locally and remotely?
+########################################################
+| Action               | Command                                | Notes                      |
+| -------------------- | -------------------------------------- | -------------------------- |
+| Delete local branch  | `git branch -d branch-name`            | Safe delete if merged      |
+| Force delete local   | `git branch -D branch-name`            | Deletes even if not merged |
+| Delete remote branch | `git push origin --delete branch-name` | Removes branch from remote |
+
+
+(16) What is a merge conflict and How do you resolve merge conflicts in Git?
+###############################################################################
+
+merge conflict : 
+-----------------
+- A merge conflict happens when Git cannot automatically combine changes from two branches because the same part of a file was changed differently.
+
+Steps to Resolve Merge Conflicts :
+----------------------------------
+STEP-1
+*******
+Merge branches : like, 
+           git checkout main
+           git merge feature
+ Note:- If there are conflicts, Git will show.
+STEP-2
+*******
+Open conflicted files : Look for conflict markers in the file
+STEP-3
+*******
+Decide which changes to keep : connected to the developers if other developers were involved, try to ask him what is code all about then find the conculusion is there any sequence to ,in which code need to be keept if sequence need to be kept accordingly we arrange the code.
+STEP-4
+*******
+Mark file as resolved : like, git add file.txt
+STEP-5
+*******
+Complete the merge : git commit
+
+
+(17) What are Git workflows (Git Flow, GitHub Flow, trunk-based development)?
+##############################################################################
+Git Workflows : 
+---------------
+Workflows define how teams use branches to collaborate in Git.
+
+The three most popular ones are:
+--------------------------------
+ a. Git Flow :
+***************
+- Best for: Large projects with planned releases.
+- Branching model:
+     - main (or master) → production-ready code
+     - develop → integration branch (where features merge before release)
+     - feature/* → for new features
+     - release/* → for preparing a release
+     - hotfix/* → for urgent fixes in production
+b. GitHub Flow :
+*****************
+- Best for: Continuous deployment, small-to-medium teams.
+- Branching model:
+      - main → always deployable
+      - Create a short-lived feature branch (feature/login)
+      - Open a Pull Request (PR) → get reviewed → merge back into main
+c. Trunk-Based Development :
+******************************
+- Best for: Agile, DevOps, CI/CD teams.
+- Branching model:
+        - Developers commit directly to main (trunk) or very short-lived branches.
+        - Frequent small commits → continuously integrated.
+
+
+
+(18) What is Fork ? and How do you fork a repository and create a pull request in GitHub?
+#############################################################################################
+Fork :
+--------
+- Forking means creating your own copy of someone else’s GitHub repository.
+
+after forking create a pull request in GitHub :
+------------------------------------------------
+ STEP-1 :
+   - Go to the repo on GitHub.
+   - Click Fork (top-right corner).
+   - This makes a copy of the repo in your GitHub account.
+STEP-2 :
+    - Clone Your Fork Locally
+STEP-3 :
+    - Create a another Branch from it. (good practice)
+STEP-4 :
+    - Make Changes & Commit
+STEP-5 :
+    - Push Branch to Your Fork
+STEP-6 :
+     - Create a Pull Request (PR) :
+                 - Go to your fork on GitHub.
+                 - Click Compare & pull request.
+                                             Choose:
+                                                 - Base repository → the original repo (where you want to contribute).
+                                                 - Head repository → your fork & branch.
+                                                 - Add description and submit the Pull Request.
+
+NOTE :- IN SHORT     := Fork → Clone → Branch → Commit → Push → Pull Request  
+           
+
+(19) What is the difference between fast-forward and three-way merge in Git?
+#################################################################################
+Fast-Forward Merge :
+---------------------
+ - Happens when the branch you are merging is directly ahead of the branch you’re on.
+ - No new commits exist on the target branch since branching.
+ - Git just moves the branch pointer forward — no extra merge commit is created.
+ - Example : 
+           main:   A---B
+            feature:    \
+                         C---D
+   NOTE : Merging feature into main (no new commits on main) → just moves main to D.
+
+Three-Way Merge :
+-------------------
+- Happens when both branches have new commits after branching.
+- Situation Before Merge :
+main:    A---B---E   (HEAD points here)
+feature:    \
+             C---D
+
+NOTE :  Git looks at three commits:
+                           - Common ancestor → B
+                           - Head commit → “Head commit of current branch (E)
+                           - Head commit of merging branch → D (feature)
+
+* Git combines changes from B → E and B → D. It then creates a new commit M on the branch you merged into (here: main).
+- Situation After Merge :
+main:    A---B---E
+             \     \
+              C---D-M   (M is created on main)
+
+
+(20) How do you undo the last commit (but keep the changes)?
+#############################################################
+- If you want to remove the commit but keep all the file changes in your working directory :
+    -  git reset --soft HEAD~1
+
+(21) How do you undo the last commit (and discard the changes)?
+##################################################################
+- If you want to remove the last commit completely and also throw away all its changes :
+    - git reset --hard HEAD~1
+
+(22) How do you stage only part of a file in Git?
+####################################################
+- Using git add -p (patch mode) : 
+   ex - git add -p file.txt  when run now Git shows each change (called a hunk) in file.txt.
+                                                                                  For each hunk, you choose:
+                                                                                                    - y → stage this hunk
+                                                                                                    - n → don’t stage
+                                                                                                    - s → split into smaller hunks
+                                                                                                    - q → quit
+
+- Using Interactive Mode :
+    ex- git add -i
+
+
+
+(23) How do you see the difference between two commits?
+###########################################################
+git diff <commit1> <commit2>  : Shows the line-by-line changes between the snapshots.
+git diff --name-only <commit1> <commit2> : See names of changed files only
+
+
+(24) How do you squash multiple commits into one?
+####################################################
+- Interactive Rebase (most common) :  
+       like, git rebase -i HEAD~N  here Replace N with how many commits you want to squash.
+- now 
+An editor opens showing something like:
+pick a1b2c3 First commit
+pick d4e5f6 Second commit
+pick 789abc Third commit
+Change the word pick to squash (or s) for the commits you want to merge into the first:
+pick a1b2c3 First commit
+squash d4e5f6 Second commit
+squash 789abc Third commit
+- Git will then let you edit the commit message → combine or rewrite as needed.
+- Save and exit → Git creates one single commit.
+
+(25) How do you cherry-pick a commit from another branch?
+###########################################################
+cherry-pick : 
+-------------
+Cherry-pick in Git means applying a specific commit from one branch into another branch, without merging the whole branch.
+   commands : git cherry-pick <commit-hash>
+Example :
+Suppose you are on main branch:  git checkout main
+You see a useful commit (abc123) in feature branch that you want in main: git log feature
+Apply that commit: git cherry-pick abc123
+Note:- Now main has that commit, even without merging the entire feature branch.
+
+(26) How do you set up .gitignore and what is it used for?
+#############################################################
+gitignore :
+---------------
+-  .gitignore is a plain text file in your Git repository.
+- It tells Git which files/folders to ignore (not track).
+- Useful for things like:
+                - build artifacts (/target, /dist)
+                - IDE files (.idea/, .vscode/)
+                - OS files (Thumbs.db, .DS_Store)
+                - secrets (*.env, *.key)
+How to Set It Up :
+-------------------
+- Create a file named .gitignore in your repository root:  touch .gitignore
+- Add patterns of files/folders you want Git to ignore. Example :
+# Ignore build directory
+/target/
+
+# Ignore log files
+*.log
+
+# Ignore environment files
+.env
+
+# Ignore IDE configs
+.idea/
+*.iml
+- Save it and commit 
+- Important Notes  :
+                 - .gitignore only affects untracked files.
+                 - If you already tracked a file, Git won’t ignore it automatically. To fix: git rm --cached filename
+
+
+
+(27) What is the difference between git log and git reflog?
+############################################################
+git log :
+-----------
+- Shows the commit history of your repository.
+- Only displays commits that are part of the current branch’s history.
+- Good for seeing what has been committed to the project.
+- Example: git log --oneline
+git reflog :
+---------------
+- Shows the history of HEAD movements (where your HEAD and branches pointed to).
+- Includes commits that may not be visible in git log (like after reset, rebase, checkout, etc.).
+- Useful for recovering lost commits.
+- Example: git reflog
+
+(28) How do you check who wrote a particular line of code in a file? (git blame)?
+###################################################################################
+This is where git blame comes in.
+command : git blame <filename>
+Shows who last modified each line in a file, along with:
+                                                      - commit hash
+                                                      - author
+                                                      - timestamp
+                                                      - the actual line of code
+                                                                             Example : git blame UserService.java
+
+
+(29) How Much Branches was there in your projects?
+-  How Much Branches was there in your projects: 
+                - features (for adding new features)
+                - R & D ( for adding some extra thing to make better application)
+                - Hot fix ( serious problem)
+                - bug fix ( for fixing bugs).... etc
+
+(30) How many branches you have created ( at a given time )?
+ - How many branches you have created ( at a given time )
+       1 ,2 or 3
+- tell me procedure to fix a bug ?
+firstly from bug fix branch , i created one more branch (sub branch) like bug-fix-jira-3456-login-error and work in this branch , once after fixed bug
+then i have done PR (pull request) 
+
+
+
+###################################################################################################################################################################
+                                                                                 Git Commands
+####################################################################################################################################################################
 
 1. git init
 ________________
@@ -348,9 +819,6 @@ PULL CONFLICT := when two developers are working on same functionality and there
 (10) git pull :- you will see conflict error so manually fix and then repeat above 3 commands then
 (11) git push
 
-* How did you resolve conflict ?
-sir i connected to the developers try to ask him what is code all about then we arrive a conculusion is there any sequence to in which code need to be keept if sequence
-need to be kept accordingly we arrange the code .
 
 * Note: if you want to set your origin then : git remote set-url origin https://github.com/mera786/test.git
 
@@ -399,7 +867,4 @@ git log --oneline
 git revert b2f3abc
 
 
-
-* What is Fork ?
-taking another github code in  your github repository.
 
