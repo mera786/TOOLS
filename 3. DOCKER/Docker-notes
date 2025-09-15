@@ -1,0 +1,119 @@
+Q1. What is Docker?
+-> docker is a tool which is open-source centlised platform, designed to deploye & run application.
+-> docker written in 'go' language.
+-> docker uses container on the host O.S to run application, it allows applications to use the same linux kernel as a system on the host computer
+   rather than creating a whole Virtual O.S 
+
+Q2. Advantage Of Docker?
+-> Resolves Compatibility problem using containerization
+-> Docker will help us to install our software on different server without worrying about compatibility issue
+-> To deploy same application on multiple servers for load balancing we need not manually install technology stack (like Angular 18v, java 17V etc) manually one by one if docker is not used
+-> Software upgrades can be done easily on multiple machines using docker
+
+Note:
+✔ Docker Engine acts as a bridge between the container and the host OS
+✔ Containers don’t have their own kernel, they use the host’s kernel
+✔ Docker Engine manages containers but does not create them—it runs & controls them
+
+Q3. Disadvantage Of Docker?
+-> Docker is not good solution for application which requires Rich GUI.
+-> Difficult to manage large ammount of containers.
+-> Docker is suitable when the development O.S and testing O.S are same , if the O.S is different we should use VM.
+-> No solutions for Data Recovery & Backup.
+
+Q4. Explain Docker Architecture?
+Docker File: Here we will provide Intructions to create docker image
+Docker Image: Application Package with dependencies of it
+Docker Registry: Its a hub to store docker images
+Docker Container: Isolated environment to run docker image
+
+#########################          #########################                  ####################                 @@@@@@@@@@@@@@@@@
+Dockerfile														%%%%%%%%
+															Container1
+(Contains instructions     ------>    Docker Image               ------------>  Docker hub/registry   ---------->       %%%%%%%%%
+ to download dependencies   (build)	    (Application Code +   (Store)      (Collection of images)			Container2	
+				      Dependencies to run that)								%%%%%%%%%%
+)
+##########################	   ##########################                 #####################                 @@@@@@@@@@@@@@@@@
+
+
+Q5. What is Containerization?
+Containerization is a way to pack an application and everything it needs (like libraries, code, and settings) into one portable box called a container, so it runs the same everywhere — on your laptop, server, or cloud.
+ex- when you build a Docker image using a Dockerfile.
+
+Q6. Explain Docker Component / Docker EcoSystem?
+-> Docker Demon : it is responsible for running containers to manages docker services.
+-> Docker Client: docker client uses commands and Rest-API to communicate with the docker demon.
+-> Docker Host: used to provide an enviroment to execute and run application.
+-> Docker Hub / Registry : manages and stores the docker images.
+-> Docker images: used to create docker containers.
+
+Q7. what is difference between Docker Component and Docker Architecture?
+Docker Component:
+The tools and parts Docker is made of.
+Docker Architecture:
+How those tools interact and are structured.
+
+Q8. What is the difference between a container and a virtual machine?
+| Feature            | Container 🐳                  | Virtual Machine 💻                          |
+| ------------------ | ----------------------------- | ------------------------------------------- |
+| **OS**             | Shares host OS kernel         | Has its own OS (guest OS)                   |
+| **Size**           | Small (MBs)                   | Large (GBs)                                 |
+| **Startup time**   | Very fast (seconds)           | Slow (minutes)                              |
+| **Resource usage** | Lightweight, less RAM/CPU     | Heavy, more RAM/CPU                         |
+| **Isolation**      | Process-level isolation       | Full machine-level isolation                |
+| **Portability**    | Highly portable               | Less portable                               |
+| **Use case**       | Best for microservices, CI/CD | Best for running multiple OS on one machine |
+
+
+Q9. What is a Docker Image?
+-> A Docker image is a read-only blueprint with instructions to create containers.
+-> image becomes container when they run on docker engine.
+
+Q10. How many ways to create Docker image?
+-> (Existing image to docker image) : take image from docker hub. 
+-> (Docker file -> Docker Image) : Create image from docker file.
+-> (Docker Container -> Docker Image): Create image from existing docker containers.
+
+
+Q11. What is a Docker Container?
+A Docker container is a running instance of an image, isolated and portable.
+
+
+Q12. What is the difference between a Dockerfile and a Docker image?
+| Feature        | **Dockerfile** 📝                               | **Docker Image** 📦                            |
+| -------------- | ----------------------------------------------- | ---------------------------------------------- |
+| **Definition** | A text file with instructions to build an image | The actual package created from the Dockerfile |
+| **Content**    | Commands like `FROM`, `RUN`, `COPY`             | Application + dependencies + environment       |
+| **Type**       | Blueprint (recipe)                              | Final product (dish)                           |
+| **Usage**      | Used to create/build images                     | Used to run containers                         |
+
+
+Q13. What is the use of .dockerignore file?
+It excludes unnecessary files (like .git, node_modules) when building images, reducing size.
+
+
+Q14. Explain COPY vs ADD commands in Dockerfile.?
+COPY:
+- Used to copy files or folders from your local system (build context) into the Docker image.
+- Very simple and predictable.
+- Example: COPY app.py /app/ → copies app.py into the /app folder inside the image.
+ADD:
+- Works like COPY, but with extra features:
+- Can automatically extract compressed files (like .tar) into the image.
+- Can fetch files from a URL directly into the image.
+-Example: ADD archive.tar /app/ → automatically extracts files from archive.tar.    OR        ADD https://example.com/file.txt /app/ → downloads file from URL.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
