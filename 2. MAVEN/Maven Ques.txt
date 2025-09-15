@@ -3,12 +3,19 @@ Q2. What is an artifact in Maven?
 Q3. What are groupId, artifactId, and version, packaging,SNAPSHOT,RELEASE?
 Q4. What is Archetype?
 Q5. What is the Maven repository? Types?
+Q6. What is the pom.xml?
+Q7. What is the difference between mvn clean, mvn compile, and mvn install?
+Q8. What is the Maven build lifecycle?
+Q9. What is called Maven Phase ?
+Q10. What is called Maven Goal ?
+Q11. What is the difference between dependencyManagement and dependencies?
+Q12. What is the difference between transitive dependencies and starter depenecies?
+Q13. How do you exclude a transitive dependency?
+Q14. What is the difference between mvn package and mvn install?
+Q15. How to set up maven in local system ?
 
-(2) How to set up maven in local system ?
 
 
 
 
-(9) What are Maven Goals?
-(10) What is Dependency Exclusion?
-(11) What is the difference between transitive dependencies and starter depenecies?
+
