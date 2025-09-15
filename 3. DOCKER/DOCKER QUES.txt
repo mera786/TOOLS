@@ -1,12 +1,20 @@
-(1) what is Docker?
-(2) Advantage Of Docker?
-(3) Disadvantage Of Docker?
-(4) Explain Docker Architecture?
-(5) What is containerization?
-(6) Explain Docker Component / Docker EcoSystem?
-(7) what is difference between Docker Component and Docker Architecture?
-(8) How many ways to create Docker image?
-(9) what is container?
+Q1. What is Docker?
+Q2. Advantage Of Docker?
+Q3. Disadvantage Of Docker?
+Q4. Explain Docker Architecture?
+Q5. What is Containerization?
+Q6. Explain Docker Component / Docker EcoSystem?
+Q7. what is difference between Docker Component and Docker Architecture?
+Q8. What is the difference between a container and a virtual machine?
+Q9. What is a Docker Image?
+Q10. How many ways to create Docker image?
+Q11. What is a Docker Container?
+Q12. What is the difference between a Dockerfile and a Docker image?
+Q13. What is the use of .dockerignore file?
+Q14. Explain COPY vs ADD commands in Dockerfile.
+
+
+
 (10) Tell How to Install Docker In Amazon Linux?
 (11) Tell some Important Docker Commands?
 (12) What is Port Mapping Docker?
