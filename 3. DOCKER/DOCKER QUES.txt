@@ -1,23 +1,58 @@
-Q1. What is Docker?
-Q2. Advantage Of Docker?
-Q3. Disadvantage Of Docker?
-Q4. Explain Docker Architecture?
-Q5. What is Containerization?
-Q6. Explain Docker Component / Docker EcoSystem?
-Q7. what is difference between Docker Component and Docker Architecture?
-Q8. What is the difference between a container and a virtual machine?
-Q9. What is a Docker Image?
-Q10. How many ways to create Docker image?
-Q11. What is a Docker Container?
-Q12. What is the difference between a Dockerfile and a Docker image?
-Q13. What is the use of .dockerignore file?
-Q14. Explain COPY vs ADD commands in Dockerfile.
+Section 1: Basics  
+----------------------
+              Q1. What is Docker?
+              Q2. Advantage Of Docker?
+              Q3. Disadvantage Of Docker?
+              Q4. Explain Docker Architecture?
+              Q5. What is Containerization?
+              Q6. Explain Docker Component / Docker EcoSystem?
+              Q7. what is difference between Docker Component and Docker Architecture?
+              Q8. What is the difference between a container and a virtual machine?
+              Q9. What is a Docker Image?
+              Q10. How many ways to create Docker image?
+              Q11. What is a Docker Container?
+              Q12. What is the difference between a Dockerfile and a Docker image?
+              Q13. What is the use of .dockerignore file?
+              Q14. Explain COPY vs ADD commands in Dockerfile.
+              Q15. Difference between CMD and ENTRYPOINT?
+              Q16. What is the difference between RUN and CMD in Dockerfile?
+              Q17. Can we have multiple RUN and CMD instructions in one Dockerfile?
+              Q18. What is Docker Hub?
+              Q19. What is Port Mapping in Docker?
+              Q20. How do you check running containers?
+              Q21. How do you run a container in detached mode?
+              Q22. How do you enter inside a running container?
+Section 2: Intermediate :
+--------------------------
+              Q1. How to persist data in Docker?
+              Q2. What is the difference between Volumes and Bind Mounts?
+              Q3. How do you check logs of a container?
+              Q4. Difference between docker stop and docker kill?
+              Q5. How do you monitor Docker resource usage?
+              Q6. What is a Dangling Image in Docker?
+              Q7. How do you clean unused images/containers?
+              Q8. What is a Docker Tag?
+              Q9. What is the difference between docker run and docker start?
+              Q10. How do you remove a container?
+              Q11. How do you remove an image?
+              Q12. What is Docker Registry vs Repository?
+              Q13. What is the difference between Docker Hub and Private Registry?
+              Q14. How do you copy files between host and container?
+              Q15. How do you commit(Save the current state of a running container as a new image) a container to create an image?
+              Q16. How do you export and import containers?
+              Q17. What is the layered file system in Docker?
+              Q18. What is Multi-stage build in Docker?
+              Q19. How do you reduce Docker image size?
+Section 3: Advanced :
+----------------------
+              Q1. How do containers communicate with each other?
+              Q2. What are Docker Network types?
+              Q3. How do you inspect a container?
+              Q4. How do you check container IP?
+              Q5. How do you scale containers manually?
+              Q6. What is the difference between Docker and Kubernetes?
+              Q7. What is Docker Compose?
+              Q8. How do you upgrade a container without downtime?
+              Q9. What are common challenges in using Docker?
+              Q10. How would you Dockerize a Spring Boot app?
 
-
-
-(10) Tell How to Install Docker In Amazon Linux?
-(11) Tell some Important Docker Commands?
-(12) What is Port Mapping Docker?
-(13) How to Run Image and access from browser?
-(14) How to create docker file? Create Docker Image? push that to docker hub?
-(15) i want to do Dockerizing Spring boot application tells the steps (real scinario)?
