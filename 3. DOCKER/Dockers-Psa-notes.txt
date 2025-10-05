@@ -80,9 +80,6 @@ To remove all stopped containers and un-used docker images we can use below comm
 
 
 
-(12) What is Port Mapping Docker?
--> Port mapping in Docker is the process of making a container’s internal port accessible to the host machine or outside world.
--> syntax : docker run -p <host_port>:<container_port> image_name
 
 
 (13) How to Run Image and access from browser?
@@ -211,13 +208,6 @@ RUN 'mvn clean package'
 
 Note: If you specify multiple RUN instructions in Dockerfile, then those will execute in sequential manner.
 
-4. CMD
-____________
--> The CMD instruction in a Dockerfile specifies the default command that runs when the container starts
-
-CMD "java -jar myapp.jar"
-
-Note: when we write multiple CMD instructions in dockerfile, docker will execute only last CMD instruction only.
 
 
 Let us create our first docker file:
@@ -318,57 +308,5 @@ ___________________________________________________________________________
 -> To run springboot application jar file we will use tomcat server as "embedded server".
 -> By default spring boot application will run on port number 8080
 
-Step 1: Create Docker File
 
-FROM openjdk:17
-
-COPY target/demo-app.jar  /usr/app/
-
-WORKDIR /usr/app/
-
-EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "demo-app.jar"]
-
-
-Step 2: Note (Install maven and git in linux VM first)
-
-1) Clone git repo in docker host machine (linux): git clone <http-url>
-
-2) Point to project root folder: cd <app-name> and run to generate jar: mvn clean package
-
-3) Create docker image and check that: 
--> docker build -t psait/pankajsiracademy:<tag> .
-(
-Here 
--> psait is username
--> repositoryname of docker hub
--> <tag> can
-  a. prod-v1 or prod-v2v2 for production
-  b. dev-v1 for development environment
-  c. test-v1 for testing environment
-  d. staging-v1 for staging environment
-)
--> docker images 
-
-4) run docker container: docker run -d -p 8080:8080 --name psa psait/your-app
-
-5)See the image is running or not: docker ps
-
-6) docker logs <container-id>
-
-5) Access application URL in browser: http://public-ip:8080/
-
-
-Steps to push docker image to docker hub
-__________________________________________
-
--> login into docker hub account from bash
-
-docker login
-Enter username: psait
-Enter password
-
--> push docker image
-docker push psait/pankajsiracademy:<tag>
 
