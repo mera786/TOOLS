@@ -1,3 +1,6 @@
+Section 1: Basics  
+----------------------
+
 Q1. What is Docker?
 -> docker is a tool which is open-source centlised platform, designed to deploye & run application.
 -> docker written in 'go' language.
@@ -104,6 +107,289 @@ ADD:
 - Can fetch files from a URL directly into the image.
 -Example: ADD archive.tar /app/ → automatically extracts files from archive.tar.    OR        ADD https://example.com/file.txt /app/ → downloads file from URL.
 
+
+Q15. Difference between CMD and ENTRYPOINT?
+CMD :
+    - The CMD instruction in a Dockerfile specifies the default command that runs when the container starts.
+    - If you define multiple CMD instructions, only the last one takes effect.
+    - It can be overridden at runtime using docker run (when you pass a command).
+    - Used for providing default behavior that the user can change easily.
+    - Example: CMD ["java", "-jar", "myapp.jar"]
+                   If you run:  docker run myimage  // It runs java -jar myapp.jar
+                   But if you run: docker run myimage echo "Hello"  // The CMD is overridden, and it runs echo "Hello" instead.
+ENTRYPOINT :
+    - The ENTRYPOINT instruction defines a main command that always runs when the container starts.
+    - It is not overridden by default — even if you pass arguments at runtime.
+    - You can combine ENTRYPOINT with CMD — in that case, CMD provides default arguments for the ENTRYPOINT.
+    - Used for defining the core command of the container.
+    - Example: ENTRYPOINT ["java", "-jar", "app.jar"]
+                   If you run: docker run myimage  // It runs java -jar app.jar
+                   If you run: docker run myimage test // It becomes java -jar app.jar test (Here test is passed as an argument, not a command override)
+
+Q16. What is the difference between RUN and CMD in Dockerfile?
+RUN :
+    - When it runs :-  While building the image (docker build)
+    - used to install software or configure environment inside image.
+CMD :
+    - When it runs :- When the container starts (docker run)
+    - used to run your application inside container.
+
+Q17. Can we have multiple RUN and CMD instructions in one Dockerfile?
+        - You can have multiple RUN commands — each one creates a new image layer.
+        - You can have only one CMD — if you write multiple, only the last one is used.
+
+Q18. What is Docker Hub?
+Docker Hub is a public cloud registry for storing and sharing images.
+
+
+Q19. What is Port Mapping in Docker?
+-> Port mapping in Docker is the process of making a container’s internal port accessible to the host machine or outside world.
+-> syntax : docker run -p <host_port>:<container_port> image_name
+
+Q20. How do you check running containers?
+docker ps
+
+Q21. How do you run a container in detached mode?
+docker run -d nginx
+
+Q22. How do you enter inside a running container?
+docker exec -it <container_id> bash
+here , exec :- Short for execute, It allows you to run a new command inside an already running container.
+        -i  :- Stands for interactive, meaning you can type commands inside the container.
+        -t :- Stands for tty (teletypewriter), Allocates a terminal session — gives you a proper shell-like interface (with colors, prompt, etc.).
+       bash/ sh :- The command you want to execute inside the container,giving you an interactive terminal session inside the container.
+
+
+
+
+Section 2: Intermediate :
+--------------------------
+
+Q1. How to persist(save) data in Docker?
+We can persist (save) data in Docker using volumes or bind mounts — so that the data is not lost when the container stops or is deleted.
+because containers are temporary, but using volumes or bind mount , save data permanently and old data ca be reuse.
+eg- 
+Using Volumes :
+docker run -v mydata:/var/lib/mysql mysql
+here,    -v : Creates a volume or attaches an existing one 
+         mydata  :The **name** of the volume (Docker manages where it’s stored) 
+         /var/lib/mysql :  The **path inside the container** where data will be stored
+ Check the volume:  docker volume ls
+If you start a new container with the same volume name: docker run -v mydata:/var/lib/mysql mysql
+Using Bind Mounts :
+docker run -v /home/user/mysql_data:/var/lib/mysql mysql
+here,     /home/user/mysql_data : Folder on your **host system**
+          /var/lib/mysql`       : Folder inside container
+           -v                   : Connects these two folders 
+
+Q2. What is the difference between Volumes and Bind Mounts?
+| Feature              | Volume                       | Bind Mount                      |
+| -------------------- | ---------------------------- | ------------------------------- |
+| Managed by           | Docker                       | You (host user)                 |
+| Data stored          | Inside Docker’s storage area | At a specific path on your host |
+| Backup & portability | Easier                       | Manual                          |
+| Recommended for      | Production use               | Development/debugging           |
+
+Q3. How do you check logs of a container?
+docker logs <container_id>
+
+Q4. Difference between docker stop and docker kill?
+docker stop :
+        - Gracefully stops a running container, Sends a SIGTERM signal first, then SIGKILL if the container doesn’t stop after a few seconds because it gives time to clean up, close files, save data.
+        - When to use :- Normally (safe, recommended way)
+docker kill : 
+        - Immediately stops a running container, Sends a SIGKILL signal directly
+        - Only when the container is not responding
+
+Q5. How do you monitor Docker resource usage?
+docker stats
+
+
+Q6. What is a Dangling Image in Docker?
+A dangling image is an unused or untagged image in Docker — it doesn’t have a name or tag and is not linked to any container.
+       - When you run: docker images
+       - You might see something like:
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+<none>       <none>    7e7f5b8c6b4a   2 hours ago      540MB
+       - To remove : docker image prune -f
+
+Q7. How do you clean unused images/containers?
+docker system prune -a
+
+Q8. What is a Docker Tag?
+A tag is a version label for an image. 
+Example: nginx:1.25
+
+Q9. What is the difference between docker run and docker start?
+   - run → Creates + starts a new container.
+   - start → Restarts an existing stopped container.
+
+Q10. How do you remove a container?
+docker rm <id>
+
+Q11. How do you remove an image?
+docker rmi <image_id>
+
+Q12. What is Docker Registry vs Repository?
+Docker Registry :
+    - A server or service where Docker images are stored and shared. eg- docker hub
+Docker Repository :
+    - A collection (folder) inside a registry that contains different versions (tags) of one image.
+    - eg : nginx → has tags like nginx:1.20, nginx:latest
+
+Q13. What is the difference between Docker Hub and Private Registry?
+     - Docker Hub → Public, cloud-based.
+     - Private Registry -> Hosted by you — on your own server or cloud.
+
+Q14. How do you copy files between host and container?
+- From host → container: docker cp file.txt <container_id>:/app/
+here, /aap/ i, The destination path inside the container where the file will be copied
+
+Q15. How do you commit(Save the current state of a running container as a new image) a container to create an image?
+docker commit <container_id> <new_image_name>
+
+Q16. How do you export and import containers?
+It’s a way to backup, share, or move containers as files. without needing a registry. but file being .tar is mandatory if you want to save it as a single file.
+Commands :
+  - Export: docker export <id> > file.tar
+  - Import: docker import file.tar
+
+Q17. What is the layered file system in Docker?
+Docker images are made up of layers, where each layer represents a set of filesystem but Each layer only stores the changes from the previous layer — not the whole filesystem.
+Ex -
+FROM ubuntu:20.04
+RUN apt-get update && apt-get install -y python3
+COPY app.py /app/
+here, Docker builds layers for each instruction:
+| Instruction                                        | Layer Description                  |
+| -------------------------------------------------- | ---------------------------------- |
+| `FROM ubuntu:20.04`                                | Base Ubuntu image layer            |
+| `RUN apt-get update && apt-get install -y python3` | Adds a layer with Python installed |
+| `COPY app.py /app/`                                | Adds a layer with your app file    |
+so Final image = all layers stacked together.
+
+
+Q18. What is Multi-stage build in Docker?
+Technique to create smaller images:
+    - First stage → Build code.
+    - Second stage → Copy only final artifact.
+
+Q19. How do you reduce Docker image size?
+         - Use alpine images.
+         - Clean temp files.
+         - Multi-stage builds.
+         - .dockerignore file.
+
+
+
+Section 3: Advanced :
+----------------------
+
+Q1. How do containers communicate with each other?
+Using Docker networks (bridge, host, none). Containers in the same network can communicate by name.
+eg - 
+imagine I have two projects running in separate containers: Project 1 runs on port 8081 and provides an API to fetch employee data, 
+while Project 2 runs on port 8082 and provides an API to fetch employee addresses. If both containers are attached to the same Docker network, 
+Project 1 can call Project 2’s API using http://project2:8082/employee-address and vice versa using http://project1:8081/employee, 
+even though both projects are running individually.
+
+Q2. What are Docker Network types?
+There are few types :
+   - bridge (default, container-to-container).
+   - host (shares host network).
+   - none (isolated).
+                                    bridge (default, container-to-container)    :
+- Definition: Default network for containers. Each container gets its own private IP. Containers can communicate via IP.
+- Real-time Example: You run two containers on the default bridge: a backend API and a database. The backend can connect to the database
+                    using the database container’s IP, but not its name.
+- Command to create user-defined bridge (for name communication):    
+        - Create the network   : docker network create my-network
+        - Run containers on this network :    # Run the backend container
+                                              docker run -d --name backend --network my-network backend-image
+                                              # Run the database container
+                                               docker run -d --name db --network my-network db-image
+        - Connect an already running container to the network  : If you already started containers, you can attach them:  
+                                                                                                                docker network connect my-network backend
+                                                                                                                docker network connect my-network db
+
+Q3. How do you inspect a container?
+docker inspect <container_id>
+
+Q4. How do you check container IP?
+docker inspect project1
+
+Q5. How do you scale containers manually?
+Run multiple instances with different ports:
+            - docker run -d -p 8081:80 nginx
+            - docker run -d -p 8082:80 nginx
+
+Q6. What is the difference between Docker and Kubernetes?
+Docker → Containerization platform.
+Kubernetes → Orchestration platform for managing many containers.
+
+
+Q7. What is Docker Compose?
+  - Tool for defining and running multi-container apps via docker-compose.yml.
+  - Docker Compose vs Kubernetes → Compose is single-host & dev focused, Kubernetes is production-grade, multi-host orchestration.
+
+Q8. How do you upgrade a container without downtime?
+    - Run new container.
+    - Test new one.
+    - Stop/remove old container.
+
+Q9. What are common challenges in using Docker?
+    - Security risks.
+    - Networking issues.
+    - Large image sizes.
+    - Data persistence.
+
+Q10. How would you Dockerize a Spring Boot app?
+- Create Dockerfile :
+                    FROM openjdk:17
+                    COPY target/demo-app.jar /usr/app/
+                    WORKDIR /usr/app/
+                    EXPOSE 8080
+                    ENTRYPOINT ["java", "-jar", "demo-app.jar"]
+ - Build the Project :
+                    Clone repo: git clone <repo-url>
+                    Go to project folder: cd <app-name>
+                    Generate jar: mvn clean package
+ - Build Docker Image :
+                    docker build -t psait/pankajsiracademy:<tag> .
+ - Run Container : 
+                  docker run -d -p 8080:8080 --name psa psait/pankajsiracademy:<tag>
+ - Verify :
+          Check running containers: docker ps
+         See logs: docker logs <container-id>
+         Access app: http://<host-ip>:8080/
+ - Push Image to Docker Hub :
+                        docker login            # enter username & password
+                        docker push psait/pankajsiracademy:<tag>
+
+
+
+
+
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
 
 
 
