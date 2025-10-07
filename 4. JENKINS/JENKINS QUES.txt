@@ -1,5 +1,49 @@
+(1) Basics :
+---------------
+              Q1. What is Jenkins?
+              Q2. What is Continuous Integration (CI)?
+              Q3. What is Continuous Deployment (CD)?
+              Q4. Why do we use Jenkins?
+              Q5. What language is Jenkins written in?
+              Q6. What are the main features of Jenkins?
+              Q7. What is a Jenkins Pipeline?
+              Q8. What is a Jenkinsfile?
+              Q9. What is the difference between Jenkins and Maven?
+              Q10. What are Jenkins Plugins?
+(2) Installation & Setup :
+----------------------------
+              Q1. How do you install Jenkins?
+              Q2. What are Jenkins prerequisites?
+              Q3. What is the default Jenkins port?
+              Q4. How can you secure Jenkins?
+              Q5. How do you start and stop Jenkins?
+(3) Jenkins Jobs & Builds :
+----------------------------
+              Q1. What is a Jenkins Job?
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+              a.
+
+
+
+
 (1) Build and deployment process?
-(2) what is Jenkins CI/CD?
 (3) Explain Jenkins CI/CD Workflow?
 (4) can you explain Pipeline Structure of Groovy-based syntax?
 (5) Tell steps for Jenkins Server Setup in Linux VM?
