@@ -1,3 +1,273 @@
+(1) Basics :
+---------------
+
+Q1. What is Jenkins?
+👉 Jenkins is an open-source automation server used for Continuous Integration (CI) and Continuous Deployment (CD) in software development. It helps automate the building, testing, and deployment of applications.
+
+Q2. What is Continuous Integration (CI)?
+👉 CI means automatically integrating code changes from multiple developers into a shared repository frequently.
+      - Developer writes code locally on their computer (using IDE like IntelliJ, VS Code, etc.).
+      - They commit the code to a feature branch in Git (for example, feature/login-api).
+      - They push the branch to the remote repository (e.g., GitHub).
+      - Pull Request (PR) or Merge Request (MR) is created to merge code into the main branch (like develop or main).
+      - As soon as code is pushed or merged, the CI tool (like Jenkins, GitHub Actions, GitLab CI) automatically:
+                         - Pulls the latest code from the repo
+                         - Builds the project (e.g., using Maven or Gradle)
+                         - Runs automated tests (JUnit, Selenium, etc.)
+                         - Reports build/test results (pass/fail)
+Note:- The main goal of CI is to detect issues early and ensure the new code works well with existing code.
+
+Q3. What is Continuous Deployment (CD)?
+👉 Continuous Delivery (CD) is the process that automatically deploys tested code from Continuous Integration (CI) to staging or production environments :
+      - Once CI successfully builds and tests the code, the CD process starts.
+      - The CD tool (like Jenkins) automatically:
+                         - Takes the tested build artifact (like .jar, .war, or Docker image)
+                         - Deploys it to a staging environment for further testing
+                         - after approval, deploys it to production
+Note:- The main goal of CD is to reduce manual steps and make deployment smooth, frequent, and error-free.
+
+
+Q4. Why do we use Jenkins?
+👉 To automate repetitive tasks like building, testing, and deploying code, ensuring faster delivery and fewer errors.
+
+Q5. What language is Jenkins written in?
+👉 Jenkins is written in Java.
+
+Q6. What are the main features of Jenkins?
+      - Easy setup :
+               - Jenkins is easy to install — it runs on any system (Windows, Linux, macOS) and starts through a simple .war file or Docker image.
+      - open-source :
+               - It’s completely free and open-source, supported by a large community of developers.
+      - hundreds of plugins:
+               - Maven / Gradle → for build automation
+               - Git / GitHub / GitLab → for version control
+               - JUnit / Selenium → for testing
+               - Docker / Kubernetes → for containerization and deployment
+      - pipeline support: 
+               - Jenkins supports Declarative and Scripted Pipelines, which allow you to define your entire CI/CD workflow as code (using a Jenkinsfile).
+      - distributed builds:
+               - Jenkins supports Master-Agent (Node) architecture — meaning you can run builds on multiple machines (agents) to speed up execution and                          distribute load.
+
+Q7. What is a Jenkins Pipeline?
+👉 A pipeline defines your entire build and deployment process as code (written in Groovy script).
+
+Q8. What is a Jenkinsfile?
+👉 A Jenkinsfile is a text file that contains the pipeline script, stored in your project repository.
+
+Q9. What is the difference between Jenkins and Maven?
+👉 Maven is a build tool, while Jenkins is an automation server that can use Maven to build projects.
+
+Q10. What are Jenkins Plugins?
+👉 Plugins extend Jenkins features, like integration with Git, Docker, SonarQube, etc.
+
+
+
+
+
+
+
+(2) Installation & Setup :
+----------------------------
+
+Q1. How do you install Jenkins?
+👉 You can install Jenkins in 3 main ways, and each method has its own way of downloading :
+        - Using WAR file (Manual method) :
+               - Where to get it:  Download directly from the official Jenkins website → https://www.jenkins.io/download
+               - How to run:  java -jar jenkins.war
+               - Use when: You just want a quick setup, especially for learning or testing Jenkins.
+        - Using Docker (Container method) :
+               - Where to get it: Jenkins image is available on Docker Hub (official repository).
+               - How to install: You don’t download it manually — instead, Docker automatically pulls the image from Docker Hub using this command:  docker                                                                                                                                            pull jenkins/jenkins:lts
+               - Then run Jenkins container: docker run -p 8080:8080 jenkins/jenkins:lts
+               - Use when: You want a clean, isolated, portable setup (commonly used in DevOps environments).
+        - Using System Packages (apt / yum) :
+               - Where to get it: Jenkins provides official package repositories for Linux distributions.
+               - sudo apt update / sudo apt install jenkins :  These commands automatically download Jenkins from the official repo (not from browser).
+               - Use when: You want to install Jenkins as a system service (starts automatically on boot).
+
+
+Q2. What are Jenkins prerequisites?
+👉 Java (JDK 8 or higher) and a web browser are required.
+
+Q3. What is the default Jenkins port?
+👉 Port 8080.
+
+Q4. How can you secure Jenkins?
+👉 Enable authentication, authorization, SSL, and limit access using role-based strategies.
+
+Q5. How do you start and stop Jenkins?
+👉 By using commands like systemctl start jenkins or running the WAR file with java -jar jenkins.war.
+
+
+
+
+
+(3) Jenkins Jobs & Builds :
+----------------------------
+
+Q1. What is a Jenkins Job?
+👉 A Jenkins Job is a task that Jenkins runs — such as building code, running tests, or deploying an application.
+
+Q2. What are the different types of Jenkins jobs?
+👉 Jenkins supports several types of jobs, each designed for a specific purpose: like,
+       - Freestyle :  
+             - This is the simplest type of Jenkins job.
+             - You configure everything manually using the Jenkins UI.
+             - Example: Pull code from Git, build with Maven, run tests.
+             - Think of it like: “Click-based setup” — no coding, just filling steps.
+       - Pipeline : 
+             - Used to define the entire CI/CD process as code — inside a file called Jenkinsfile.
+       - Multibranch Pipeline :
+       - Maven Project
+
+Q3. What is a Freestyle Project?
+👉 It’s a simple job type used to build, test, or deploy using predefined steps.
+
+Q4. How do you schedule a Jenkins job?
+👉 Using CRON syntax in the “Build Triggers” section (e.g., H/15 * * * * for every 15 minutes).
+
+Q5. How do you trigger Jenkins jobs automatically?
+👉 Using webhooks (from GitHub/GitLab), SCM polling, or another job trigger.
+
+Q6. What is SCM Polling?
+👉 Jenkins checks the source control repository at intervals for code changes.
+
+(4) Pipelines :
+
+Q1. What are the two types of Jenkins pipelines?
+👉 Declarative Pipeline (simpler syntax) and Scripted Pipeline (uses Groovy code).
+
+Q2. What is the advantage of Jenkins Pipeline over Freestyle jobs?
+👉 Pipeline as code, better version control, complex build stages, and reusability.
+
+Q3. What are pipeline stages?
+👉 Stages represent major parts of your build process — like Build, Test, Deploy.
+
+Q4. Example of a simple Declarative Pipeline?
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+}
+Q5. What is a Jenkins agent or node?
+👉 A system (machine) that runs your Jenkins build. The master (controller) assigns jobs to agents.
+
+(5) Integration & Tools :
+
+Q1. How does Jenkins integrate with Git?
+👉 Using the Git plugin, you can pull code directly from repositories like GitHub or GitLab.
+
+Q2. How to integrate Jenkins with Maven?
+👉 Install Maven plugin → configure Maven path in Jenkins → use “Invoke top-level Maven targets” in job.
+
+Q3. How does Jenkins integrate with Docker?
+👉 Using the Docker plugin or CLI to build, push, and run containers from Jenkins.
+
+Q4. How do you integrate Jenkins with SonarQube?
+👉 Install the SonarQube plugin, configure server URL, and run Sonar analysis as part of the build.
+
+Q5. How do you integrate Jenkins with Slack or Email?
+👉 Use Slack or Email Extension plugins to send build notifications automatically.
+
+(6) Build Management & Deployment :
+
+Q1. What is an artifact in Jenkins?
+👉 An artifact is the output of your build (like a JAR, WAR, or ZIP file).
+
+Q2. How to archive build artifacts in Jenkins?
+👉 Use the “Archive the artifacts” post-build action.
+
+Q3. What is post-build action in Jenkins?
+👉 Steps executed after the build, such as sending notifications or deploying files.
+
+Q4. How can Jenkins deploy code?
+👉 Using SSH, FTP, Docker, or by integrating with deployment tools like Ansible or Kubernetes.
+
+Q5. What is Blue Ocean in Jenkins?
+👉 Blue Ocean is a modern UI for Jenkins Pipelines that gives a better visualization of stages and steps.
+
+(7) Security & Administration :
+
+Q1. How do you manage users in Jenkins?
+👉 Through the “Manage Users” section or by integrating with LDAP/Active Directory.
+
+Q2. What is Role-Based Strategy Plugin?
+👉 It allows assigning specific permissions (like read, build, configure) to different user roles.
+
+Q3. How do you back up Jenkins?
+👉 Backup $JENKINS_HOME directory where all configuration, jobs, and plugins are stored.
+
+Q4. What is a Jenkins Master-Slave architecture?
+👉 The master (controller) handles scheduling, and slaves (agents) execute builds on different machines.
+
+(8) Troubleshooting & Performance :
+
+Q1. What happens if Jenkins goes down?
+👉 All builds stop; you can restore it by restarting Jenkins and ensuring data from $JENKINS_HOME is safe.
+
+Q2. How do you monitor Jenkins performance?
+👉 Use Monitoring plugins or external tools like Prometheus + Grafana.
+
+Q3. What is a common reason for Jenkins build failure?
+👉 Missing dependencies, wrong path, plugin version mismatch, or permission issues.
+
+Q4. How to see Jenkins build logs?
+👉 Open the job → Build History → Click on the build → “Console Output.”
+
+Q5. How do you handle failed builds?
+👉 Check logs, fix issues, and use “Retry build after failure” plugins if needed.
+
+(9) Advanced & Interview Practical :
+
+Q1. How can you parameterize a Jenkins job?
+👉 Use the “This project is parameterized” option to accept user input like branch name or environment.
+
+Q2. What is parallel execution in Jenkins Pipeline?
+👉 Running multiple stages or tasks simultaneously to save time.
+
+Q3. What is the difference between Declarative and Scripted Pipeline?
+👉 Declarative → simple and structured syntax
+👉 Scripted → full control using Groovy scripting.
+
+Q4. How do you handle secrets or credentials in Jenkins?
+👉 Store them in Jenkins “Credentials” and access them securely inside pipeline scripts.
+
+Q5. How do you run Jenkins on Docker?
+👉 docker run -p 8080:8080 jenkins/jenkins:lts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #################################
 (1) Build and deployment process
 ##################################
