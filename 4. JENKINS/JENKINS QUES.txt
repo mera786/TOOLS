@@ -20,11 +20,13 @@
 (3) Jenkins Jobs & Builds :
 ----------------------------
               Q1. What is a Jenkins Job?
-              a.
-              a.
-              a.
-              a.
-              a.
+              Q2. What are the different types of Jenkins jobs?
+              Q3. How do you schedule a Jenkins job?
+              Q4. How do you trigger Jenkins jobs automatically?
+              Q5. What is SCM Polling?
+(4) Pipelines :
+----------------
+              Q1. What are the two types of Jenkins pipelines?
               a.
               a.
               a.
