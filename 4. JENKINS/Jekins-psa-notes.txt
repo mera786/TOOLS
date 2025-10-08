@@ -111,28 +111,42 @@ Q1. What is a Jenkins Job?
 Q2. What are the different types of Jenkins jobs?
 👉 Jenkins supports several types of jobs, each designed for a specific purpose: like,
        - Freestyle :  
-             - This is the simplest type of Jenkins job.
+             - It’s a simple job type used to build, test, or deploy using predefined steps.
              - You configure everything manually using the Jenkins UI.
              - Example: Pull code from Git, build with Maven, run tests.
              - Think of it like: “Click-based setup” — no coding, just filling steps.
        - Pipeline : 
              - Used to define the entire CI/CD process as code — inside a file called Jenkinsfile.
+             - You write pipeline steps using scripting language called Groovy. eg - pipeline {
+                                                                                         stages {
+                                                                                          stage('Build') { steps { sh 'mvn clean install' } }
+                                                                                       }}
        - Multibranch Pipeline :
-       - Maven Project
+             - Used when your Git repository has multiple branches (e.g., develop, feature, main).
+             - Jenkins automatically creates a separate pipeline for each branch that has a Jenkinsfile.
+       - Maven Project  :
+             - This type is made especially for Java projects that use Apache Maven.Jenkins automatically understands Maven’s pom.xml file and can:
+                                                                                                                 - Run Maven build goals (like clean install).
+                                                                                                                 - Detect and run unit tests.
+                                                                                                                 - Generate reports.
 
-Q3. What is a Freestyle Project?
-👉 It’s a simple job type used to build, test, or deploy using predefined steps.
-
-Q4. How do you schedule a Jenkins job?
+Q3. How do you schedule a Jenkins job?
 👉 Using CRON syntax in the “Build Triggers” section (e.g., H/15 * * * * for every 15 minutes).
 
-Q5. How do you trigger Jenkins jobs automatically?
+Q4. How do you trigger Jenkins jobs automatically?
 👉 Using webhooks (from GitHub/GitLab), SCM polling, or another job trigger.
 
-Q6. What is SCM Polling?
+Q5. What is SCM Polling?
 👉 Jenkins checks the source control repository at intervals for code changes.
 
+
+
+
+
+
+
 (4) Pipelines :
+----------------
 
 Q1. What are the two types of Jenkins pipelines?
 👉 Declarative Pipeline (simpler syntax) and Scripted Pipeline (uses Groovy code).
