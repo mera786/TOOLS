@@ -10,6 +10,7 @@
               Q8. What is a Jenkinsfile?
               Q9. What is the difference between Jenkins and Maven?
               Q10. What are Jenkins Plugins?
+              Q11. What is a Build and Deployment Process? (✅ Newly added — fits naturally here)
 (2) Installation & Setup :
 ----------------------------
               Q1. How do you install Jenkins?
@@ -17,6 +18,7 @@
               Q3. What is the default Jenkins port?
               Q4. How can you secure Jenkins?
               Q5. How do you start and stop Jenkins?
+              Q6. Tell steps for Jenkins Server Setup in Linux VM? (✅ newly categorized)
 (3) Jenkins Jobs & Builds :
 ----------------------------
               Q1. What is a Jenkins Job?
@@ -24,6 +26,7 @@
               Q3. How do you schedule a Jenkins job?
               Q4. How do you trigger Jenkins jobs automatically?
               Q5. What is SCM Polling?
+              Q6. Explain Jenkins CI/CD Workflow? (✅ newly categorized — this is part of job execution flow)
 (4) Pipelines :
 ----------------
               Q1. What are the two types of Jenkins pipelines?
@@ -31,6 +34,7 @@
               Q3. What are pipeline stages?
               Q4. Example of a simple Declarative Pipeline?
               Q5. What is a Jenkins agent or node?
+              Q6. Can you explain the Pipeline Structure of Groovy-based syntax? (✅ newly categorized — perfectly fits here)
 (5) Integration & Tools :
 ----------------------------
               Q1. How does Jenkins integrate with Git?
@@ -38,29 +42,27 @@
               Q3. How does Jenkins integrate with Docker?
               Q4. How do you integrate Jenkins with SonarQube?
               Q5. How do you integrate Jenkins with Slack or Email?
+              Q6. Tell steps to Setup Docker in Jenkins? (✅ newly categorized)
 (6) Build Management & Deployment :
 ---------------------------------------
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-              a.
-
-
-
-
-(1) Build and deployment process?
-(3) Explain Jenkins CI/CD Workflow?
-(4) can you explain Pipeline Structure of Groovy-based syntax?
-(5) Tell steps for Jenkins Server Setup in Linux VM?
-(4) Tell steps Setup Docker in Jenkins?
+              Q1. What is an artifact in Jenkins?
+              Q2. How to archive build artifacts in Jenkins?
+              Q3. What is post-build action in Jenkins?
+              Q4. How can Jenkins deploy code?
+              Q5. What is Blue Ocean in Jenkins?
+(7) Security & Administration :
+---------------------------------
+              Q1. How do you manage users in Jenkins?
+              Q2. What is Role-Based Strategy Plugin?
+              Q3. How do you back up Jenkins?
+              Q4. What is a Jenkins Master-Slave architecture?
+(8) Troubleshooting & Performance :
+-------------------------------------
+              Q1. What happens if Jenkins goes down?
+              Q2. How do you monitor Jenkins performance?
+              Q3. What is a common reason for Jenkins build failure?
+              Q4. How to see Jenkins build logs?
+              Q5. How do you handle failed builds?
+              Q6. What is the difference between Declarative and Scripted Pipeline?
+              Q7. How do you handle secrets or credentials in Jenkins?
+              Q8. How do you run Jenkins on Docker?
