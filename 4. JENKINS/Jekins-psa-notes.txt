@@ -152,7 +152,9 @@ Q1. What are the two types of Jenkins pipelines?
 👉 Declarative Pipeline (simpler syntax) and Scripted Pipeline (uses Groovy code).
 
 Q2. What is the advantage of Jenkins Pipeline over Freestyle jobs?
-👉 Pipeline as code, better version control, complex build stages, and reusability.
+👉 Freestyle jobs are simple and UI-based, good for small tasks. Jenkins Pipelines are code-based, stored in Jenkinsfile, and support complex workflows, 
+version control, and error recovery. Pipelines make CI/CD more automated, flexible, and maintainable.
+
 
 Q3. What are pipeline stages?
 👉 Stages represent major parts of your build process — like Build, Test, Deploy.
@@ -178,19 +180,70 @@ pipeline {
         }
     }
 }
+
 Q5. What is a Jenkins agent or node?
 👉 A system (machine) that runs your Jenkins build. The master (controller) assigns jobs to agents.
 
+
+
+
+
+
 (5) Integration & Tools :
+----------------------------
 
 Q1. How does Jenkins integrate with Git?
 👉 Using the Git plugin, you can pull code directly from repositories like GitHub or GitLab.
 
 Q2. How to integrate Jenkins with Maven?
-👉 Install Maven plugin → configure Maven path in Jenkins → use “Invoke top-level Maven targets” in job.
+       - Step 1: Install Jenkins and Maven :
+                    - Jenkins must be installed
+                    - Maven should be installed on the same machine (so Jenkins can use it).
+       - Step 2: Install Maven Plugin in Jenkins
+                    - Go to Jenkins Dashboard → Manage Jenkins → Plugins → Available
+                    - Search for “Maven Integration”
+                    - Install the “Maven Integration Plugin”
+       - Step 3: Configure Maven in Jenkins :
+                    - Go to Manage Jenkins → Global Tool Configuration
+                    - Scroll to Maven section
+                    - Click Add Maven , Give it a name (e.g., Maven_3.9.6)
+
 
 Q3. How does Jenkins integrate with Docker?
-👉 Using the Docker plugin or CLI to build, push, and run containers from Jenkins.
+       - Install Docker on the Jenkins Server :
+                    - First, install Docker on the machine where Jenkins is running.
+                    - Then give Jenkins permission to run Docker commands :   sudo usermod -aG docker jenkins
+       - Install “Docker Plugin” in Jenkins :
+                    - Go to Manage Jenkins → Plugins → Available tab → Search “Docker” → Install
+                    - This plugin allows Jenkins to: Build Docker images, Run containers as build agents, Push images to Docker Hub or private registry
+       - Use Docker in a Jenkins Pipeline :
+                    - You can write a pipeline script (Jenkinsfile) that uses Docker commands 
+ex-
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build a Docker image
+                    sh 'docker build -t myapp:latest .'
+                }
+            }
+        }
+        stage('Run Container') {
+            steps {
+                script {
+                    // Run a container
+                    sh 'docker run -d -p 8080:8080 myapp:latest'
+                }
+            }
+       - Use Docker Agents :
+                    - Instead of running Jenkins jobs on the main server, you can make Jenkins run each build inside a Docker container using:
+agent {
+    docker { image 'maven:3.8.6' }
+}
+
 
 Q4. How do you integrate Jenkins with SonarQube?
 👉 Install the SonarQube plugin, configure server URL, and run Sonar analysis as part of the build.
@@ -198,7 +251,12 @@ Q4. How do you integrate Jenkins with SonarQube?
 Q5. How do you integrate Jenkins with Slack or Email?
 👉 Use Slack or Email Extension plugins to send build notifications automatically.
 
+
+
+
+
 (6) Build Management & Deployment :
+---------------------------------------
 
 Q1. What is an artifact in Jenkins?
 👉 An artifact is the output of your build (like a JAR, WAR, or ZIP file).
