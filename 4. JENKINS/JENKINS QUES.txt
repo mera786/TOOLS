@@ -27,6 +27,20 @@
 (4) Pipelines :
 ----------------
               Q1. What are the two types of Jenkins pipelines?
+              Q2. What is the advantage of Jenkins Pipeline over Freestyle jobs?
+              Q3. What are pipeline stages?
+              Q4. Example of a simple Declarative Pipeline?
+              Q5. What is a Jenkins agent or node?
+(5) Integration & Tools :
+----------------------------
+              Q1. How does Jenkins integrate with Git?
+              Q2. How to integrate Jenkins with Maven?
+              Q3. How does Jenkins integrate with Docker?
+              Q4. How do you integrate Jenkins with SonarQube?
+              Q5. How do you integrate Jenkins with Slack or Email?
+(6) Build Management & Deployment :
+---------------------------------------
+              a.
               a.
               a.
               a.
