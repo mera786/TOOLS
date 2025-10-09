@@ -1,11 +1,27 @@
-(1) What is Kubernetes?
-(2) Why use Kubernetes? or Kubernetes Advantages (Detailed Explanation)?
+(1) Basics :
+------------
+           Q1. What is Kubernetes?
+           Q2. Why do we use Kubernetes?
+           Q3. What problem does Kubernetes solve?
+           Q4. Explain Kubernetes Architecture?
+           Q5. What are the main components of the Control Plane(Master Node/Control Node)?
+           Q6. What are the main components of a Worker Nodes (Slave Nodes)?
+           Q7. Explanation of Kubernetes working ?
+           Q8. What is a Pod?
+           Q9. What is the difference between a Container and a Pod?
+           Q10. What is a ReplicaSet?
+           Q11. What is a Deployment?
+           a.
+           a.
+           a.
+           a.
+
+(2) Kubernetes Advantages (Detailed Explanation)?
 (3) Conclusion (difference between docker & kubernets)?
-(4) Kubernetes (K8s) Architecture - Explained in Detail ?
-(5) Explanation k8S working ?
+
 (6) How many ways to do Kubernetes (K8s) Cluster Setup?
 (7) Tell steps to setup minikube?
-(8)  What is a POD in Kubernetes?
+                                                                                 (8)  What is a POD in Kubernetes?
 (9) Kubernetes Services &  Why Do We Use Services?
 (10) How many Types of Kubernetes Services?
 (11) Explain ClusterIP Service with it Access Scope & use case ?
