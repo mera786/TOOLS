@@ -66,6 +66,78 @@ Q11. What is a Deployment?
 👉 A Deployment manages ReplicaSets and provides declarative updates for pods (used for rolling updates and rollbacks).
 
 
+Q12. What is a Service in Kubernetes?
+👉 A Service is a way to connect or communicate with Pods in Kubernetes. It gives a fixed name or address (IP/DNS) to reach the Pods, even if Pods are created or deleted. In simple words, it helps other apps or users find and talk to your Pods easily.
+
+Q13. What are the different types of Kubernetes Services? 
+       - ClusterIP (default): Internal-only communication. 
+       - NodePort: Exposes service on each node’s IP. 
+       - LoadBalancer: Uses cloud load balancer for external access. 
+       - ExternalName: Maps service to external DNS name.
+
+
+Q14. What is a Namespace?
+👉 A logical partition within a cluster to group resources (used for multi-environment or multi-team isolation).
+
+
+Q15. What is a Label and Selector?
+👉 A Label is a small piece of information (key-value pair) you attach to an object, like a tag or name.
+A Selector is used to find or group objects that have specific labels.
+
+
+Q16. What is a ConfigMap? 
+👉 A ConfigMap stores non-sensitive configuration data (like environment variables or config files).
+
+
+Q17. What is a Secret? 
+👉 A Secret stores sensitive data such as passwords or tokens (encoded in base64).
+
+Q18. What is a Volume in Kubernetes? 
+Volumes provide storage accessible to containers within a pod — used for data persistence.
+
+Q19. What is a Job and CronJob? 
+    - Job: Runs a task to completion once. 
+    - CronJob: Runs jobs on a schedule (like cron).
+
+Q20. What is kubelet and kube-proxy?
+    - kubelet: Manages pods on a node. 
+    - kube-proxy: Manages networking rules for services and pods.
+
+Q21. What is etcd?
+👉 etcd is a database that Kubernetes uses to store all its important information, like cluster settings and the current state of Pods, nodes, and other resources.
+
+Q22. What is the difference between Kubernetes Master and Worker Node?
+      - Master runs control-plane components; 
+      - Worker runs application workloads (pods).
+
+Q23. What is a YAML manifest file?
+👉 A configuration file that defines Kubernetes resources (pods, deployments, services, etc.)
+
+
+Q24. What is kubectl? 
+👉 The command-line tool to interact with the Kubernetes cluster and manage resources.
+
+
+Q25. What is the difference between kubectl apply, create, and replace? 
+     - create: Creates a new resource. 
+     - apply: Updates or creates resources declaratively. 
+     - replace: Fully overwrites an existing resource.
+
+
+
+
+
+
+(2) Installation & Setup :
+-----------------------------
+
+Q1. What are the prerequisites for installing Kubernetes?
+        - A machine with Linux, Windows, or macOS.
+        - Minimum 2 CPU cores and 2GB RAM for single-node clusters.
+        - Docker or any container runtime installed.
+        - kubectl command-line tool installed.
+
+
 
 
 
