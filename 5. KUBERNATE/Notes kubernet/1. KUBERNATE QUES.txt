@@ -11,6 +11,28 @@
            Q9. What is the difference between a Container and a Pod?
            Q10. What is a ReplicaSet?
            Q11. What is a Deployment?
+           Q12. What is a Service in Kubernetes?
+           Q13. What are the different types of Kubernetes Services? 
+           Q14. What is a Namespace?
+           Q15. What is a Label and Selector?
+           Q16. What is a ConfigMap? 
+           Q17. What is a Secret? 
+           Q18. What is a Volume in Kubernetes? 
+           Q19. What is a Job and CronJob? 
+           Q20. What is kubelet and kube-proxy?
+           Q21. What is etcd?
+           Q22. What is the difference between Kubernetes Master and Worker Node?
+           Q23. What is a YAML manifest file?
+           Q24. What is kubectl? 
+           Q25. What is the difference between kubectl apply, create, and replace? 
+(2) Installation & Setup :
+-----------------------------
+           Q1. What are the prerequisites for installing Kubernetes?
+           a.
+           a.
+           a.
+           a.
+           a.
            a.
            a.
            a.
