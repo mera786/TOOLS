@@ -28,10 +28,12 @@
 (2) Installation & Setup :
 -----------------------------
            Q1. What are the prerequisites for installing Kubernetes?
-           a.
-           a.
-           a.
-           a.
+           Q2. How to install Minikube?
+           Q3.What is kubectl and how to configure it?
+           Q5. How to verify the cluster setup?
+           Q6. How to deploy your first app in Minikube?
+(3) Pods & Deployments (Core Operations) :
+----------------------------------------------
            a.
            a.
            a.
