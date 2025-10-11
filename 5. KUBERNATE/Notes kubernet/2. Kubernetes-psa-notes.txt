@@ -138,6 +138,75 @@ Q1. What are the prerequisites for installing Kubernetes?
         - kubectl command-line tool installed.
 
 
+Q2. How to install Minikube?
+     - Minikube is a tool to run Kubernetes locally.
+     - Installation (Linux/macOS/Windows) via package manager or binary. 
+Example for Linux:        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+                          sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+
+
+Q3.What is kubectl and how to configure it?
+👉 kubectl is a command-line tool used to communicate with and manage a Kubernetes cluster. It helps you deploy, view, and control Kubernetes resources like Pods, Deployments, and Services.
+      Why we update or configure kubectl?
+                       - kubectl uses a kubeconfig file to know which cluster to talk to and how to authenticate. This file has:
+                       - Cluster address (where the Kubernetes API server is)
+                       - User credentials (how kubectl can access the cluster)
+                       - Context (which cluster and user kubectl should use)
+                       - You usually don’t need to touch this file if your cluster setup doesn’t change.
+         But you need to update or reconfigure kubectl when:
+                       - You create a new cluster → kubectl needs to know the new cluster details.
+                       - Cluster configuration changes → for example, cluster IP, certificate, or user credentials change.
+                       - You want to switch between clusters → kubectl needs the correct context to point to the cluster you want to work with.
+STEP 1- Install kubectl
+            For Linux: 
+                 curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-                                        release/release/stable.txt)/bin/linux/amd64/kubectl"
+       Note:- Download the latest version of the kubectl binary for Linux 64-bit and save it in the current directory with the same filename (kubectl).
+               chmod +x kubectl
+Note:- it is used to change file permissions like, here used for kubectl file permission to execute.
+              sudo mv kubectl /usr/local/bin/
+Note:- This one’s about moving the kubectl file into a system-wide executable location so you can run it from anywhere.
+ STEP 2- Get and Set Up the Cluster Configuration (kubeconfig file) :
+         - The kubeconfig file contains cluster connection details like the cluster address, credentials, and context.
+         - You usually get this file from your cluster admin or cloud provider.
+                                   example : 
+                                        - For Minikube: minikube update-context
+                                        - For AWS EKS: aws eks update-kubeconfig --region <region-name> --name <cluster-name>
+                        Then, place the kubeconfig file in the default location:
+                                                          - Linux/Mac: ~/.kube/config
+                                                          - Windows: C:\Users\<your-username>\.kube\config
+STEP 3- Verify kubectl setup : kubectl version -o yaml
+STEP4- Then test the connection with the cluster: kubectl get nodes
+
+
+Q4. How to start and stop Minikube?
+minikube start   # Starts the cluster
+minikube stop    # Stops the cluster
+
+Q5. How to verify the cluster setup?
+kubectl get nodes      # Lists nodes
+kubectl cluster-info   # Shows cluster info
+kubectl get pods --all-namespaces
+
+
+Q6. How to deploy your first app in Minikube?
+kubectl create deployment hello-node --image=k8s.gcr.io/echoserver:1.10
+kubectl expose deployment hello-node --type=NodePort --port=8080
+minikube service hello-node
+
+
+
+
+
+(3) Pods & Deployments (Core Operations) :
+----------------------------------------------
+
+
+
+
+
+                                       
+
 
 
 
