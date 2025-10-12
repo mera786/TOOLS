@@ -46,13 +46,30 @@
            Q1. What is a Service in Kubernetes?
            Q2. How to create a Service using YAML?
            Q3. How to access a Service from outside the cluster?
-           a.
-           a.
-           a.
-           a.
-           a.
-           a.
-           a.
+           Q4. What is a NetworkPolicy?
+(5) Scaling & Monitoring :
+---------------------------
+           Q1. What is Horizontal Pod Autoscaler (HPA)?
+           Q2. How to create HPA?
+           Q3. What is Vertical Pod Autoscaler (VPA)?
+           Q4. Difference between HPA and VPA ?
+           Q5. How to monitor a Kubernetes cluster?
+           Q6. How to scale manually?
+(6) Security & RBAC :
+-----------------------
+           Q1. What is RBAC?
+           Q2. What are Roles and RoleBindings?
+           Q3. What are ClusterRoles and ClusterRoleBindings?
+           Q4. What is a ServiceAccount?
+           Q5. How to store secrets securely?
+(7) Troubleshooting & Advanced :
+----------------------------------
+           Q1. How to debug a pod?
+           Q2. How to check events in the cluster?
+           Q3. How to view resource usage?
+           Q4. How to perform rolling updates safely?
+           Q5. How to delete all resources in a namespace?
+
 
 (2) Kubernetes Advantages (Detailed Explanation)?
 (3) Conclusion (difference between docker & kubernets)?
