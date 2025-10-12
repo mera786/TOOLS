@@ -319,6 +319,169 @@ Q3. How to access a Service from outside the cluster?
   - LoadBalancer creates an external IP using your cloud provider’s load balancer (like AWS, GCP, Azure).You can access the Service through that external IP.
 
 
+Q4. What is a NetworkPolicy?
+👉 A NetworkPolicy in Kubernetes is used to control network traffic between Pods.It decides which Pods can talk to each other and what kind of traffic (in or out) is allowed.
+
+
+
+
+
+
+
+(5) Scaling & Monitoring :
+---------------------------
+
+Q1. What is Horizontal Pod Autoscaler (HPA)?
+👉 Horizontal Pod Autoscaler (HPA) automatically increases or decreases the number of Pods based on how much work they are doing — like CPU or memory usage.
+In simple words: If your app gets more traffic, HPA adds more Pods.If traffic goes down, it removes extra Pods.
+
+Q2. How to create HPA?
+there are two ways :
+   - 1️⃣ Using kubectl command (imperative way): kubectl autoscale deployment my-deploy --cpu-percent=50 --min=1 --max=5
+   - 2️⃣ Using YAML file (declarative way):
+example : hpa.yml 
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-deploy
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+
+Q3. What is Vertical Pod Autoscaler (VPA)?
+👉 Vertical Pod Autoscaler (VPA) automatically changes the CPU and memory resources of a Pod based on how much it actually needs.
+In simple words: If a Pod needs more CPU or memory, VPA increases it. If it’s using less, VPA can reduce it.
+Ways to create Vertical Pod Autoscaler (VPA) :  Using YAML file (declarative way) — most common
+Example vpa.yaml:
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: my-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: my-deploy
+  updatePolicy:
+    updateMode: "Auto"
+Apply it using:  kubectl apply -f vpa.yaml
+
+
+
+Q4. Difference between HPA and VPA ?
+HPA (Horizontal Pod Autoscaler) :
+         - What it does: Adds or removes Pods based on resource usage (like CPU, memory) or custom metrics.
+         - Effect: Changes the number of Pods.
+         - Example: If CPU usage goes above 50%, HPA may create more Pods to handle the load.
+VPA (Vertical Pod Autoscaler)
+         - What it does: Adjusts the CPU and memory requests/limits of existing Pods based on actual usage.
+         - Effect: Changes resources inside Pods, not the number of Pods.
+         - Example: If a Pod needs more memory, VPA increases the memory limit for that Pod.
+
+
+Q5. How to monitor a Kubernetes cluster?
+Metrics-based monitoring (to check resource usage):
+       - Metrics Server → Provides basic CPU and memory usage for Pods and nodes.
+       - Prometheus → Collects detailed metrics over time.
+       - Grafana → Visualizes metrics in dashboards for easier monitoring.
+       - Commands to monitor Kubernetes cluster: 
+                     - Check nodes and their status:
+                                 - kubectl get nodes
+                                 - kubectl describe node <node-name>
+                     - Check Pods and their status:
+                                 - kubectl get pods
+                                 - kubectl describe pod <pod-name>
+Logs-based monitoring (to check application behavior and errors):
+       - Use kubectl logs <pod-name> to view Pod logs.
+       - For centralized logging, tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Fluentd can be used.
+       - Commands to logs Kubernetes cluster: 
+                     -  View Pod logs:
+                                 - kubectl logs <pod-name>
+                                 - kubectl logs -f <pod-name>   # follow live logs
+                     - Check resource usage (requires Metrics Server):
+                                 - kubectl top nodes
+                                 - kubectl top pods
+
+Q6. How to scale manually?
+kubectl scale deployment my-deploy --replicas=5
+
+
+
+
+
+
+(6) Security & RBAC :
+-----------------------
+
+Q1. What is RBAC?
+Role-Based Access Control controls who can do what in the cluster.
+
+Q2. What are Roles and RoleBindings?
+Role: Permissions within a namespace.
+RoleBinding: Assigns a Role to a user/group/serviceaccount.
+
+Q3. What are ClusterRoles and ClusterRoleBindings?
+ClusterRole: Permissions cluster-wide.
+ClusterRoleBinding: Assigns ClusterRole to users/groups.
+
+Q4. What is a ServiceAccount?
+Provides an identity for pods to access the API server.
+
+Q5. How to store secrets securely?
+Use kubectl create secret or YAML.
+Secrets are base64 encoded; enable encryption at rest for better security.
+
+
+
+
+
+
+(7) Troubleshooting & Advanced :
+----------------------------------
+
+Q1. How to debug a pod?
+there are the some steps and commands:
+   - Check Pod status :
+             kubectl get pods
+             kubectl describe pod <pod-name>
+   - Check Pod logs
+             kubectl logs <pod-name>
+             kubectl logs -f <pod-name>   # follow live logs
+   - Access the Pod’s container
+             kubectl exec -it <pod-name> -- /bin/bash
+   - Check events and errors in the cluster
+             kubectl get events
+
+
+Q2. How to check events in the cluster?
+kubectl get events
+
+
+Q3. How to view resource usage?
+kubectl top pod
+kubectl top node
+
+
+Q4. How to perform rolling updates safely?
+kubectl set image deployment/my-deploy nginx=nginx:1.21
+kubectl rollout status deployment/my-deploy
+
+
+Q5. How to delete all resources in a namespace?
+kubectl delete all --all -n <namespace>
+
+
 
 
 
