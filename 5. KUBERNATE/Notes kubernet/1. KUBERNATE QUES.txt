@@ -34,6 +34,20 @@
            Q6. How to deploy your first app in Minikube?
 (3) Pods & Deployments (Core Operations) :
 ----------------------------------------------
+           Q1. How to create a Pod using YAML?
+           Q2. How to view pods?
+           Q3. How to delete a pod?
+           Q4. What is a Deployment and how to create it?
+           Q5. How to scale a Deployment?
+           Q6. How to update a Deployment image?
+           Q7. How to rollback a Deployment?
+(4) Networking & Services :
+----------------------------
+           Q1. What is a Service in Kubernetes?
+           Q2. How to create a Service using YAML?
+           Q3. How to access a Service from outside the cluster?
+           a.
+           a.
            a.
            a.
            a.
