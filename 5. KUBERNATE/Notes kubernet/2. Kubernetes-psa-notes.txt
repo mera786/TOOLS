@@ -201,6 +201,125 @@ minikube service hello-node
 (3) Pods & Deployments (Core Operations) :
 ----------------------------------------------
 
+Q1. How to create a Pod using YAML?
+         - First, create a YAML file (e.g., pod.yaml).
+         - Define the required fields:
+                       - apiVersion → version of Kubernetes API (here v1)
+                       - kind → type of object (here Pod)
+                       - metadata → name and labels of the Pod
+                       - spec → container details like name, image, and port
+         - Then apply the file using the command:
+                                        - kubectl apply -f pod.yaml
+         - eg :
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80
+
+Q2. How to view pods?
+ - kubectl get pods
+ - kubectl describe pod my-pod
+
+Q3. How to delete a pod?
+kubectl delete pod my-pod
+
+Q4. What is a Deployment and how to create it?
+👉A Deployment manages ReplicaSets and makes sure the desired number of Pods are always running. It also helps you update or roll back your application easily.
+there are Two ways to create a Deployment:
+1️⃣
+  -> Using kubectl command (imperative way): kubectl create deployment my-deploy --image=nginx
+  -> Then check:  kubectl get deployments
+2️⃣
+  -> Using YAML file (declarative way):    Create a file named deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx
+        ports:
+        - containerPort: 80
+
+-> Apply it using:   kubectl apply -f deployment.yaml
+
+
+Q5. How to scale a Deployment?
+Scaling a Deployment means increasing or decreasing the number of running Pods. can ne scaled a Deployment either by using the kubectl scale command or by changing the replicas count in the YAML file.
+   - 1️⃣ Using kubectl command (imperative way):  kubectl scale deployment my-deploy --replicas=3
+   - 2️⃣ Using YAML file (declarative way):    Open your Deployment YAML file and update:
+spec:
+  replicas: 3
+Note:- Then apply the changes:  kubectl apply -f deployment.yaml
+
+
+Q6. How to update a Deployment image?
+Command : kubectl set image deployment/my-deploy nginx=nginx:1.21
+
+
+Q7. How to rollback a Deployment?
+kubectl rollout undo deployment my-deploy
+
+
+
+
+
+
+(4) Networking & Services :
+----------------------------
+
+Q1. What is a Service in Kubernetes?
+👉 A Service in Kubernetes helps you connect to Pods and gives them a fixed IP/DNS or name so other apps or users can reach them, even if Pods keep changing.
+Types of Services:
+             - ClusterIP → Used for internal communication inside the cluster.
+             - NodePort → Makes the app accessible using a port on each node.
+             - LoadBalancer → Used to access the app from outside the cluster (via cloud load balancer).
+             - ExternalName → Connects to an external service using a name (like a domain).
+Note:- DNS (Domain Name System) → It works like a contact list for the internet. It helps change easy names (like google.com) into numbers (like 142.250.182.14) so computers can find and talk to each other.
+
+
+Q2. How to create a Service using YAML?
+👉 To create a Service, we write a YAML file that defines how Pods will be exposed inside or outside the cluster.
+Steps:
+      - Create a YAML file (for example, service.yaml).
+      - Define the required fields:
+                - apiVersion: v1 → Tells which API version is used.
+                - kind: Service → Defines the resource type as a Service.
+                - metadata → Gives the Service a name.
+                - spec → Describes how the Service should work.
+                         - selector → Matches the Pods with label app: my-app.
+                         - ports → Defines which port the Service exposes (port: 80) and which port on the Pod it connects to (targetPort: 8080).
+                         - type → Defines how the Service is exposed (here ClusterIP = internal access only).
+      - Apply the YAML file using:    kubectl apply -f service.yaml
+
+
+Q3. How to access a Service from outside the cluster?
+👉 There are two main ways to access a Service from outside the cluster:
+1️⃣ NodePort :
+  - NodePort exposes your Service on a port of each Node’s IP (a port between 30000–32767). That means you can access your app using: <NodeIP>:<NodePort>
+  - in minikube : You can easily open the Service in your browser using: minikube service my-service
+      Note:- This command automatically opens the correct URL in your browser.(It works because Minikube runs a single node locally.)
+2️⃣ LoadBalancer :
+  - LoadBalancer creates an external IP using your cloud provider’s load balancer (like AWS, GCP, Azure).You can access the Service through that external IP.
+
+
+
 
 
 
