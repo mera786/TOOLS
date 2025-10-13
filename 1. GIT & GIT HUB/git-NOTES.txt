@@ -1,146 +1,514 @@
-(1). What is Source code management tool?
-################################################
+🧩 (1) Basics :
+------------------
 
-- Version Control: It allows teams of developers to keep track of changes to their codebase.
+Q1. What is Git?
+Git is a version control system tool,used to track changes in code.It helps developers save versions of their work, go back to earlier versions, and work together on the same project without losing any changes.
 
-- Collaboration: It enables multiple developers to work together on the same project.
+Q2. What is GitHub?
+GitHub is a cloud-based platform where you can store, share, and manage your Git repositories online.
+It allows developers to collaborate, review code, and contribute to projects using Git.
 
-- Continuous Integration/Continuous Deployment (CI/CD)
-It integrates with various CI/CD tools (like GitHub Actions, Jenkins, and Travis CI) to automate testing, building, and deploying your code.
+Q3. What is the difference between Git and GitHub?
+ - Git is a tool used on your computer to track and manage changes in your code (version control).
+ - GitHub is a website (cloud platform) that stores your Git repositories online and helps you collaborate with others.
 
-Example:
+Q4. What type of version control system is Git?
+ - Git is a Distributed Version Control System (DVCS).
+ - That means every developer has a complete copy of the project’s code and history on their own computer — not just the latest version.
 
--  Git hub
--  Bit Bucket
--  Clear case
--  SVN
+Q5. Difference between Centralized VCS and Distributed VCS ?
+| Type                | Description                                          | Example  |
+| ------------------- | ---------------------------------------------------- | -------- |
+| **Centralized VCS** | One main server holds all code; others depend on it. | SVN, CVS |
+| **Distributed VCS** | Every developer has a full copy of code & history.   | Git      |
 
-
-(2). What is Git, and how is it different from GitHub?
-#######################################################
-Git :
-----
-- Git is a distributed version control system (DVCS).
-- It helps you track changes in your code, go back to previous versions, and collaborate with others.
-- Example: You can save different versions of your project and switch between them easily.
-Github :
---------
-- GitHub is a cloud-based platform that hosts Git repositories.
-- It allows you to store your code online, collaborate with teams, and manage projects.
-- Think of it as social media for code (with repos, stars, pull requests).
-
-(3) Explain the difference between Git and other version control systems like SVN.?
-#####################################################################################
-SVN (Centralized VCS):
------------------------
-- Has a central server that stores the complete repository.
-- Developers check out files, make changes, then commit back to the central server.
-- Without server access → you can’t commit.
-Git (Distributed VCS):
-----------------------
-- Every developer has a full copy of the repository, including complete history.
-- You can commit locally without internet.
-- Later you push to a remote server (like GitHub) for collaboration.
-
-Note: Offline Work
-- SVN: Needs internet/server connection for most actions.
-- Git: Works offline; you only need internet for push/pull.
-
-________________________
-Git Hub and git 
-________________________
-
--  Create git hub account
--  Install git in local system
--  Configure name & email using following commands (One time configuration)
-
-git config --global user.name ""
-git config --gloabl user.email ""
-
-(4) Let's go over the explanation of Git Architecture in detail:
-#######################################################################
-
-a) Working Tree
-The Working Tree (also called the Working Directory or Workspace) is where all the files for your project are stored on your local machine.
-
-b) Staging Area
-The Staging Area (also called the Index) is where files are prepared before being committed to the repository.
-When you make changes in your working directory and want to save them to the local repository, you first add them to the staging area using the git add command.
-Once files are in the staging area, they are ready to be committed. The staging area holds a snapshot of your changes and prepares them for the next commit.
-In short, it's a "pre-commit" area where you gather all the changes you want to be part of the next commit.
-
-c) Local Repository
-The Local Repository is the place where Git stores all your project’s history. It's stored on your local machine.
-When you commit changes (git commit), the changes are recorded into your local repository.
-This local repository contains a .git folder that holds all of the project’s version history, configuration settings, and other important Git-related data.
-Commits in the local repository allow you to revert to previous versions, branch out, and compare changes locally without affecting the central repository.
-
-d) Central Repository
-The Central Repository (also called the Remote Repository) is usually hosted on a platform like GitHub, GitLab, or Bitbucket.
-It is shared by multiple contributors and serves as the main repository that everyone pulls from and pushes to.
-Developers clone this repository to create their local copies and regularly push their commits to share their changes, as well as pull others' changes from the central repository.
-This central repository is accessible to all team members.
+Q6. What are repositories in Git?
+     - A repository (repo) in Git is a storage location where your project’s files and their complete version history are kept.
+     - It helps you track changes, switch between versions, and collaborate with others.
+Types of Repositories:
+     - Local Repository:
+               - Stored on your own computer.
+               - You create it using git init or by cloning another repo.
+               - Example: C:\Projects\MyApp\.git
+     - Remote Repository:
+               - Stored on a server (like GitHub, GitLab, or Bitbucket).
+               - Used to share your code with others.
+               - Example: https://github.com/username/MyApp.git
+Example Commands:
+git init                     # Create a new local repository
+git clone <repo-url>         # Copy a remote repo to your local machine
+git remote add origin <url>  # Link your local repo to a remote one
 
 
-(5) What is the difference between git clone, git pull, and git fetch?
-#######################################################################
+Q7. Explain of Git Architecture in detail?
+  - Working Tree :
+               The Working Tree (also called the Working Directory or Workspace) is where all the files for your project are stored on your local machine.
+  - Staging Area :
+            The Staging Area (also called the Index) is where files are prepared before being committed to the repository.
+            When you make changes in your working directory and want to save them to the local repository, you first add them to the staging area using the git             add command.Once files are in the staging area, they are ready to be committed. The staging area holds a snapshot of your changes 
+            and prepares them for the next commit.
+            In short, it's a "pre-commit" area where you gather all the changes you want to be part of the next commit.
+  - Local Repository :
+               The Local Repository is the place where Git stores all your project’s history. It's stored on your local machine.When you commit changes (git                   commit), the changes are recorded into your local repository.This local repository contains a .git folder  that holds all of the project’s                      version history, Contains commits, branches, tags.
+  - Central Repository :
+                The Central Repository (also called the Remote Repository) is usually hosted on a platform like GitHub, GitLab, or Bitbucket.Optional — a                       repository on a server like GitHub for collaboration.
+  - Objects in Git: 
+              Git stores data as objects:
+                     - Blob: Stores file content
+                     - Tree: Stores folder structure
+                     - Commit: Stores metadata (author, message, parent commits)
+                     - Tag: Named pointer to a commit
+  - HEAD: 
+      Points to the current branch or commit.
+
+
+Q8. What are commits in Git?
+A commit in Git is like a snapshot of your project at a particular point in time.
+It records what changes were made, who made them, and when.
+
+
+Q9. What is the staging area (or index) in Git?
+The staging area is a temporary place where you prepare changes before committing them to the repository.
+In simple words: It’s like a waiting area for changes you want to save in Git.
+EX-
+git add file.txt   # Move changes to staging area
+git commit -m "Save changes"  # Commit from staging to repository
+
+
+Q10. What is a branch in Git?
+A branch is a separate path of development in Git. It allows you to work on new features or fixes without affecting the main code.
+In simple words: Think of a branch as a parallel version of your project.
+
+Q11. What is a merge in Git?
+A merge in Git is the process of combining changes from one branch into another.
+In simple words: It brings updates from different branches together.
+
+
+Q12. Explain the Git workflow (Working Directory → Staging → Repository).
+Git workflow describes how changes move from your files to the repository:
+In simple words : Work → Prepare → Save — that’s the Git workflow.
+               - Working Directory: Where you edit files on your computer.
+               - Staging Area (Index): Where you prepare changes for commit (git add).
+               - Repository: Where commits are saved permanently (git commit).
+Example :
+        # Edit files → Stage changes → Commit to repository
+git add file.txt
+git commit -m "Save changes"
+
+
+Q13. What is a distributed version control system?
+A Distributed Version Control System (DVCS) is a system where every developer has a full copy of the repository, including its entire history.
+Key Points :
+     - No single point of failure.
+     - Allows offline work.
+     - Changes can later be pushed or pulled to/from a remote repository.
+
+
+
+Q14. What is the difference between git clone, git pull and git fetch?
 Git clone :
 ------------
 - Purpose: Downloads a copy of an existing Git repository (usually from a remote central repository) to your local system.
 - Usage: This command is typically used when you want to start working on an existing project and need a copy of the central repository on your machine.
+- Example: git clone https://github.com/username/project.git
 
 Git pull :
 -----------
 - Purpose: Fetches and merges changes from the central repository to your local repository.
 - Usage: Use this to keep your local repository up to date with changes made by other collaborators. However, conflicts may arise if your local changes clash with those on the central repo.
 - Note: Conflicts occur when there are changes in the same part of a file in both your local and the central repository. You’ll need to manually resolve these conflicts.
+- Example : git pull origin feature1
 
 Git fetch :
 ------------
 - Downloads the latest changes from the remote repository but does not merge them into your working branch.
 - This is a safe operation because it allows you to review the changes before merging.
 - The fetched changes are stored in origin/<branch>, and you can manually merge them when ready.
+- Example : git fetch origin main
 
-(6) What is the difference between git merge and git rebase?
-##############################################################
+
+
+
+
+
+⚙️ (2) Installation & Setup :
+-------------------------------
+
+Q1. How do you install Git on Windows/Linux/Mac?
+-  Install git in local system
+-  Configure name & email using following commands (One time configuration)
+              git config --global user.name ""
+              git config --global user.email ""
+- Verify configuration:
+              git config --global --list
+
+Q2. How to check Git version?
+run this command in Command Prompt, PowerShell, or Terminal:
+git --version
+
+Q3. How to configure username and email in Git?
+Before committing code, Git needs to know who you are. You can configure your name and email with these commands:
+                       git config --global user.name "Your Name"
+                       git config --global user.email "youremail@example.com"
+Verify Configuration:  git config --global --list
+Notes:
+--global → Applies to all repositories on your system.
+To configure for one specific repository only, skip --global and run the commands inside that repo.
+                       git config user.name "Your Name"
+                       git config user.email "youremail@example.com"
+Verify Configuration:  git config --list 
+
+Q4. Where are Git configurations stored?
+1️⃣ System-Level Configuration :
+      - The system config file usually already exists when Git is installed.
+      - It stores default Git settings for all users on the machine.
+      - You usually don’t need to manually create it.
+      - View or modify:
+git config --system --list
+git config --system user.name "System Name"
+2️⃣ Global-Level Configuration
+      - Stored in your home directory: ~/.gitconfig (Linux/Mac) or C:\Users\<username>\.gitconfig (Windows).
+      - Created automatically the first time you run a global configuration command, like:
+git config --global user.name "Your Name"
+git config --global user.email "youremail@example.com"
+3️⃣ Local-Level Configuration
+      - Stored inside each repository in .git/config.
+      - Created automatically when you initialize a Git repository:
+            git init
+
+Q5. What is the purpose of .gitconfig file?
+The .gitconfig file is where Git stores configuration settings. It tells Git how to behave for a user or repository.
+Purpose:
+   - Identity settings: Your name and email (user.name, user.email) for commits.
+   - Preferences: Editor, merge tool, line endings, colors, aliases, etc.
+   - Behavior: Settings for push, pull, fetch, rebase, etc.
+   - Scope: Can exist at three levels:
+              - System → Applies to all users on the computer
+              - Global → Applies to your user account
+              - Local → Applies only to a specific repository
+
+Q6. How do you initialize a new Git repository?
+To start tracking a project with Git, you initialize a repository in your project folder.
+Steps:
+  - Go to your project folder: cd path/to/your/project
+  - Initialize Git repository: git init
+                                     - This creates a hidden .git folder inside your project.
+                                     - Git now starts tracking changes in this folder.
+  - Verify repository: git status
+
+Q7. How do you clone an existing repository?
+Cloning means copying a remote repository (like from GitHub) to your local machine.
+Steps:
+   - Get the repository URL
+         - Example: https://github.com/username/project.git
+   - Run the clone command:
+         - git clone https://github.com/username/project.git
+
+Q8. What is the command to check current Git configuration?
+    - Check all Git configurations (local + global + system) for the current repo: git config --list
+    - Check global configurations only: git config --global --list
+    - Check a specific setting:   git config user.name    ,    git config user.email
+
+
+
+
+
+
+🧱 (3) Core Git Commands :
+----------------------------
+
+
+Q1. What does git init do?
+   - git init starts a new Git repository in your project folder.
+   - It creates a hidden .git folder where Git stores all information about your project history.
+   - After running git init, Git can track changes in your files.
+   - Example : git init
+
+Q2. What does git clone do?
+   - git clone copies an existing Git repository (like from GitHub) to your computer.
+   - It downloads all files, branches, and history.
+   - You can start working on the project locally.
+   - Example : git clone https://github.com/username/project.git
+
+Q3. What is git add used for?
+   - git add moves changes from your working folder to the staging area.
+   - It tells Git, “I want to include these changes in the next commit.”
+   - Without git add, Git won’t include your changes in a commit.
+   - Example : 
+git add file.txt        # Stage a single file
+git add .               # Stage all changed files in the folder
+
+
+Q4. What does git commit do?
+   - git commit saves a snapshot of your staged changes in the repository.
+   - It records what changed, who changed it, and when.
+   - Each commit has a unique ID to track history.
+   - Example : git commit -m "Add homepage design"
+
+Q5. What does git status show?
+   - git status shows the current state of your repository.
+   - Which files are modified, staged, or untracked.
+   - Tells you what will be included in the next commit.
+   - Example: git status
+Output Example:
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+        new file:   index.html
+Changes not staged for commit:
+        modified:   style.css
+Untracked files:
+        script.js
+
+Q6. What does git log display?
+ - git log shows the history of commits in your repository.
+ - It lists each commit with:
+                     - Commit ID (hash)
+                     - Author name
+                     - Date and time
+                     - Commit message
+ - Example : git log
+Output Example:
+commit 9fceb02
+Author: John Doe <john@example.com>
+Date:   Tue Oct 1 12:34:56 2025 +0530
+    Add homepage design
+
+Q7. What is git diff used for?
+ - git diff = Compare your current work with the last saved version.
+ - Helps you see what has changed line by line.
+ - Can be used before committing to review changes.
+Example:
+git diff              # Changes not staged
+git diff --staged     # Changes staged for next commit
+
+
+Q8. What is git reset and its different modes (--soft, --mixed, --hard)?
+git reset undoes changes in Git by moving the HEAD (current commit pointer) to an earlier commit.
+There are three main modes:
+ - --soft
+       - Moves HEAD to a previous commit but keeps changes staged.
+       - Good if you want to redo a commit without losing work. 
+       - command : git reset --soft <commit_id>
+ - --mixed (default)
+       - Moves HEAD to a previous commit and unstages changes, but keeps changes in the working folder.
+       - Good if you want to unstage files.
+       - command : git reset --mixed <commit_id>     or git reset <commit_id>
+ - --hard
+       - Moves HEAD to a previous commit and discards all changes in staging and working folder.
+       - Be careful: You will lose uncommitted work.
+       - command : git reset --hard <commit_id>
+
+Q9. What is git revert?
+  - git revert is used to undo a commit safely by creating a new commit that cancels the changes made in a previous commit.
+  - It does not delete history, it just adds a new commit to fix the old one.
+  - Example: git revert <commit_id>
+
+Q10. What does git checkout do?
+git checkout is used to switch between branches or restore files to a previous version.
+Example :
+git checkout main              # Switch to main branch  
+git checkout -b new-feature    # Create and switch to new branch  
+git checkout filename.txt      # Restore a file to last saved version  
+
+
+Q11. What does git rm do?
+git rm is used to remove files from the working directory and from Git tracking.
+Example :
+git rm file.txt          # Remove file from working directory and Git  
+git rm --cached file.txt # Remove file only from Git tracking (keep it locally)  
+
+
+Q12. What does git mv do?
+git mv is used to rename or move a file or folder in a Git repository.
+Example :
+git mv oldname.txt newname.txt     # Rename a file  
+git mv file.txt folder/            # Move file to another folder  
+
+
+
+
+
+
+🌿 (4) Branching & Merging :
+------------------------------
+
+Q1. What is branching in Git?
+Branching in Git means creating a separate line of development to work on new features or fixes without changing the main code.
+Example : git branch feature-login
+
+Q2. How to create a new branch?
+You can create a new branch using the git branch command.
+Example :
+git branch feature-login
+To switch to it:
+git checkout feature-login
+
+Q3. How to switch between branches?
+You can switch between branches using the git checkout or git switch command.
+git checkout branch-name     → Switch branch  
+git switch branch-name       → Switch branch (new way)
+git checkout -b new-branch   → Create & switch  
+git switch -c new-branch     → Create & switch
+
+
+Q4. What is merging in Git?
+Merging in Git means combining changes from one branch into another.
+ - Switch to the branch you want to merge into (usually main or master):   
+                                                                 git checkout main
+ - Merge the other branch into it: 
+                        git merge feature-login
+Note: - If there are conflicts, Git will ask you to resolve them manually before completing the merge.After resolving conflicts, you commit the merge:
+git add .
+git commit
+
+
+Q5. What is a merge conflict and how do you resolve it?
+merge conflict : 
+            - A merge conflict happens when Git cannot automatically combine changes from two branches because the same part of a file was changed differently.
+Steps to Resolve Merge Conflicts :
+STEP-1
+*******
+Merge branches : like, 
+           git checkout main
+           git merge feature
+ Note:- If there are conflicts, Git will show.
+STEP-2
+*******
+Open conflicted files : Look for conflict markers in the file
+STEP-3
+*******
+Decide which changes to keep : connected to the developers if other developers were involved, try to ask him what is code all about then find the conculusion is there any sequence to ,in which code need to be keept if sequence need to be kept accordingly we arrange the code.
+STEP-4
+*******
+Mark file as resolved : like, git add file.txt
+STEP-5
+*******
+Complete the merge : git commit
+
+
+Q6. Difference between git merge and git rebase?
 Git Merge :
 ------------
 - Combines changes from one branch into another.
 - Creates an extra commit (merge commit).
 - Preserves the history of both branches as they are.
+- Merge command :
+   git checkout main
+   git merge feature-login
+here, Combines feature-login branch into main.Creates a merge commit.
 Git Rebase :
 -------------
 - Moves (re-applies) commits of one branch on top of another branch.
 - Rewrites history (no merge commit).
 - Makes the commit history linear and clean.
-
+- Rebase command :
+        git checkout feature-login
+        git rebase main
+here , Moves feature-login commits on top of <main>.Makes history linear. "on top of main " : Git takes all commits from feature-login and re-applies them after the latest commit on main.
+ex- 
+Before rebase:
+main: A --- B --- C
+feature-login: D --- E
+After git rebase main:
+main: A --- B --- C
+feature-login: D' --- E'      # Notice D and E are now after C.
+After rebase, you may need to force push if the branch is already on remote:  git push --force
 Note: 
 🔹 When to Use?
 Use Merge → When working in teams, and you want to keep the true history.
 Use Rebase → When you want a clean, linear history (often before pushing code, or in personal branches).
 
+ 
+Q7. How to delete a branch locally and remotely?
+Delete a branch locally :
+👉 Safe delete (won’t delete if all its commits are merged (usually in main or master)) suppose you want deletion of this   branch git branch -d feature-login
+If feature-login was already merged into main, it will delete safely.
+If not merged, Git will prevent deletion.
+-   git branch -d branch-name  
+👉 Force delete
+-   git branch -D branch-name
+Delete a branch on remote :
+-   git push origin --delete branch-name
 
-(7) What is the difference between git checkout and git switch?
-################################################################
-git checkout :
-----------------
-- A multi-purpose command (old way).
-- Can do two different things:
-   a. Switch between branches.
-   b. Restore files to a previous state.
-ex:-
-# Switch branch
-git checkout feature
-# Restore file from last commit
-git checkout -- index.html
 
-git switch :
-- Dedicated only for switching branches (not restoring files)/create branches.
-ex:-
-# Switch to an existing branch
-git switch feature
-# Create and switch to a new branch
-git switch -c new-feature
+Q8. What is a fast-forward merge?
+there are two types of Git merges :
+Fast-Forward Merge :
+---------------------
+ - Happens when the branch you are merging is directly ahead of the branch you’re on.
+ - No new commits exist on the target branch since branching.
+ - Git just moves the branch pointer forward — no extra merge commit is created.
+ - Example : 
+           main:   A---B
+            feature:    \
+                         C---D
+   NOTE : Merging feature into main (no new commits on main) → just moving main pointer to D.
+Three-Way Merge :
+-------------------
+- Happens when both branches have new commits after branching.
+- Situation Before Merge :
+main:    A---B---E   (HEAD points here)
+feature:    \
+             C---D
+NOTE :  Git looks at three commits:
+                           - Common ancestor → B
+                           - Head commit → “Head commit of current branch (E)
+                           - Head commit of merging branch → D (feature)
+* Git combines changes from B → E and B → D. It then creates a new commit M on the branch you merged into (here: main).
+- Situation After Merge :
+main:    A---B---E
+             \     \
+              C---D-M   (M is created on main)
+
+
+Q9. What is a detached HEAD state?
+Normally, HEAD points to the latest commit of a branch (e.g., main, dev).
+But sometimes you checkout a commit directly (instead of a branch). Then HEAD points to a commit, not a branch.
+This is called detached HEAD state.
+ex- git checkout a1b2c3d(commit hash)
+Note:- If you make commits in detached HEAD and want to keep them: git checkout -b new-branch-name (this branch)
+- Normal HEAD → Points to a branch (which points to a commit).
+- Detached HEAD → Points directly to a commit, not a branch.
+
+
+Q10. How to stash your changes and apply them later? (git stash)
+git stash saves your uncommitted changes temporarily so you can work on something else and apply them later.
+ - Stash your changes:
+      - command : git stash
+      - explanation : Saves changes in a stack and clears your working folder.
+ - List stashed changes:
+      - command : git stash list
+      - explanation : Shows all saved stashes.
+ - Apply the last stashed changes:
+      - command : git stash apply
+      - explanation : Applies changes but keeps the stash in the list.
+ - Apply and remove the stash:
+      - command : git stash pop
+      - explanation : Applies changes and removes it from the stash list.
+ - Clear all stashes: 
+      - command : git stash clear
+
+
+
+
+☁️ (5) Remote Repositories (GitHub Integration) :
+----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 (8) Explain git reset vs git revert vs git checkout. ?
 ##########################################################
@@ -191,27 +559,8 @@ git revert :
 - Usually, it points to the latest commit of the current branch.
 - Example: If you’re on branch main, HEAD points to the tip of main.
 
-(10) What is the difference between git stash and git stash pop?
-##################################################################
-git stash :
------------
-- Saves your uncommitted changes (both staged + unstaged) into a hidden stack.
-- Cleans your working directory so you can switch branches or do other work safely.
-- Changes are still stored in Git’s stash memory, but not applied.
-git stash pop :
-----------------
-- Restores (applies) the most recent stashed changes back to your working directory.
-- After applying, it removes that stash from the stash list.
 
-(11) What is a detached HEAD state in Git?
-##############################################
-Normally, HEAD points to the latest commit of a branch (e.g., main, dev).
-But sometimes you checkout a commit directly (instead of a branch). Then HEAD points to a commit, not a branch.
-This is called detached HEAD state.
-ex- git checkout a1b2c3d(commit hash)
-Note:- If you make commits in detached HEAD and want to keep them: git checkout -b new-branch-name
-- Normal HEAD → Points to a branch (which points to a commit).
-- Detached HEAD → Points directly to a commit, not a branch.
+
 
 (12) How do you check the history of commits for a file in Git?
 ##################################################################
@@ -220,13 +569,7 @@ Note:- If you make commits in detached HEAD and want to keep them: git checkout 
 - git log -p -- file.txt :  See changes inside the file.
 - git blame file.txt :  See which commit/author last modified each line.
 
-(13) How do you create a new branch and switch to it?
-#########################################################
-creating a new branch and switching to it can be done in two ways:
-a. Using git checkout (old way) :
-    ex- git checkout -b new-branch-name  , here -b → create a new branch.
-b. Using git switch (recommended modern way) :
-    ex- git switch -c new-branch-name   , here -c → create a new branch.
+
 
 
 (14) What is the difference between a local branch and a remote-tracking branch?
@@ -250,42 +593,12 @@ Remote-Tracking Branch :
      git fetch           # update remote-tracking branches
      git merge origin/main   # merge remote changes into local
 
-(15) How do you delete a branch locally and remotely?
-########################################################
-| Action               | Command                                | Notes                      |
-| -------------------- | -------------------------------------- | -------------------------- |
-| Delete local branch  | `git branch -d branch-name`            | Safe delete if merged      |
-| Force delete local   | `git branch -D branch-name`            | Deletes even if not merged |
-| Delete remote branch | `git push origin --delete branch-name` | Removes branch from remote |
 
 
-(16) What is a merge conflict and How do you resolve merge conflicts in Git?
-###############################################################################
 
-merge conflict : 
------------------
-- A merge conflict happens when Git cannot automatically combine changes from two branches because the same part of a file was changed differently.
 
-Steps to Resolve Merge Conflicts :
-----------------------------------
-STEP-1
-*******
-Merge branches : like, 
-           git checkout main
-           git merge feature
- Note:- If there are conflicts, Git will show.
-STEP-2
-*******
-Open conflicted files : Look for conflict markers in the file
-STEP-3
-*******
-Decide which changes to keep : connected to the developers if other developers were involved, try to ask him what is code all about then find the conculusion is there any sequence to ,in which code need to be keept if sequence need to be kept accordingly we arrange the code.
-STEP-4
-*******
-Mark file as resolved : like, git add file.txt
-STEP-5
-*******
-Complete the merge : git commit
+
+
 
 
 (17) What are Git workflows (Git Flow, GitHub Flow, trunk-based development)?
@@ -353,37 +666,8 @@ STEP-6 :
 NOTE :- IN SHORT     := Fork → Clone → Branch → Commit → Push → Pull Request  
            
 
-(19) What is the difference between fast-forward and three-way merge in Git?
-#################################################################################
-Fast-Forward Merge :
----------------------
- - Happens when the branch you are merging is directly ahead of the branch you’re on.
- - No new commits exist on the target branch since branching.
- - Git just moves the branch pointer forward — no extra merge commit is created.
- - Example : 
-           main:   A---B
-            feature:    \
-                         C---D
-   NOTE : Merging feature into main (no new commits on main) → just moves main to D.
 
-Three-Way Merge :
--------------------
-- Happens when both branches have new commits after branching.
-- Situation Before Merge :
-main:    A---B---E   (HEAD points here)
-feature:    \
-             C---D
 
-NOTE :  Git looks at three commits:
-                           - Common ancestor → B
-                           - Head commit → “Head commit of current branch (E)
-                           - Head commit of merging branch → D (feature)
-
-* Git combines changes from B → E and B → D. It then creates a new commit M on the branch you merged into (here: main).
-- Situation After Merge :
-main:    A---B---E
-             \     \
-              C---D-M   (M is created on main)
 
 
 (20) How do you undo the last commit (but keep the changes)?
