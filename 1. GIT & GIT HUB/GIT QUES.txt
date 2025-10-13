@@ -1,22 +1,146 @@
-(1) What is Source code management tool?
-(2) What is Git, and how is it different from GitHub?
-(3) Explain the difference between Git and other version control systems like SVN.?
-(4) Explain of Git Architecture in detail?
-(5) What is the difference between git clone, git pull, and git fetch?
-(6) What is the difference between git merge and git rebase?
-(7) What is the difference between git checkout and git switch?
+🧩 (1) Basics :
+------------------
+Q1. What is Git?
+Q2. What is GitHub?
+Q3. What is the difference between Git and GitHub?
+Q4. What type of version control system is Git?
+Q5. Difference between Centralized VCS and Distributed VCS ?
+Q6. What are repositories in Git?
+Q7. Explain of Git Architecture in detail?
+Q8. What are commits in Git?
+Q9. What is the staging area (or index) in Git?
+Q10. What is a branch in Git?
+Q11. What is a merge in Git?
+Q12. Explain the Git workflow (Working Directory → Staging → Repository).
+Q13. What is a distributed version control system?
+Q14. What is the difference between git clone, git pull and git fetch?
+
+⚙️ (2) Installation & Setup :
+-------------------------------
+Q1. How do you install Git on Windows/Linux/Mac?
+Q2. How to check Git version?
+Q3. How to configure username and email in Git?
+Q4. Where are Git configurations stored?
+Q5. What is the purpose of .gitconfig file?
+Q6. How do you initialize a new Git repository?
+Q7. How do you clone an existing repository?
+Q8. What is the command to check current Git configuration?
+
+🧱 (3) Core Git Commands :
+----------------------------
+Q1. What does git init do?
+Q2. What does git clone do?
+Q3. What is git add used for?
+Q4. What does git commit do?
+Q5. What does git status show?
+Q6. What does git log display?
+Q7. What is git diff used for?
+Q8. What is git reset and its different modes (--soft, --mixed, --hard)?
+Q9. What is git revert?
+Q10. What does git checkout do?
+Q11. What does git rm do?
+Q12. What does git mv do?
+
+🌿 (4) Branching & Merging :
+------------------------------
+Q1. What is branching in Git?
+Q2. How to create a new branch?
+Q3. How to switch between branches?
+Q4. What is merging in Git?
+Q5. What is a merge conflict and how do you resolve it?
+Q6. Difference between git merge and git rebase?
+Q7. How to delete a branch locally and remotely?
+Q8. What is a fast-forward merge and three-way merge?
+Q9. What is a detached HEAD state?
+Q10. How to stash your changes and apply them later? (git stash)
+
+☁️ (5) Remote Repositories (GitHub Integration) :
+
+Q1. How do you connect a local repo to a remote GitHub repository?
+Q2. What is git remote add origin used for?
+Q3. How to push your code to GitHub?
+Q4. Difference between git push and git pull?
+Q5. What is a fork in GitHub?
+Q6. What is a pull request (PR)?
+Q7. What is the difference between fork and clone?
+Q8. How do you review or merge a pull request?
+Q9. What are GitHub Actions?
+Q10. What are issues and discussions in GitHub?
+
+🧰 (6) Advanced Git Features :
+
+Q1. What is git cherry-pick?
+Q2. What is git rebase -i (interactive rebase)?
+Q3. What is git tag, and why is it used?
+Q4. What is git bisect used for?
+Q5. What does git reflog do?
+Q6. How do you squash multiple commits into one?
+Q7. What is the difference between git reset and git revert?
+Q8. What is git clean used for?
+Q9. How do you undo a commit after it’s pushed to a remote?
+Q10. How do you handle large files in Git? (e.g., Git LFS)
+
+🔐 (7) Git & GitHub Security / Access Control :
+
+Q1. How do you manage access permissions in GitHub?
+Q2. What is SSH vs HTTPS authentication?
+Q3. What are personal access tokens (PAT)?
+Q4. How do you revoke or regenerate an access token?
+Q5. How to make a repository private or public?
+Q6. How do you add collaborators to a repository?
+Q7. What are GitHub branch protection rules?
+Q8. How do you enable two-factor authentication (2FA) for GitHub?
+
+⚡ (8) Collaboration & Workflow :
+
+Q1. What is the Git feature branch workflow?
+Q2. What is the Gitflow branching model?
+Q3. What is trunk-based development?
+Q4. How do you perform a code review in GitHub?
+Q5. What is a PR template?
+Q6. How do you resolve conflicts during collaborative work?
+Q7. How do you keep your local branch updated with main?
+Q8. What is a draft pull request?
+Q9. What are labels and milestones in GitHub?
+Q10. What is GitHub Projects or Kanban view?
+
+🧩 (9) Troubleshooting & Best Practices :
+
+Q1. What does “detached HEAD” mean, and how do you fix it?
+Q2. What happens if you accidentally delete a branch?
+Q3. How do you recover a deleted commit?
+Q4. What is a common reason for merge conflicts?
+Q5. How do you check who made a particular change in a file? (git blame)
+Q6. How to ignore files in Git? (.gitignore)
+Q7. What are good commit message practices?
+Q8. How do you revert the last commit without losing changes?
+Q9. How do you rollback to a specific commit?
+Q10. How to find differences between two branches?
+
+🧠 (10) Scenario-Based / Real-Time Questions :
+
+Q1. You committed sensitive data — how will you remove it from Git history?
+Q2. Your teammate force-pushed to the main branch — how will you fix it?
+Q3. You want to sync your forked repo with the original — how?
+Q4. You want to track a specific file’s history — how will you do it?
+Q5. How do you handle conflicts during a pull request merge?
+Q6. You accidentally committed to the wrong branch — what will you do?
+Q7. How do you create a release version from GitHub?
+Q8. How do you revert a PR that caused an issue?
+Q9. How do you work with multiple remotes (origin, upstream)?
+Q10. What will happen if two developers push to the same branch simultaneously?
+
+
+
+
+
+
 (8) Explain git reset vs git revert vs git checkout. ?
 (9) What is the difference between a commit, branch, tag, and HEAD in Git?
-(10) What is the difference between git stash and git stash pop?
-(11) What is a detached HEAD state in Git?
 (12) How do you check the history of commits for a file in Git?
-(13) How do you create a new branch and switch to it?
 (14) What is the difference between a local branch and a remote-tracking branch?
-(15) How do you delete a branch locally and remotely?
-(16) What is a merge conflict and How do you resolve merge conflicts in Git?
 (17) What are Git workflows (Git Flow, GitHub Flow, trunk-based development)?
 (18) What is Fork ? and How do you fork a repository and create a pull request in GitHub?
-(19) What is the difference between fast-forward and three-way merge in Git?
 (20) How do you undo the last commit (but keep the changes)?
 (21) How do you undo the last commit (and discard the changes)?
 (22) How do you stage only part of a file in Git?
