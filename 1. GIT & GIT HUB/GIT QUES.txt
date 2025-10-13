@@ -55,7 +55,7 @@ Q9. What is a detached HEAD state?
 Q10. How to stash your changes and apply them later? (git stash)
 
 ☁️ (5) Remote Repositories (GitHub Integration) :
-
+----------------------------------------------------
 Q1. How do you connect a local repo to a remote GitHub repository?
 Q2. What is git remote add origin used for?
 Q3. How to push your code to GitHub?
