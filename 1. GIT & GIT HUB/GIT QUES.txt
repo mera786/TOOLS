@@ -14,6 +14,7 @@ Q11. What is a merge in Git?
 Q12. Explain the Git workflow (Working Directory → Staging → Repository).
 Q13. What is a distributed version control system?
 Q14. What is the difference between git clone, git pull and git fetch?
+Q15. What is the difference between a commit, branch, tag, and HEAD in Git?
 
 ⚙️ (2) Installation & Setup :
 -------------------------------
@@ -40,6 +41,11 @@ Q9. What is git revert?
 Q10. What does git checkout do?
 Q11. What does git rm do?
 Q12. What does git mv do?
+Q13. How do you check the history of commits for a file in Git?
+Q14. How do you undo the last commit (but keep the changes)?
+Q15. How do you undo the last commit (and discard the changes)?
+Q16. How do you stage only part of a file in Git?
+Q17. How do you see the difference between two commits?
 
 🌿 (4) Branching & Merging :
 ------------------------------
@@ -53,6 +59,9 @@ Q7. How to delete a branch locally and remotely?
 Q8. What is a fast-forward merge and three-way merge?
 Q9. What is a detached HEAD state?
 Q10. How to stash your changes and apply them later? (git stash)
+Q11. Suppose you want to apply a specific commit from another branch to your current branch — how would you do that in Git?
+Q12. How Much Branches was there in your projects?
+Q13. How many branches you have created ( at a given time )?
 
 ☁️ (5) Remote Repositories (GitHub Integration) :
 ----------------------------------------------------
@@ -60,13 +69,14 @@ Q1. How do you connect a local repo to a remote GitHub repository?
 Q2. What is git remote add origin used for?
 Q3. How to push your code to GitHub?
 Q4. Difference between git push and git pull?
-Q5. What is a fork in GitHub?
+Q5. What is Fork ? and How do you fork a repository and create a pull request in GitHub?
 Q6. What is a pull request (PR)?
 Q7. What is the difference between fork and clone?
 Q8. How do you review or merge a pull request?
 Q9. What are GitHub Actions?
 Q10. What are issues and discussions in GitHub?
 
+                                                                ______________________________________________START FROM HERE _______________________________________________________---
 🧰 (6) Advanced Git Features :
 
 Q1. What is git cherry-pick?
@@ -135,20 +145,12 @@ Q10. What will happen if two developers push to the same branch simultaneously?
 
 
 
-(8) Explain git reset vs git revert vs git checkout. ?
-(9) What is the difference between a commit, branch, tag, and HEAD in Git?
-(12) How do you check the history of commits for a file in Git?
+
+
 (14) What is the difference between a local branch and a remote-tracking branch?
 (17) What are Git workflows (Git Flow, GitHub Flow, trunk-based development)?
-(18) What is Fork ? and How do you fork a repository and create a pull request in GitHub?
-(20) How do you undo the last commit (but keep the changes)?
-(21) How do you undo the last commit (and discard the changes)?
-(22) How do you stage only part of a file in Git?
-(23) How do you see the difference between two commits?
 (24) How do you squash multiple commits into one?
-(25) How do you cherry-pick a commit from another branch?
 (26) How do you set up .gitignore and what is it used for?
 (27) What is the difference between git log and git reflog?
 (28) How do you check who wrote a particular line of code in a file? (git blame)?
-(29) How Much Branches was there in your projects?
-(30) How many branches you have created ( at a given time )?
+
