@@ -127,6 +127,32 @@ Git fetch :
 - Example : git fetch origin main
 
 
+Q15. What is the difference between a commit, branch, tag, and HEAD in Git ? 
+🔹 Commit
+------------
+- A snapshot of your project at a point in time.
+- Think of it like saving a file version with a unique ID (SHA hash).
+- Example: "This commit saved the code after fixing a bug."
+🔹 Branch
+------------
+- A pointer (or label) to a series of commits.
+- The default branch is usually main or master.
+- Used to develop features separately without disturbing the main code.
+- Example: feature/login branch for login functionality.
+🔹 Tag
+--------
+- A pointer to a specific commit (usually a release point).
+- Unlike branches, tags don’t move — they’re fixed.
+- Commonly used for marking versions like v1.0, v2.0.
+🔹 HEAD
+----------
+- A special pointer that tells where you currently are in the repo.
+- Usually, it points to the latest commit of the current branch.
+- Example: If you’re on branch main, HEAD points to the tip of main.
+
+
+
+
 
 
 
@@ -324,6 +350,38 @@ Example :
 git mv oldname.txt newname.txt     # Rename a file  
 git mv file.txt folder/            # Move file to another folder  
 
+Q13. How do you check the history of commits for a file in Git ?
+- git log -- file.txt  :  See commits that changed the file.
+- git log --oneline -- <filename> : Show commit history in one line
+- git log -p -- file.txt :  See changes inside the file.
+- git blame file.txt :  See which commit/author last modified each line.
+
+Q14. How do you undo the last commit (but keep the changes)?
+- If you want to remove the commit but keep all the file changes in your working directory :
+    -  git reset --soft HEAD~1
+
+Q15. How do you undo the last commit (and discard the changes)?
+- If you want to remove the last commit completely and also throw away all its changes :
+    - git reset --hard HEAD~1
+
+Q16. How do you stage only part of a file in Git ?
+- Using git add -p (patch mode) : 
+   ex - git add -p file.txt  when run now Git shows each change (called a hunk) in file.txt.
+                                                                                  For each hunk, you choose:
+                                                                                                    - y → stage this hunk
+                                                                                                    - n → don’t stage
+                                                                                                    - s → split into smaller hunks
+                                                                                                    - q → quit
+- Using Interactive Mode :
+    ex- git add -i
+
+
+
+Q17. How do you see the difference between two commits ?
+git diff <commit1> <commit2>  : Shows the line-by-line changes between the snapshots.
+git diff --name-only <commit1> <commit2> : See names of changed files only
+
+
 
 
 
@@ -489,85 +547,159 @@ git stash saves your uncommitted changes temporarily so you can work on somethin
       - command : git stash clear
 
 
+Q11. Suppose you want to apply a specific commit from another branch to your current branch — how would you do that in Git?
+cherry-pick : 
+-------------
+Cherry-pick in Git means applying a specific commit from one branch into another branch, without merging the whole branch.
+   commands : git cherry-pick <commit-hash>
+Example :
+Suppose you are on main branch:  git checkout main
+You see a useful commit (abc123) in feature branch that you want in main: git log feature
+Apply that commit: git cherry-pick abc123
+Note:- Now main has that commit, even without merging the entire feature branch.
+
+
+Q12. How Much Branches was there in your projects?
+-  How Much Branches was there in your projects: 
+                - features (for adding new features)
+                - R & D ( for adding some extra thing to make better application)
+                - Hot fix ( serious problem)
+                - bug fix ( for fixing bugs).... etc
+
+
+Q13. How many branches you have created ( at a given time )?
+ - How many branches you have created ( at a given time )
+       1 ,2 or 3
+- tell me procedure to fix a bug ?
+firstly from bug fix branch , i created one more branch (sub branch) like bug-fix-jira-3456-login-error and work in this branch , once after fixed bug
+then i have done PR (pull request) 
+
+
+
+
+
+
+
 
 
 ☁️ (5) Remote Repositories (GitHub Integration) :
 ----------------------------------------------------
 
+Q1. How do you connect a local repo to a remote GitHub repository?
+using this command:
+   git remote add origin <remote-repo-URL>
 
+Q2. What is git remote add origin used for?
+ - It is used to add a remote connection (usually called origin) to your local Git repo.
+ - It tells Git where to push and pull code from.
+ - origin is just a name given to the remote repository.
 
+Q3. How to push your code to GitHub?
+First, make sure your repo is connected to GitHub.
+Then run these commands:
+                         git add .
+                         git commit -m "Initial commit"
+                         git push -u origin main
 
+Q4. Difference between git push and git pull?
+    git push: Uploads your local changes to the remote GitHub repo.
+    git pull: Downloads and merges the latest changes from the remote repo to your local branch.
 
-
-
-
-
-
-
-
-
-
-
-
-
-(8) Explain git reset vs git revert vs git checkout. ?
-##########################################################
-git checkout :
---------------
-- switch branches or restore working tree.
-git reset :
-------------
--  The purpose of git reset is to take the current branch and reset it to point somewhere else.
-- piche wala commit pe chla jata hai
-- there are different modes of git reset :
-        a. --soft := moves head but does't touch the staging area or the working tree.
-        b. --mixed := moves head and updates the staging area but not the working tree.
-        c. --hard := moves head and adjust your staging area and working tree to the new head, throwing away everything.
-Note :- head ? => HEAD in Git is a pointer that shows the current branch or commit you are working on.
-  ex- Jab aap git commit karte ho → naya page add hota hai aur HEAD automatically us page par move ho jata hai. Jab aap checkout karte ho → HEAD us branch par point            karne lagta hai.
-git revert :
---------------
-- git rever creates a new commit with the changes that are rolled back.
-- piche wala commit shi hai usse leke neya commit bna deta hai.
-- there are different flags/options git revert :
-      a. --no-commit
-      b. --edit
-      c. --no-edit etc.
-
-(9) What is the difference between a commit, branch, tag, and HEAD in Git?
-###########################################################################
-
-🔹 Commit
-------------
-- A snapshot of your project at a point in time.
-- Think of it like saving a file version with a unique ID (SHA hash).
-- Example: "This commit saved the code after fixing a bug."
-🔹 Branch
-------------
-- A pointer (or label) to a series of commits.
-- The default branch is usually main or master.
-- Used to develop features separately without disturbing the main code.
-- Example: feature/login branch for login functionality.
-🔹 Tag
+Q5. What is Fork? And how do you fork a repository and create a pull request in GitHub?
+Fork :
 --------
-- A pointer to a specific commit (usually a release point).
-- Unlike branches, tags don’t move — they’re fixed.
-- Commonly used for marking versions like v1.0, v2.0.
-🔹 HEAD
-----------
-- A special pointer that tells where you currently are in the repo.
-- Usually, it points to the latest commit of the current branch.
-- Example: If you’re on branch main, HEAD points to the tip of main.
+- Forking means creating your own copy of someone else’s GitHub repository.
+
+after forking create a pull request in GitHub :
+------------------------------------------------
+ STEP-1 :
+   - Go to the repo on GitHub.
+   - Click Fork (top-right corner).
+   - This makes a copy of the repo in your GitHub account.
+STEP-2 :
+    - Clone Your Fork Locally
+STEP-3 :
+    - Create a another Branch from it. (good practice)
+STEP-4 :
+    - Make Changes & Commit
+STEP-5 :
+    - Push Branch to Your Fork
+STEP-6 :
+     - Create a Pull Request (PR) :
+                 - Go to your fork on GitHub.
+                 - Click Compare & pull request.
+                                             Choose:
+                                                 - Base repository → the original repo (where you want to contribute).
+                                                 - Head repository → your fork & branch.
+                                                 - Add description and submit the Pull Request.
+
+NOTE :- IN SHORT     := Fork → Clone → Branch → Commit → Push → Pull Request  
+
+
+Q6. What is a Pull Request (PR)?
+A Pull Request is a request to merge your code changes into another branch or repository.
+It’s used for code review before merging changes.
+Example: When you fork a repo, make updates, and then want the owner to include your changes — you send a PR.
+
+Q7. What is the difference between Fork and Clone?
+| Action    | Description                                        |
+| --------- | -------------------------------------------------- |
+| **Fork**  | Makes a copy of a repo **on GitHub** (remote).     |
+| **Clone** | Makes a copy of a repo **on your local computer**. |
+
+
+Q8. How do you review or merge a Pull Request?
+Create PR:
+     - After pushing code to your branch (or forked repo), click “Compare & pull request” to open a PR from your branch → to the main repo’s branch (e.g., main or develop).
+Open PR for Review:
+     - Go to the Pull Requests tab of the target repository and select the PR you want to review.
+Review Changes:
+     - Check the Files changed, Commits, and add comments or feedback if needed.
+Approve or Request Changes:
+     - Reviewer clicks Review changes → choose Approve, Comment, or Request changes.
+Merge PR:
+     - If approved, click Merge pull request → Confirm merge, then delete the source branch and pull latest code locally.
+
+
+Q9. What are GitHub Actions?
+GitHub Actions are used to automate workflows like testing, building, or deploying code.
+For example:
+You can set up an Action to automatically run tests whenever you push code or open a PR.
+Workflow file:
+     - You define automation steps inside a .yml file located in .github/workflows/.
+     - Example: ci.yml
+Triggers (Events):
+     - The workflow runs when a specific event happens — like push, pull_request, or merge.
+Jobs and Steps:
+     - A workflow has jobs, and each job runs a series of steps (like running tests or building code).
+     - These steps execute in GitHub-hosted virtual machines (Linux, Windows, or macOS).
+Runners:
+     - The actual commands are executed on a runner (a VM provided by GitHub or your own machine).
+Example:  see example by cliking in github on action tab
+
+
+Q10. What are Issues and Discussions in GitHub?
+           Issues: Used to report bugs, suggest features, or track tasks.
+           Discussions: Used for open conversations, questions, or planning ideas.
+Example:
+If something is broken → open an Issue.
+If you want to talk about a new feature → start a Discussion.
 
 
 
 
-(12) How do you check the history of commits for a file in Git?
-##################################################################
-- git log -- file.txt  :  See commits that changed the file.
-- git log --oneline -- <filename> : Show commit history in one line
-- git log -p -- file.txt :  See changes inside the file.
-- git blame file.txt :  See which commit/author last modified each line.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -634,71 +766,14 @@ c. Trunk-Based Development :
 
 
 
-(18) What is Fork ? and How do you fork a repository and create a pull request in GitHub?
-#############################################################################################
-Fork :
---------
-- Forking means creating your own copy of someone else’s GitHub repository.
 
-after forking create a pull request in GitHub :
-------------------------------------------------
- STEP-1 :
-   - Go to the repo on GitHub.
-   - Click Fork (top-right corner).
-   - This makes a copy of the repo in your GitHub account.
-STEP-2 :
-    - Clone Your Fork Locally
-STEP-3 :
-    - Create a another Branch from it. (good practice)
-STEP-4 :
-    - Make Changes & Commit
-STEP-5 :
-    - Push Branch to Your Fork
-STEP-6 :
-     - Create a Pull Request (PR) :
-                 - Go to your fork on GitHub.
-                 - Click Compare & pull request.
-                                             Choose:
-                                                 - Base repository → the original repo (where you want to contribute).
-                                                 - Head repository → your fork & branch.
-                                                 - Add description and submit the Pull Request.
 
-NOTE :- IN SHORT     := Fork → Clone → Branch → Commit → Push → Pull Request  
            
 
 
 
 
 
-(20) How do you undo the last commit (but keep the changes)?
-#############################################################
-- If you want to remove the commit but keep all the file changes in your working directory :
-    -  git reset --soft HEAD~1
-
-(21) How do you undo the last commit (and discard the changes)?
-##################################################################
-- If you want to remove the last commit completely and also throw away all its changes :
-    - git reset --hard HEAD~1
-
-(22) How do you stage only part of a file in Git?
-####################################################
-- Using git add -p (patch mode) : 
-   ex - git add -p file.txt  when run now Git shows each change (called a hunk) in file.txt.
-                                                                                  For each hunk, you choose:
-                                                                                                    - y → stage this hunk
-                                                                                                    - n → don’t stage
-                                                                                                    - s → split into smaller hunks
-                                                                                                    - q → quit
-
-- Using Interactive Mode :
-    ex- git add -i
-
-
-
-(23) How do you see the difference between two commits?
-###########################################################
-git diff <commit1> <commit2>  : Shows the line-by-line changes between the snapshots.
-git diff --name-only <commit1> <commit2> : See names of changed files only
 
 
 (24) How do you squash multiple commits into one?
@@ -717,17 +792,8 @@ squash 789abc Third commit
 - Git will then let you edit the commit message → combine or rewrite as needed.
 - Save and exit → Git creates one single commit.
 
-(25) How do you cherry-pick a commit from another branch?
-###########################################################
-cherry-pick : 
--------------
-Cherry-pick in Git means applying a specific commit from one branch into another branch, without merging the whole branch.
-   commands : git cherry-pick <commit-hash>
-Example :
-Suppose you are on main branch:  git checkout main
-You see a useful commit (abc123) in feature branch that you want in main: git log feature
-Apply that commit: git cherry-pick abc123
-Note:- Now main has that commit, even without merging the entire feature branch.
+
+
 
 (26) How do you set up .gitignore and what is it used for?
 #############################################################
@@ -790,19 +856,11 @@ Shows who last modified each line in a file, along with:
                                                                              Example : git blame UserService.java
 
 
-(29) How Much Branches was there in your projects?
--  How Much Branches was there in your projects: 
-                - features (for adding new features)
-                - R & D ( for adding some extra thing to make better application)
-                - Hot fix ( serious problem)
-                - bug fix ( for fixing bugs).... etc
 
-(30) How many branches you have created ( at a given time )?
- - How many branches you have created ( at a given time )
-       1 ,2 or 3
-- tell me procedure to fix a bug ?
-firstly from bug fix branch , i created one more branch (sub branch) like bug-fix-jira-3456-login-error and work in this branch , once after fixed bug
-then i have done PR (pull request) 
+
+
+
+
 
 
 
