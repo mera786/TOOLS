@@ -1,3 +1,92 @@
+Docker Installation and important commands
+___________________________________________
+
+Docker Installation :
+---------------------
+  1. Create a machine on AWS 
+  2. install Docker if not installed. 
+
+Docker Commands :
+-----------------
+</> To see all images present in your local :
+👉 docker images
+
+</> To find out images in the docker hub :
+👉 docker search <image-name>
+
+</> To download an image from docker-hub to a local machine :
+👉 docker pull <image-name>
+
+</> To give a name to the container and run :
+👉 docker run -it --name <container-name> <image-name> /bin/bash
+Note:-  
+-it => interative mode and direct to terminal 
+/bin/bash => to start a bash shell inside the container
+
+</> To check whether the Docker service is running:
+👉 sudo systemctl status docker
+
+</> To start the Docker service :
+👉 sudo systemctl start docker
+
+</> To Stop the Docker service :
+👉 sudo systemctl stop docker
+
+</> To restart the docker service :
+👉 sudo systemctl restart docker
+
+</> to Start a stopped container :
+👉 docker start <container-name or container-id>
+
+</> Stop a running container :
+👉 docker stop <container-name or container-id>
+
+</> To delete the container :
+👉 docker rm <container-name or container-id>
+
+</> Restart a running container :
+👉 docker restart <container-name or container-id>
+
+</> to see all containers :
+👉 docker ps -a 
+
+</> To see only running containers.
+👉 docker ps
+
+</> To delete images :
+👉 docker image rm <imgage-name>
+
+
+
+
+
+Dockerfile Creation
+______________________
+
+Docker image creation using existing docker file
+--------------------------------------------------
+
+
+
+
+
+
+
+</>
+👉 
+</>
+👉 
+
+
+
+
+
+
+
+
+
+
+
 How to create docker file in spring boot?then Create Docker Image then? push that to docker hub?
 #################################################################################################
 STEP-1:
