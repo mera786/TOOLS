@@ -1,55 +1,174 @@
 Section 1: Basics  
 ----------------------
 
+Note:- Before Docker, many users face the problem that a particular code runs in the developer’s system but not in the user’s system.
+
 Q1. What is Docker?
--> docker is a tool which is open-source centlised platform, designed to deploye & run application.
+-> docker is a tool which is open-source centlised platform(Developers use different OS, setups, and versions → “it works on my machine” problem ❌ , works everywhere→developer, tester, production server), 
+   designed to create(creates a container image from docker file) deploye(You push your image to Docker Hub Then pull and deploy it (i.e., start a container) on another machine.) & run(Docker runs the container) application.
 -> docker written in 'go' language.
 -> docker uses container on the host O.S to run application, it allows applications to use the same linux kernel as a system on the host computer
    rather than creating a whole Virtual O.S 
 
 Q2. Advantage Of Docker?
 -> Resolves Compatibility problem using containerization
--> Docker will help us to install our software on different server without worrying about compatibility issue
--> To deploy same application on multiple servers for load balancing we need not manually install technology stack (like Angular 18v, java 17V etc) manually one by one if docker is not used
+-> No pre-allocation of RAM.
+-> It is light in weight.
+-> You can re-use the image.
 -> Software upgrades can be done easily on multiple machines using docker
+-> It took very less time to create the container
 
 Note:
 ✔ Docker Engine acts as a bridge between the container and the host OS
 ✔ Containers don’t have their own kernel, they use the host’s kernel
-✔ Docker Engine manages containers but does not create them—it runs & controls them
+✔ Docker Engine manages containers but does not create them — it runs & controls them so Docker CLI or Docker Daemon creates the container not not directly the Engine itself.
 
 Q3. Disadvantage Of Docker?
 -> Docker is not good solution for application which requires Rich GUI.
--> Difficult to manage large ammount of containers.
--> Docker is suitable when the development O.S and testing O.S are same , if the O.S is different we should use VM.
+-> Difficult to manage large number of containers.
+-> Docker is suitable when the development O.S and testing O.S are same , if the O.S is different we should use Virtual Machine.
 -> No solutions for Data Recovery & Backup.
 
-Q4. Explain Docker Architecture?
-Docker File: Here we will provide Intructions to create docker image
-Docker Image: Application Package with dependencies of it
-Docker Registry: Its a hub to store docker images
-Docker Container: Isolated environment to run docker image
+VIRTUALIZATION    VS    CONTAINERIZATION   :
 
-#########################          #########################                  ####################                 @@@@@@@@@@@@@@@@@
-Dockerfile														%%%%%%%%
-															Container1
-(Contains instructions     ------>    Docker Image               ------------>  Docker hub/registry   ---------->       %%%%%%%%%
- to download dependencies   (build)	    (Application Code +   (Store)      (Collection of images)			Container2	
-				      Dependencies to run that)								%%%%%%%%%%
-)
-##########################	   ##########################                 #####################                 @@@@@@@@@@@@@@@@@
+                   (1) Virtualization Architecture
+                   ---------------------------------
++-------------------------------------------------------------+
+|                      PHYSICAL SERVER (Host Machine)         |
+|-------------------------------------------------------------|
+|   +-----------------------------------------------------+   |
+|   |                HOST OPERATING SYSTEM                |   |
+|   |-----------------------------------------------------|   |
+|   |                  Hypervisor (e.g., VMware, KVM)     |   |
+|   |-----------------------------------------------------|   |
+|   |     +------------------+   +------------------+      |   |
+|   |     |   Virtual Machine |   |  Virtual Machine |      |   |
+|   |     |-------------------|   |------------------|      |   |
+|   |     | Guest OS (Ubuntu) |   | Guest OS (CentOS)|      |   |
+|   |     | App + Libraries   |   | App + Libraries  |      |   |
+|   |     +------------------+   +------------------+      |   |
+|   +-----------------------------------------------------+   |
++-------------------------------------------------------------+
+
+Legend (Virtualization):
+-------------------------
+- Each VM has its own Guest OS.
+- Hypervisor runs on top of Host OS or hardware.
+- Heavyweight, as each VM replicates an entire OS.
+- Examples: VMware, VirtualBox, KVM.
+
+                    (2) Containerization Architecture
+                    ---------------------------------
++-------------------------------------------------------------+
+|                      PHYSICAL SERVER (Host Machine)         |
+|-------------------------------------------------------------|
+|   +-----------------------------------------------------+   |
+|   |                HOST OPERATING SYSTEM                |   |
+|   |-----------------------------------------------------|   |
+|   |             Container Engine (e.g., Docker)         |   |
+|   |-----------------------------------------------------|   |
+|   |     +------------------+   +------------------+      |   |
+|   |     |    Container 1   |   |    Container 2   |      |   |
+|   |     |------------------|   |------------------|      |   |
+|   |     | App + Libraries  |   | App + Libraries  |      |   |
+|   |     | (Shares Host OS) |   | (Shares Host OS) |      |   |
+|   |     +------------------+   +------------------+      |   |
+|   +-----------------------------------------------------+   |
++-------------------------------------------------------------+
+
+Legend (Containerization):
+--------------------------
+- Containers share the same Host OS kernel.
+- Lightweight and faster to start.
+- No need for separate Guest OS per app.
+- Examples: Docker, Podman, containerd.
+
+---------------------------------------------------------------
+Comparison Summary:
+---------------------------------------------------------------
+| Feature            | Virtual Machines       | Containers        |
+|--------------------|------------------------|-------------------|
+| Isolation Level    | Hardware-level (Hypervisor) | OS-level      |
+| Boot Time          | Minutes                | Seconds           |
+| Resource Overhead  | High (Each has OS)     | Low (Shared OS)   |
+| Portability        | Moderate               | High              |
+| Management Tools   | VMware, KVM            | Docker, Kubernetes|
+| Use Case           | Run multiple OS types  | Microservices     |
+---------------------------------------------------------------
+
+
+
+Q4. Explain Docker Architecture?
++---------+                                 +----------------------+
+| Client  |                                 |      Registry        |
+|---------|                                 |----------------------|
+| docker build |                            |  (e.g., Docker Hub)  |
+| docker pull  |                            |  Contains Images:    |
+| docker run   |                            |   - Ubuntu            |
++---------+                                 |   - CentOS            |
+      |                                     |   - NGINX             |
+      |                                     +----------------------+
+      | 
+      |  (1) Commands sent to Docker Daemon
+      |--------------------------------------.
+                                               \
+                                                \ 
+                                                 \  (2) Pull or Push Images
+                                                  --------------------------->
++-------------------------------------------------------------+
+|                         DOCKER_HOST                         |
+|-------------------------------------------------------------|
+|                  Docker Daemon (Server)                     |
+|                                                             |
+|   +-------------------+          +------------------------+  |
+|   |   Containers      |          |        Images          |  |
+|   |-------------------|          |------------------------|  |
+|   |  [Running App 1]  | <------> |  Ubuntu Base Image     |  |
+|   |  [Running App 2]  | <------> |  Redis Image           |  |
+|   |  [Running App 3]  |          +------------------------+  |
+|   +-------------------+                                      |
++-------------------------------------------------------------+
+  a. Docker CLI (in docker file whatever command wrote)
+        👇
+  b. Docker Demon  -> container demon
+        👇
+  c. Docker Engine 
 
 
 Q5. What is Containerization?
 Containerization is a way to pack an application and everything it needs (like libraries, code, and settings) into one portable box called a container, so it runs the same everywhere — on your laptop, server, or cloud.
 ex- when you build a Docker image using a Dockerfile.
 
-Q6. Explain Docker Component / Docker EcoSystem?
--> Docker Demon : it is responsible for running containers to manages docker services.
--> Docker Client: docker client uses commands and Rest-API to communicate with the docker demon.
--> Docker Host: used to provide an enviroment to execute and run application.
--> Docker Hub / Registry : manages and stores the docker images.
--> Docker images: used to create docker containers.
+Q6. Explain Docker Component ?
+-> Docker Demon : 
+               - Docker daemon runs on the Host O.S.
+               - It is responsible for running containers, and managing docker services.
+               - Docker daemons can communicate with other daemons.
+-> Docker Client: 
+               - Docker users can interact with the docker daemon through a client
+               - Docker client uses commands and Rest API to communicate with the docker daemon.
+               - When a client runs any server command on the docker client terminal, the client terminal sends the docker commands to the docker daemon.
+               - Docker clients can communicate with more than one daemon.
+-> Docker Host: 
+               - Docker Host is used to providing an environment to execute and run applications. 
+               - It contains the docker daemon, images, containers, networks, and storage.
+-> Docker Hub / Registry : 
+               - Docker registry manages and stores the docker images.
+               - There are two types of registries in the docker :
+                                                                - Public Registry → Public registry also called Docker Hub.
+                                                                - Private Registry → It is used to share images within the enterprise
+-> Docker images: 
+               - Docker images are the read-only binary templates used to create docker containers. or, a single file with all dependencies and configurations required to run a program.
+               - Ways to create an images :
+                                       - Take an image from Docker Hub.
+                                       - Create an image from Docker File.
+                                       - Create an image from existing docker containers.
+-> Docker Container :
+               - The container holds the entire package that is needed to run the application. or, In other words, we can say that the image is a template and the container is a copy of that template.
+               - container is like virtualization when they run on the Docker engine.
+               - Images become containers when they run on the docker engine.
+
+
 
 Q7. what is difference between Docker Component and Docker Architecture?
 Docker Component:
