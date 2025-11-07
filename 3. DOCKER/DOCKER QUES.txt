@@ -5,7 +5,7 @@ Section 1: Basics
               Q3. Disadvantage Of Docker?
               Q4. Explain Docker Architecture?
               Q5. What is Containerization?
-              Q6. Explain Docker Component / Docker EcoSystem?
+              Q6. Explain Docker Component ?
               Q7. what is difference between Docker Component and Docker Architecture?
               Q8. What is the difference between a container and a virtual machine?
               Q9. What is a Docker Image?
