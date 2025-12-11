@@ -2,6 +2,9 @@ Section 1: Basics
 ----------------------
 
 Note:- Before Docker, many users face the problem that a particular code runs in the developer’s system but not in the user’s system.
+     ex - suppose you are a developer , developing application for client, now client is aksing for the application when you give application code then in client system not working so docker comes in pic,
+          because suppose you have developed application in windows and client using mac so docker ek aisa enviroment bna ke deta hai container ke ander jo dono ke liye compatible ho or aap is container 
+          ko ship kr dete ho via image.
 
 Q1. What is Docker?
 -> docker is a tool which is open-source centlised platform(Developers use different OS, setups, and versions → “it works on my machine” problem ❌ , works everywhere→developer, tester, production server), 
@@ -29,7 +32,24 @@ Q3. Disadvantage Of Docker?
 -> Docker is suitable when the development O.S and testing O.S are same , if the O.S is different we should use Virtual Machine.
 -> No solutions for Data Recovery & Backup.
 
-VIRTUALIZATION    VS    CONTAINERIZATION   :
+Q4. VIRTUALIZATION / Virtual Machine 💻     VS     CONTAINERIZATION / Container 🐳  :
+- Virtualization poora OS duplicate karta hai, jabki Containerization sirf application aur dependencies ko isolate, Isolation means: Ek container doosre container ko disturb nahi karta, sab alag environment me run hote hain even though they share the same OS kernel.)
+   karta hai OS ko share karke.
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|1️⃣ Virtualization (VM-based) :                                                       2️⃣ Containerization (Docker-based):                                                 |
+|      - VM ke andar kya hota hai?                                                             - Container ke andar kya hota hai?                                          |
+|                        - Guest Operating System (Windows/Linux etc.)                                      - Application                                                  |
+|                        - Application                                                                      - Libraries & dependencies                                     |
+|                        - Libraries                                                                           (No full OS)                                                |
+|                        - Dependencies                                                                                                                                    |
+|      - Characteristics :                                                                      - Characteristics :                                                        |
+|                        - Har VM apna complete OS chalata hai                                                - Very lightweight                                           |
+|                        - Heavy size (GBs)                                                                   - Fast startup (seconds me)                                  |
+|                        - Boot hone me time lagta hai                                                        - Less resource usage                                        |
+|                        - Strong isolation (kaafi secure)                                                    - OS kernel host se share karta hai                          |
+|                        - More resource usage (CPU/RAM high consume)                                         - Isolation VM se thoda kam, but enough for apps             |
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
                    (1) Virtualization Architecture
                    ---------------------------------
@@ -50,12 +70,6 @@ VIRTUALIZATION    VS    CONTAINERIZATION   :
 |   +-----------------------------------------------------+   |
 +-------------------------------------------------------------+
 
-Legend (Virtualization):
--------------------------
-- Each VM has its own Guest OS.
-- Hypervisor runs on top of Host OS or hardware.
-- Heavyweight, as each VM replicates an entire OS.
-- Examples: VMware, VirtualBox, KVM.
 
                     (2) Containerization Architecture
                     ---------------------------------
@@ -76,29 +90,20 @@ Legend (Virtualization):
 |   +-----------------------------------------------------+   |
 +-------------------------------------------------------------+
 
-Legend (Containerization):
---------------------------
-- Containers share the same Host OS kernel.
-- Lightweight and faster to start.
-- No need for separate Guest OS per app.
-- Examples: Docker, Podman, containerd.
-
----------------------------------------------------------------
-Comparison Summary:
----------------------------------------------------------------
-| Feature            | Virtual Machines       | Containers        |
-|--------------------|------------------------|-------------------|
-| Isolation Level    | Hardware-level (Hypervisor) | OS-level      |
-| Boot Time          | Minutes                | Seconds           |
-| Resource Overhead  | High (Each has OS)     | Low (Shared OS)   |
-| Portability        | Moderate               | High              |
-| Management Tools   | VMware, KVM            | Docker, Kubernetes|
-| Use Case           | Run multiple OS types  | Microservices     |
----------------------------------------------------------------
 
 
 
 Q4. Explain Docker Architecture?
+
+Docker Client  →  Docker Daemon  →  Docker Registry
+        ↑                  ↓
+        └──── Containers / Images ────┘
+
+1️⃣ Docker Client : Ye wo tool hai jisse aap Docker ko commands dete ho, jaise: docker run , docker pull, docker ps etc.. Client commands ko Docker Daemon ko send karta hai.
+2️⃣ Docker Daemon (dockerd) :  Ye Docker ka main brain hai. Daemon ye kaam karta hai: Containers run karna, Images pull/push karna, Networks create/manage karna, Volumes manage karna
+                              Daemon hi sari heavy lifting karta hai, client sirf request bhejta hai.
+3️⃣ Docker Registry (Hub or Private Registry) : Yaha Docker images stored hoti hain. Default registry = Docker Hub , Daemon jab image pull karta hai, yahi se karta hai.
+
 +---------+                                 +----------------------+
 | Client  |                                 |      Registry        |
 |---------|                                 |----------------------|
@@ -128,11 +133,7 @@ Q4. Explain Docker Architecture?
 |   |  [Running App 3]  |          +------------------------+  |
 |   +-------------------+                                      |
 +-------------------------------------------------------------+
-  a. Docker CLI (in docker file whatever command wrote)
-        👇
-  b. Docker Demon  -> container demon
-        👇
-  c. Docker Engine 
+
 
 
 Q5. What is Containerization?
@@ -140,52 +141,49 @@ Containerization is a way to pack an application and everything it needs (like l
 ex- when you build a Docker image using a Dockerfile.
 
 Q6. Explain Docker Component ?
--> Docker Demon : 
-               - Docker daemon runs on the Host O.S.
-               - It is responsible for running containers, and managing docker services.
-               - Docker daemons can communicate with other daemons.
--> Docker Client: 
-               - Docker users can interact with the docker daemon through a client
-               - Docker client uses commands and Rest API to communicate with the docker daemon.
-               - When a client runs any server command on the docker client terminal, the client terminal sends the docker commands to the docker daemon.
-               - Docker clients can communicate with more than one daemon.
+🔹 Architecture = Overall design
+🔹 Components = Architecture ke parts
+so,
+-> Docker Demon (dockerd): 
+               - Docker daemon host OS par run hota hai.
+               - Ye containers ko run/stop/manage karta hai.
+               - Images, networks, volumes ka management bhi daemon karta hai.
+               - Daemons ek-dusre se communicate kar sakte hain distributed setups me.
+-> Docker Client (CLI / UI): 
+               - Docker user daemon se interact, client ke through karta hai.
+               - Client commands aur REST API ka use karke daemon ko request bhejta hai.
+               - Jab bhi hum terminal me command chalate hain (docker run, docker pull),client us command ko daemon ko forward karta hai.
+               - Ek client multiple daemons se connect ho sakta hai.
 -> Docker Host: 
-               - Docker Host is used to providing an environment to execute and run applications. 
-               - It contains the docker daemon, images, containers, networks, and storage.
--> Docker Hub / Registry : 
-               - Docker registry manages and stores the docker images.
+               - Ye wo physical/virtual machine hoti hai jisme Docker install hota hai.
+               - Docker Host ke andar:
+                                 - Docker Daemon
+                                 - Images
+                                 - Containers
+                                 - Networks
+                                 - Storage (volumes) hota hai.
+               - Ye application execution environment provide karta hai.
+-> Docker Registry (Docker Hub / Private Registry) : 
+               - Docker registry images ko store aur manage karta hai.
                - There are two types of registries in the docker :
-                                                                - Public Registry → Public registry also called Docker Hub.
-                                                                - Private Registry → It is used to share images within the enterprise
+                                                                - Public Registry → Public registry also called Docker Hub(default).
+                                                                - Private Registry → Organization ke internal use ke liye.
+               - docker push → image registry me upload
+               - docker pull → image download
+
 -> Docker images: 
-               - Docker images are the read-only binary templates used to create docker containers. or, a single file with all dependencies and configurations required to run a program.
+               - Image ek read-only template hoti hai jis se container banta hai.
+               - Isme application + dependencies + libraries + environment config hoti hai.
                - Ways to create an images :
-                                       - Take an image from Docker Hub.
-                                       - Create an image from Docker File.
-                                       - Create an image from existing docker containers.
+                                       - Docker Hub se pull karna.
+                                       - Dockerfile se custom image build karna.
+                                       - Running container ko commit karke image banana.
 -> Docker Container :
-               - The container holds the entire package that is needed to run the application. or, In other words, we can say that the image is a template and the container is a copy of that template.
-               - container is like virtualization when they run on the Docker engine.
-               - Images become containers when they run on the docker engine.
-
-
-
-Q7. what is difference between Docker Component and Docker Architecture?
-Docker Component:
-The tools and parts Docker is made of.
-Docker Architecture:
-How those tools interact and are structured.
-
-Q8. What is the difference between a container and a virtual machine?
-| Feature            | Container 🐳                  | Virtual Machine 💻                          |
-| ------------------ | ----------------------------- | ------------------------------------------- |
-| **OS**             | Shares host OS kernel         | Has its own OS (guest OS)                   |
-| **Size**           | Small (MBs)                   | Large (GBs)                                 |
-| **Startup time**   | Very fast (seconds)           | Slow (minutes)                              |
-| **Resource usage** | Lightweight, less RAM/CPU     | Heavy, more RAM/CPU                         |
-| **Isolation**      | Process-level isolation       | Full machine-level isolation                |
-| **Portability**    | Highly portable               | Less portable                               |
-| **Use case**       | Best for microservices, CI/CD | Best for running multiple OS on one machine |
+               - Container = Image ka running instance
+               - Image → Template
+               - Container → Template ki copy + running state.
+               - Containers virtual machines jaise lagte hain, but lightweight aur fast hote hain.
+               - Jab image run hoti hai, tabhi vo container ban jati hai.
 
 
 Q9. What is a Docker Image?
