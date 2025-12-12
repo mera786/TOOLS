@@ -53,16 +53,16 @@ Q4. VIRTUALIZATION / Virtual Machine 💻     VS     CONTAINERIZATION / Containe
 
                    (1) Virtualization Architecture
                    ---------------------------------
-+-------------------------------------------------------------+
-|                      PHYSICAL SERVER (Host Machine)         |
-|-------------------------------------------------------------|
-|   +-----------------------------------------------------+   |
-|   |                HOST OPERATING SYSTEM                |   |
++-------------------------------------------------------------+        Note:- Aapke laptop/PC me kya hota hai: eg - Laptop me Windows installed hai.Aap usi laptop me ek Linux VM banana chahte ho.
+|                      PHYSICAL SERVER (Host Machine)         |               Kaise possible hota hai? Iske liye ek software lagta hai: VMware/VirtualBox/Hyper-V, Ye software Hypervisor kehlata hai.
+|-------------------------------------------------------------|               Hypervisor kya karta hai? Hypervisor ek middle layer hota hai: Hardware → Hypervisor → Multiple VM’s
+|   +-----------------------------------------------------+   |               Hypervisor ka role: CPU allocate karta hai, RAM allocate karta hai, Storage allocate karta hai,Network allocate karta hai,
+|   |                HOST OPERATING SYSTEM                |   |               Har VM ko ek alag computer jaisa environment deta hai Example: Aapke laptop me: 16GB RAM, 512GB SSD 
+|   |-----------------------------------------------------|   |               Aap Linux VM banate ho aur usko bolte: 4GB RAM use kare, 40GB storage use kare. Ye sab hypervisor assign karta hai.
+|   |                  Hypervisor (e.g., VMware, KVM)     |   |               VM me OS ka kya role hota hai? VM ke andar: Apna poora OS hota hai, Apne drivers hote hain, Apni system files hoti hain
 |   |-----------------------------------------------------|   |
-|   |                  Hypervisor (e.g., VMware, KVM)     |   |
-|   |-----------------------------------------------------|   |
-|   |     +------------------+   +------------------+      |   |
-|   |     |   Virtual Machine |   |  Virtual Machine |      |   |
+|   |     +------------------+   +------------------+      |   |              Docker kya karta hai? Sirf application ko chalata hai aur bolta hai: Main host OS ka kernel share kar lunga.
+|   |     |   Virtual Machine |   |  Virtual Machine |      |   |             Kernel kya hota hai? Kernel is the heart of OS. Kernel ka kaam: Process management, Memory management, File system, Networking, Hardware communication
 |   |     |-------------------|   |------------------|      |   |
 |   |     | Guest OS (Ubuntu) |   | Guest OS (CentOS)|      |   |
 |   |     | App + Libraries   |   | App + Libraries  |      |   |
@@ -134,7 +134,7 @@ Docker Client  →  Docker Daemon  →  Docker Registry
 |   +-------------------+                                      |
 +-------------------------------------------------------------+
 
-
+                                                                    #first-practicle.
 
 Q5. What is Containerization?
 Containerization is a way to pack an application and everything it needs (like libraries, code, and settings) into one portable box called a container, so it runs the same everywhere — on your laptop, server, or cloud.
@@ -213,6 +213,9 @@ Q13. What is the use of .dockerignore file?
 It excludes unnecessary files (like .git, node_modules) when building images, reducing size.
 
 
+
+                                                                                      #second-Practicle
+
 Q14. Explain COPY vs ADD commands in Dockerfile.?
 COPY:
 - Used to copy files or folders from your local system (build context) into the Docker image.
@@ -261,10 +264,13 @@ Docker Hub is a public cloud registry for storing and sharing images.
 
 Q19. What is Port Mapping in Docker?
 -> Port mapping in Docker is the process of making a container’s internal port accessible to the host machine or outside world.
--> syntax : docker run -p <host_port>:<container_port> image_name
+-> syntax : docker run -d -p <host_port>:<container_port> image_name where -d for detach mode and -p for publish.
 
 Q20. How do you check running containers?
 docker ps
+
+
+                                                                                      #third-Practile
 
 Q21. How do you run a container in detached mode?
 docker run -d nginx
@@ -275,6 +281,10 @@ here , exec :- Short for execute, It allows you to run a new command inside an a
         -i  :- Stands for interactive, meaning you can type commands inside the container.
         -t :- Stands for tty (teletypewriter), Allocates a terminal session — gives you a proper shell-like interface (with colors, prompt, etc.).
        bash/ sh :- The command you want to execute inside the container,giving you an interactive terminal session inside the container.
+
+
+
+start from 1 : 21 minutes:
 
 
 
