@@ -6,14 +6,19 @@ ___________________________________________________
   1. Create a Ubuntu machine on AWS -> update system : sudo apt-get update 
   2. install Docker if not installed:
               - sudo apt-get install docker.io  (in io package you'll get docker engine,docker demon (container d),docker CLI everything. 
-</> To check whether the Docker service is running:
+</> To check whether the Docker service / Docker engine is running:
 👉 sudo systemctl status docker
-              - sudo usermod -aG docker $USER ( without adding user in docker group you can't run Docker commands without using sudo ) $user : refers to your current logged in username.
+              - sudo usermod -aG docker $USER ( without adding user in docker group you can't run Docker commands like, docker ps, docker pull etc... without using sudo ) 
+                                         $user : refers to your current logged in username.
+Note: - systemctl Linux ka systemd (Linux ka engine) naam ka system manager control karne ke liye command-line tool hai. systemctl kya-kya control karta hai? nginx, mysql, docker, ssh           jaise services ko start/stop/restart/manage karna.
+
 </> after adding to group below command for refresh :
-👉 newgrp docker 
+👉 newgrp docker
+
  3. connect local machine to docker-hub :
                                 - docker login 
                                 - login on docker hub -> setting -> personal access token -> New access token : dkg;aj;ajg;
+                                - now after token generation instead of password give token hit enter .
 </> To download an image from docker-hub to a local machine :
 👉 docker pull <image-name>
 
@@ -60,7 +65,11 @@ Note:-
 👉 docker image rm <imgage-name>
 
 
+                                                                  
 
+
+
+                                                                               #second-practicle.
 
 
 Dockerfile Creation
@@ -68,18 +77,64 @@ ______________________
 
 Docker image creation using existing docker file
 --------------------------------------------------
+hr ek chij jo FROM,WORKDIR,COPY, RUN etc dockerfile ke syntax hai.
+
+
+1. create a folder any named like, javaprojects in linux -> copy url of the project from github.
+   mkdir javaprojects -> hit enter
+   git clone https://github.com/sahilalam/simple-java-projects
+   cd simple-java-projects
+now you will see the docker file, if you want few changes then open and edit. or remove and make from skratch.
+rm -v Dockerfile   (-v because delete hote time dikhengi) : yha docker file removed ho gya ab 
+new file bnane hai  vim DockerFile ( vim ek vi ka improved version h with extra features) dhyan rhe ki apne project ke ander hee file bna rhe hai docker ka
+
+Dockerfile :
+
+FROM : openjdk:17-jdk-alpin       Sbse phle dekho kon si application run krna hai ? apne case me java , to apne ko sabse phle jo chahiye wo java chahiye hoga taki java ka enviroment mil                                   ske. jiske liye v hume image chahiye hoga jisko base image bolte hai.
+WORKDIR  /app    workdir mtlb aisa smjh lo ki apke host me source code rkha hua h or apka container use chlana chahta hai to uske liye apne container me ek aisa folder bnana hai jisme                            host ka source code apke container me rkha rhega.
+
+COPY src/Main.java    /app/Main.java      hr chij jo mere host/source me rkhi hui hai wo mere container ke ander chla jaye or mera container chlne lge
+
+RUN   javac Main.java   for compile the application code 
+
+CMD   ["java","Main"]  cmd ek aisa special command hota hai jab ek bar apka container ban jaye or usko chlane ke liye jo command uper se apply krte hai whi kaam krta hai cmd. agar ye                           command nhi likhoge tab v container bnega , but ye command likhoge to container bnne ke bad execute v ho jayega.
+                        CMD  ["java","Main"]  =   Without Docker :
+                                                           javac Main.java     // compile
+                                                           java Main           // run
+                                                  Same inside Docker :
+                                                            RUN javac Main.java  // compile
+                                                            CMD ["java","Main"]  // run
+      Case => Spring Boot : CMD ["java", "-jar", "app.jar"]  :  Yaha class nahi, JAR file run hota hai.
+
+now :wq  for save and exit ab docker file ban gyi hai 
+
+docker file se docker image bnane ki command : docker build -t <my-image-name> .  (yha . mtlb context, mtlb docker file. ki us docker file ko as a context man ke ye image ban rhi hai jo                                                                                     ki isi directory me rkhi hui hai.)
+
+ab image ko run kro  docker run my-image-name  : you will see the output
+
+ab source code me kuch change krte hai vim src/Main.java it will open vim editor kuch change kr do . or fir dubara se docker run my-image-name ko run kro you will see purana wala hee output so iske liye dubara se image ko v update krna pdega jab jab source code me change hoga to : docker build -t <my-image-name> .
+
+now,suppose aap apne application ko browser se hit krna chah rhe hai to uske liye aapne portmapping kr diya or using ec2 public ip use kr rhe ab jo v url hit kr rhe usko dekhne ke liye
+docker logs <container ka id> but hr hit ke bad apko logs wala command chlana pdega agr app chahte hai n chlana pde to docker attach <container-id>
+
+
+
+
+                                                                                      #third-Practile
+
+Note:- suppose i want to run mysql image for container so first i will pull from docker hub , then docker run -e MYSQL_ROOT_PASSWORD=<jo_mrji_value_dedo> mysql hit enter
+
+now in running database i want to enter  : docker exec (means execute) -it (means interactive terminal) <container-id> bash (shell)  -> hit enter 
+ab  mysql -u  root -p -> enter kro or jo password pull krte time dala tha wo do or jaise mysql ka query hota hai wo sab use kr skte ho.
+ab database baher ana hai to 2bar exit krna pdega by writing exit -> hit enter then exit -> hit enter
 
 
 
 
 
+                                                                                      #fourth-Practile
 
-
-</>
-👉 
-</>
-👉 
-
+start from 1 : 21 minutes.
 
 
 
