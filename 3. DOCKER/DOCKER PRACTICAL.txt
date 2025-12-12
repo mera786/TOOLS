@@ -1,5 +1,7 @@
-Docker Installation and important commands
-___________________________________________
+                                                                                        #first-practicle.
+
+Docker Installation on AWS and important commands
+___________________________________________________
 
   1. Create a Ubuntu machine on AWS -> update system : sudo apt-get update 
   2. install Docker if not installed:
