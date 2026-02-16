@@ -2,15 +2,232 @@
 ------------------
 
 Q1. What is Git?
-Git is a version control system tool,used to track changes in code.It helps developers save versions of their work, go back to earlier versions, and work together on the same project without losing any changes.
+- Git is a distributed version control tool. it is :
+                                              - popular
+                                              - free & open source
+                                              - fast & scalable
+- it used to :
+            - track changes in source code.
+            - manage project history.
+            - enable collaboration among multiple developers.
+
 
 Q2. What is GitHub?
-GitHub is a cloud-based platform where you can store, share, and manage your Git repositories online.
-It allows developers to collaborate, review code, and contribute to projects using Git.
+it is a website that allows developers to store and manage thier code using git.
 
-Q3. What is the difference between Git and GitHub?
- - Git is a tool used on your computer to track and manage changes in your code (version control).
- - GitHub is a website (cloud platform) that stores your Git repositories online and helps you collaborate with others.
+
+INSTALLATION & GUIS
+####################
+
+Git/gitbash for downloads:      http://git-scm.com
+
+To verify Installation  : git --version    or    git -v
+
+
+
+SETUP
+########
+Configuring user information used across all local repositories.
+
+1️⃣ See Current Configured User (for this repo) :
+                                       git config user.name
+                                       git config user.email
+          if not configure then Sirf Current Repository ke liye (Local Config) :
+                                                                       git config user.name "Meraz Alam"
+                                                                       git config user.email "merazalam18011998@gmail.com"
+          Local Configuration Update (Only Current Project) :
+                                                          cd your-project-folder
+                                                          git config --local user.name "Office Name"
+                                                          git config --local user.email "office@gmail.com"
+                                                                      If you are inside project folder, you can also just write:
+                                                                                                                     git config user.name "New Name"
+                                                                                                                     git config user.email "newemail@gmail.com"
+
+2️⃣ See Global Configured User (for entire system) :
+                                             git config --global user.name
+                                             git config --global user.email
+                        if not configure then Puri System ke liye (Global Config) :
+                                                                       git config --global user.name "Meraz Alam"
+                                                                       git config --global user.email "merazalam18011998@gmail.com"
+                        Global Configuration Update :
+                                                  git config --global user.name "New Name"
+                                                  git config --global user.email "newemail@gmail.com"
+3️⃣ See All Git Configuration (Very Important) :
+                                         git config --list
+4️⃣ See Where Config is Coming From (Advanced / Interview Level) :
+                                          git config --list --show-origin
+                    - This tells whether config is from:
+                                                    global (~/.gitconfig)
+                                                    local (.git/config)
+                                                    system
+                           
+                             
+
+
+
+SETUP & INIT
+#############
+Configuring user information, initializing and cloning repositories.
+
+1. retrieve an entire repository(project) from a hosted location via URL :
+                                                               git clone [url]
+2. To located current Directory(folder) :
+                                      cd project-foldername
+                                      ls  or ls -a 
+                                       Note: -a help us to see all files including hidden files.
+3. initialize an existing directory(folder) as a Git repository :
+                                                            git init  
+     git init
+     --------
+     - used to create new git repository
+     - jab hum start hee krte hai local se or bad me github pe jate hai to phle local me track rkhne ke liye ye git init use me ata hai.
+
+
+STAGE & SNAPSHOT
+#################
+Working with snapshots and the Git staging area.
+
+git status
+-----------
+show modified files in working directory, staged for your next commit.
+
+Note:- jab v hum git status ko use krte hai to generally 4 types ke status show hoti hai:
+                                                                       1. untracked  : new files that git doesn't yet trak.
+                                                                       2. modified   : changed
+                                                                       3. staged     : file is ready to be commited.
+                                                                       4. unmodified : unchanged. 
+
+git add [file]
+--------------
+git add file ke changes ko staging area (index) me daalta hai —taaki wo next commit me include ho sake.
+
+git restore --staged file.txt 
+--------------------------------
+Ye command staging area se file ko hata deta hai,lekin file ke andar ke changes delete nahi karta.
+
+git restore file.txt
+--------------------
+File ko last commit wali state me wapas la deta hai aur current uncommitted changes ko hata deta hai modified status(sirf change hua hai na to add or na commit) se.
+
+
+git diff
+---------
+diff of what is changed but not staged
+
+
+git diff --staged
+------------------
+matlab jo files staging area me add ho chuki hain unka diff.
+
+
+git commit -m “[descriptive message]”
+-------------------------------------
+commit your staged content as a new commit snapshot
+
+
+git reset --soft HEAD~1
+-------------------------
+- agar tum commit ho chuki changes ko wapas staging area me lana chahte ho.
+- Matlab situation aisi ho jayegi jaise tumne git add kiya ho lekin commit nahi kiya ho.
+- Ye tab safe hai jab commit abhi push nahi hua ho.
+- Ye kya karega :
+               ❌ Last commit hata dega
+               ✅ Saare changes wapas staging area me aa jayenge
+               ✅ Code delete nahi hoga
+| Tum kya chahte ho                         | Command                   |
+| ----------------------------------------- | ------------------------- |
+| Sirf commit undo, changes staging me rahe | `git reset --soft HEAD~1` |
+| Commit undo, changes unstaged ho jaye     | `git reset HEAD~1`        |
+
+
+
+
+SHARE & UPDATE
+###############
+Retrieving updates from another repository and updating local repos
+
+     git remote add origin <link-of-repo>
+     -------------------------------------
+        - Ye command tumhare local repository ko ek remote repository (GitHub) se connect karta hai.
+        - Breakdown :
+                    -  | Part      | Meaning                                |
+                       | --------- | -------------------------------------- |
+                       | git       | Git tool                               |
+                       | remote    | Remote repository manage karne ke liye |
+                       | add       | Naya remote add karna                  |
+                       | origin    | Remote ka naam (default name)          |
+                       | repo link | GitHub ka URL                          |
+
+      git remote -v
+      --------------
+      - git remote -v tumhe batata hai ki tumhara local Git repository kis remote repository (jaise GitHub) se connected hai — aur uska URL kya hai.
+      - Example Output :
+                  origin  https://github.com/meraz/demo.git (fetch)
+                  origin  https://github.com/meraz/demo.git (push)
+
+
+
+
+    git push [alias] [branch]  /  git push -u [alias] [branch]
+    --------------------------------------------------------
+    - upload local repo content to remote repo.
+    - here -u it is short form for future use taaki lambe time tak isi branch pe kam krna pde to sirf git push hee likhna pde.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BRANCH & MERGE
+###############
+✅ Branch : Branch Git me ek alag working line hoti hai jahan hum independently development kar sakte hain bina main code ko affect kiye.
+✅ Merge : Merge ka matlab hai ek branch ke changes ko dusri branch me combine karna.
+
+    git branch
+    ----------
+     - local branche repository ki saari branches ko list karti hai.jis bhi current active branch me app hai uski.
+     - Aur * se current active branch ko show karta hai.
+
+
+   git branch <new-branch-name>
+   ----------------------------
+     - Ye new branch bana dega.
+     - Par tum abhi bhi current branch me hi rahoge.
+
+
+   git switch -c <new-branch-name>
+   -------------------------------
+    - ye new branch bna dega or sath-sath aap isi branch pe switch v kr jayenge.
+
+
+   git branch -m <branch-name>
+   -------------------------------
+   - to rename branch
+
+
+   git switch <branch-name>
+   ------------------------
+   - Modern Way to Switch Branch.
+
+
+   git branch -d <branch-name>
+   ----------------------------
+   - to delete branch.
+   Note:- jis branch me hai usi branch ko nhi delete kr skte phle kisi aur branch me switch krna pdega.
+
+
+
+
+
+
 
 Q4. What type of version control system is Git?
  - Git is a Distributed Version Control System (DVCS).
