@@ -1,210 +1,145 @@
-########################################
-What is SDLC : Software development lifecycle
-########################################
+What is Jira ?
+- Jira ek project management, issue tracking tool aur team collaboration ke liye use hota hai.
+- developed by Atlassian.
+- Development me Jira ka use hota hai:
+                       - Tasks assign karne ke liye
+                       - Bug track karne ke liye
+                       - Feature development manage karne ke liye
+                       - Team ko pata rahe kaun kya kaam kar raha hai
+- Example (Software Development Workflow) :
+             Maan lo tum Spring Boot project bana rahe ho.
+                                             Jira me ek task create hoga:
+                                   Task:
+                                         Create User Registration API
+                                   Isme details hongi:
+                                                   Description: User register API banana hai
+                                                   Assignee: Meraz Alam
+                                                   Priority: High
+                                                   Status: To Do → In Progress → Done
+                                          Developer (tum) jab kaam start karoge to status In Progress kar doge aur complete hone par Done.
+
+HOW JIRA WORKS :
+                                                   +--------------------------+
+                                                   |                          |
++---------------------+     +-----------------+    | +----------------------+ |     +------------------+     +------------------+
+| Project Configuration| --> | Plan a Version | -->| |     Plan Sprint      | | --> |  Release Version | --> |  Wrap up Project |  
++---------------------+     +-----------------+    | +----------+-----------+ |     +------------------+     +------------------+
+                                                   |           |              |   
+                                                   |           v              |
+                                                   |     +-----------+        |
+                                                   |     | Run Sprint|        |
+                                                   |     +-----+-----+        |
+                                                   |           |              |
+                                                   |           v              |
+                                                   |      +-----------+       |
+                                                   |      | End Sprint|       |
+                                                   |      +-----+-----+       |
+                                                   |                          |
+                                                   +--------------------------+
+                                                             Users
+
+1️⃣ Project Configuration
+Meaning:  
+      - Project ka initial setup.
+      - Manager kya karta hai:
+                        - Project create karta hai
+                        - Issue types define karta hai (Bug, Task, Story)
+                        - Workflow set karta hai
+                        - Permissions aur roles set karta hai
+    👉 Simple: Project ka environment ready kiya jata hai.
 
 
--> SDLC Represents Phases involved in software project execution
-
--> We have several phases in SDLC 
-
-	1) Requirements Gathering / Requirement Collection
-	
-	2) Analysis Of Requirement
-	
-	3) Design
-	
-	4) Development
-	
-	5) Testing
-	
-	6) Deployment
-	
-	7) Support
-
-###################################
-Important Terminologies in Agile
-###################################
-
-==================
-Agile Terminology
-==================
-
-1) **Backlog**  
-2) **Backlog Grooming (Refinement)/Backlog Planning**
-2) **user Story**  
-3) **Story Points**  
-4) **Sprint Planning**  
-5) **Sprint**  
-6) **Scrum call** / **Standup meeting**/** Daily Status Call **
-7) **Retrospective**  
-
-##**Backlog Grooming (Refinement)/Backlog Planning**##
-
-Purpose: To refine and estimate user stories before sprint planning.
-🔹 Who Attends? Product Owner, Scrum Master, Developers, Testers.
-🔹 Activities:
-✅ Discuss user stories in detail.
-✅ Break down large stories into smaller ones.
-✅ Assign story points using techniques like planning poker.
-✅ Ensure stories have clear acceptance criteria.
-✅ unnecessary backlog items.
-
-
-### **Backlog**  
-Backlog contains all pending stories and bug fixes.  
-
-Examples:
-
-#################################
-User Story for Login Feature
-#################################
-
-Issue Type: User Story
-Summary: User should be able to log in to the application
-Priority: High
-Status: Backlog
-Sprint: Not Assigned
-Assignee: Developer A
-Description:
-As a registered user, I want to log in using my email and password so that I can access my account and personalized features.
-
-Acceptance Criteria:
-✅ The login page should have fields for email and password.
-✅ Users should be able to enter their credentials and click the Login button.
-✅ The system should validate the credentials against the database.
-✅ If credentials are correct, the user is redirected to the dashboard/homepage.
-✅ If credentials are incorrect, an error message should be displayed.
-✅ The "Forgot Password" option should allow users to reset their password.
-✅ Login should work on both desktop and mobile devices.
-
-Technical Details:
-Use JWT Authentication for security.
-Implement login API (POST /api/login).
-Ensure compatibility with OAuth (Google, Facebook login) if required.
-Logging and monitoring of failed login attempts.
-Labels: Authentication, Login, Security
-Attachments:
-(Screenshots, API documentation, or mockups can be attached)
+2️⃣ Plan a Version
+Meaning:
+      - Product ka next release version decide kiya jata hai.
+      - Manager kya karta hai:
+                     - Version name define karta hai (example: v1.0, v2.0)
+                     - Us version me kaun-kaun se features aayenge decide karta hai
+                     - Deadline set karta hai
+👉 Simple: Next software release ke liye planning.
 
 
 
-
-##########################
-Example Of Bug Template
-##########################
-
-Bug Details for JIRA Backlog
-Issue Key: BUG-101
-Issue Type: Bug
-Summary: Login button not working on mobile
-Priority: High
-Status: Backlog
-Sprint: Not Assigned
-Assignee: Developer A
-Description:
-Steps to Reproduce:
-
-Open the application on a mobile device (Android/iOS).
-Navigate to the login screen.
-Tap the "Login" button after entering credentials.
-Expected Result:
-
-The user should be logged in successfully.
-Actual Result:
-
-The login button is unresponsive and does not trigger the authentication process.
-Attachments:
-(Screenshots, logs, or recordings can be added here)
-
-Labels: UI, Mobile, Login-Issue
-___________________________________________________________________________________________________
-### **Story**  
-For task, a **user story** is created in JIRA to track the work that needs to be completed.  
-
-### **Story Points**  
-Story points are used to estimate the **effort and time required** to complete a story.  "Template of User Story is As a user, I want, So that"
-
-This below example for points duration will vary
-
-        - 1 day of work  → 3 points  
-        - 2 days of work → 6 points  
-        - 3 days of work → 9 points  
-
-**Note:** Every team member has access to JIRA to create and manage stories in the backlog.  
-
-### **Sprint Planning**  
-Sprint Planning is the process of selecting **stories** from the backlog to work on during the next sprint and time duration required to complete that.  
-
-### **Sprint**  
-A sprint is a **fixed time period (2 weeks to 4 weeks)** in which a team works on a set of selected user stories to **develop, test, and deliver** the features.  
-
-#### **Status call / Standup meeting / Daily Standups (Scrum Calls) etc**
-What they worked on yesterday
-What they plan to do today
-Any blockers or challenges
+3️⃣ Plan Sprint
+Meaning:
+       - Agla sprint (2–3 weeks ka development cycle) plan kiya jata hai.
+       - Manager / Scrum Master
+                   - Backlog se issues select karta hai
+                   - Team members ko tasks assign karta hai
+                   - Sprint goal decide karta hai
+👉 Simple: Sprint me kya kaam hoga wo decide hota hai.
 
 
-### **Retrospective meeting** is used to discuss about sprints feedback.
 
-		- what went well
-		- what went wrong
-		- lessons learnt
-		- new ideas to improvise next sprint
-
-
-###################
-Jira
-###################
-
-- JIRA is a **task and project management software** designed for tracking work progress efficiently.  
-- It also serves as a **bug tracking system** to log and manage software defects.  
-- Developed by **Atlassian**, it is widely used in Agile development.  
-- JIRA is a **paid tool**, but a free trial version is available for learning and practice.  
-
-################Git Repository Creation Request########################
-
-**Subject:** MMT Project | Request for Git Repository Creation  
-
-**To:** mmt.devops@fnf.com  
-**CC:** mmt.development@fnf.com  
-
-**Body:**  
-
-Hi Team,  
-
-Hope you’re doing well.  
-
-As part of the mmt project development, we need a Git repository for source code integration. Kindly create the repository and share the repository URL with us at your earliest convenience.  
-
-@mike - Please review and approve this request.  
-
-Looking forward to your confirmation.  
-
-Best Regards,  
-Pankaj  
+4️⃣ Run Sprint
+Meaning:
+      - Team actual development ka kaam karti hai.
+      - Users (Developers/Testers):
+                              - Coding karte hain
+                              - Bugs fix karte hain
+                              - Tasks complete karte hain
+                              - Daily stand-up meetings hoti hain
+👉 Simple: Development ka real work yahan hota hai.
 
 
-###########################Scrum Call Update ############################### 
 
-**Subject:** Pankaj | Scrum Call Update  
+5️⃣ End Sprint
+Meaning:
+      - Sprint finish hone par review aur retrospective hota hai.
+      - Team :
+             - Completed tasks check karti hai
+             - Demo deti hai
+             - Jo incomplete hai wo backlog me wapas chala jata hai
+👉 Simple: Sprint ka result evaluate hota hai.
 
-**To:** mike.k@fnf.com  
-**CC:** mmt.development@fnf.com  
 
-**Body:**  
 
-Hi mike,  
+6️⃣ Release Version
+Meaning:
+       - Jo features sprint me complete hue hain unko software release me convert kiya jata hai.
+       - Manager / DevOps:
+                     - Build create karte hain
+                     - Production me deploy karte hain
+👉 Simple: Software ka new version users ko milta hai.
 
-Hope you're doing well.  
 
-I won’t be able to attend today’s Scrum call due to a personal emergency. Below is my current work status:  
 
-  - **Story-5:** Jenkins Pipeline setup (**In Progress**)  
-  - Expected to be completed by 3rd march 2025  
-  - No blockers/challenges at the moment  
+7️⃣ Wrap up Project
+Meaning:
+      - Project ke remaining tasks close kiye jate hain.
+      - Manager :
+               - Reports generate karta hai
+               - Documentation close karta hai
+               - Project archive karta hai
+👉 Simple: Project officially complete ho jata hai.
 
-Please let me know if any further details are required.  
 
-Best Regards,  
-Pankaj  
-	
+
+
+Jira me common issue types
+                    Epic → bada feature
+                    Story → ek feature ka part
+                    Task → normal kaam
+                    Bug → error ya problem
+       Example:
+                    Epic: User Management
+                    Story: User Registration
+                    Task: Create registration API
+                    Bug: Email validation not working
+
+
+Jira me common boards
+        Scrum Board → sprint based development
+        Kanban Board → continuous workflow
+
+
+Developer ke perspective se
+Developer Jira me:
+             - assigned tickets dekhta hai
+             - code likhta hai
+             - commit karta hai
+             - ticket ka status update karta hai.
+
+
+
+
