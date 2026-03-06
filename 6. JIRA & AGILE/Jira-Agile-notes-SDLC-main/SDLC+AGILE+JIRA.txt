@@ -115,6 +115,25 @@ Meaning:
 
 
 
+What is Jira Instance ?
+- Jira Instance ka matlab, Jira ko kitne types se use kr skte hai .
+- There are two ways to use Jira :
+            - Server Instance.
+            - Cloud Instance.
+👉  Server Instance :
+                    - Purches Paid Jira Software version, setup Jira Software on your hosting server. eg- jira.yourhosting.com
+                    - need to manage and update time to time.
+                    - if you have a big project and a big team then only use server instance.
+👉  Cloud Instance:
+                    - setup jira software on atlassian.com(jira cloud only)
+                    - no server cost.
+                    - no security code.
+                    - no need to update time to time.
+                    - best for learning -> create Account and setup project.
+
+
+
+
 
 Jira me common issue types
                     Epic → bada feature
