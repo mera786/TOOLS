@@ -134,7 +134,57 @@ What is Jira Instance ?
 
 PROJECT MENU AND OPTIONS
 -------------------------
-What is Epic ?
+
+Project me member add karna + role assign karna in Jira ?
+Login Jira
+     ↓
+Go to "Projects"
+     ↓
+Open Your Project
+     ↓
+Click "Project Settings"
+     ↓
+Click "People"
+     ↓
+Click "Add People"
+     ↓
+Enter User Name / Email
+     ↓
+Select Project Role
+ (Admin / Developer / Member / Viewer etc.)
+     ↓
+Click "Add"
+     ↓
+User Added to Project with Selected Role
+
+✅ SUMMARY :
+1️⃣ Short Title
+             - Issue ka chhota aur clear title hota hai.
+2️⃣ Main Idea
+             - Task ya bug kis bare me hai, ye quickly batata hai.
+3️⃣ Mandatory Field
+             - Jira me issue create karte waqt summary fill karna required hota hai.
+4️⃣ Quick Identification
+             - Team members issue list me summary dekhkar samajh jate hain task kya hai.
+5️⃣ Search & Tracking
+             - Issues ko search aur track karna easy ho jata hai.
+
+✅TIMELINE :
+1️⃣ Time-based view
+           - Tasks ko calendar timeline par dikhaya jata hai (week / month basis).
+2️⃣ Start & End Dates
+           - Har issue ya epic ke liye start date aur due date set ki ja sakti hai.
+3️⃣ Planning Tool
+           - Project manager ya team lead future work plan kar sakte hain.
+4️⃣ Dependency Tracking
+           - Ek task dusre task par depend karta hai to timeline me dikhaya ja sakta hai.
+5️⃣ Drag & Drop Scheduling
+           - Timeline me task ko drag karke date change bhi kar sakte hain.
+6️⃣ Project Progress Visibility
+           - Team easily dekh sakti hai kaunsa task chal raha hai aur kaunsa pending hai.
+
+
+✅ Epic 
 Epic = Bada kaam / bada feature
 jisko baad me chhote-chhote tasks ya user stories me tod diya jata hai.
 Example
@@ -145,6 +195,200 @@ Agar tum ek E-commerce project bana rahe ho:
 | **Story / Task** | Login API banana           |
 | **Story / Task** | Registration API banana    |
 | **Story / Task** | Forgot Password feature    |
+
+
+✅ Backlog 
+1️⃣ Pending Work List
+              - Backlog me sabhi upcoming tasks rakhe jate hain.
+2️⃣ Sprint Planning
+              - Team backlog se issues select karke sprint me add karti hai.
+3️⃣ Prioritization
+              - Product owner tasks ko priority ke according arrange karta hai.
+4️⃣ Future Work Management
+              - Jo work abhi sprint me nahi hai wo backlog me rehta hai.
+5️⃣ Refinement
+              - Team backlog ko review aur update karti rehti hai (backlog grooming).
+
+
+
+✅ Board 
+1️⃣ Visual Task View
+                - Tasks ko columns me visually dikhaya jata hai.
+2️⃣ Workflow Tracking
+                - Issue To Do → In Progress → Done stages me move hota hai.
+3️⃣ Sprint Management
+                - Scrum teams active sprint ke tasks board par track karti hain.
+4️⃣ Drag & Drop
+                - Issues ko drag karke next status me move kiya ja sakta hai.
+5️⃣ Team Collaboration
+                - Team members easily dekh sakte hain kaun sa task kis stage me hai.
+
+
+
+
+✅ Calender
+1️⃣ Date-based View
+                - Tasks ko calendar dates par visually show kiya jata hai.
+2️⃣ Due Date Tracking
+                - Team easily dekh sakti hai kaunsa task kab due hai.
+3️⃣ Planning Tool
+                - Future tasks ko schedule aur plan karne me help karta hai.
+4️⃣ Better Visibility
+                - Project manager ko deadlines aur workload clearly dikhai deta hai.
+5️⃣ Task Management
+                - Team members important dates aur upcoming tasks track kar sakte hain.
+
+✅ List
+1️⃣ Table Format View
+                - Issues rows aur columns me dikhte hain (jaise Excel table).
+2️⃣ Quick Overview
+                - Ek hi screen par multiple tasks ki details dekh sakte ho.
+3️⃣ Sorting & Filtering
+                - Tasks ko priority, status, assignee ke according filter ya sort kar sakte ho.
+4️⃣ Bulk Management
+                - Ek saath multiple issues update karna easy hota hai.
+5️⃣ Better Organization
+                - Team ko tasks ka structured view milta hai.
+
+
+✅ All Work 
+1️⃣ Complete Task View
+                - Yahan project ke saare issues (tasks, bugs, stories, epics) dikhte hain.
+2️⃣ Centralized Access
+                - Team ek hi place se sabhi work items dekh sakti hai.
+3️⃣ Filtering & Sorting
+                - Issues ko status, assignee, priority ya type ke according filter kiya ja sakta hai.
+4️⃣ Quick Tracking
+                - Managers aur team easily overall project work track kar sakte hain.
+5️⃣ Work Visibility
+                - Pata chal jata hai kaunsa task kis stage me hai aur kis ko assign hai.
+
+
+
+✅ Development
+1️⃣ Code Integration
+                - Jira ko GitHub, Bitbucket, GitLab jaise repositories se connect kiya ja sakta hai.
+2️⃣ Commit Tracking
+                - Developer jab issue key (jaise ABC-101) commit message me likhta hai to commit Jira issue se link ho jata hai.
+3️⃣ Branch Visibility
+                - Issue ke liye kaunsi branch create hui hai wo yahan show hoti hai.
+4️⃣ Pull Request Tracking
+                - Related pull requests aur merge status bhi dikhai deta hai.
+5️⃣ Development Progress
+                - Team easily dekh sakti hai issue par kitna development work ho chuka hai.
+
+
+
+✅ Code 
+1️⃣ Code Integration
+                - Jira ko Git repositories (GitHub, Bitbucket, GitLab) se integrate kiya ja sakta hai.
+2️⃣ Commit Tracking
+                - Agar developer commit message me issue key (jaise ABC-123) likhta hai to wo automatically Jira issue se link ho jata hai.
+3️⃣ Branch Visibility
+                - Issue me kaunsi branch create hui hai ye bhi dikhai deta hai.
+4️⃣ Pull Request Tracking
+                - Issue se related pull requests bhi show hote hain.
+5️⃣ Developer Collaboration
+                - Team easily samajh sakti hai issue ke liye kya code change hua hai.
+
+
+
+✅ Page
+1️⃣ Information View
+                - Page par project ya issue ki details dikhai deti hain.
+2️⃣ Different Pages
+                - Jira me alag-alag pages hote hain jaise Backlog page, Board page, Timeline page, Issue page.
+3️⃣ Navigation
+                - Users sidebar ya menu se different pages par navigate kar sakte hain.
+4️⃣ Feature Access
+                - Har page me specific tools aur options available hote hain.
+5️⃣ Work Management
+                - Team members pages ka use karke tasks dekhte, update karte aur manage karte hain.
+
+
+✅ Shortcut
+1️⃣ Quick Navigation
+                - Important pages ya links ko direct open karne me help karta hai.
+2️⃣ Custom Links
+                - Project admin custom shortcut links add kar sakta hai.
+3️⃣ External Resources
+                - Documentation, Git repo, dashboards jaise external links add kiye ja sakte hain.
+4️⃣ Time Saving
+                - Baar-baar search karne ki jagah direct shortcut se access mil jata hai.
+5️⃣ Team Convenience
+                - Team members ko frequently used resources easily mil jate hain.
+
+
+AGILE METHODLOGY
+-----------------
+
+What is Methodlogy in software developement ?
+The software development methodology is a process by which developers design, implement and test new computer Software Projects
+Eg
+How to develop and test Project
+How to release the project
+How to manage roadmap and Project milestones
+
+
+What is Agile(फुर्तीला) Methodology ?
+The Agile methodology is a way to manage a project by breaking it up into several phases.
+Step Example.
+Make a plan for 15 days.
+Development for plan.
+Test project according to the plan.
+Make feedback from the customer.
+Start Next plan.
+
+Agile Framework :
+         - Scrum Framework
+         - Kanban Framework
+         - Extreme Programming etc
+
+
+Agile Principle :
+12 PRINCIPLES to keep in minds
+      - SATISFY THE CUSTOMER
+      - WELCOME CHANGING REQUIREMENTS
+      - DELIVER WORKING SOFTWARE FREQUENTLY
+      - BUSINESS WORKS WITH DEVELOPERS DAILY
+      - BUILD PROJECTS AROUND MOTIVATED INDIVIDUALS
+      - FACE-TO-FACE CONVERSATION BEST
+      - #WORKING SOFTWARE MATTERS
+      - CONSTANT PACE
+      - HIGH QUALITY CODE IS FASTER
+      - MAXIMIZE WORK NOT DONE
+      - SELF-ORGANIZING TEAMS DELIVER QUALITY
+      - FEEDBACK LOOPS USED TO IMPROVE
+
+
+Agile Alternatives :
+      - Waterfall methodology
+      - Rapid Development
+      - Lean etc
+
+
+
+The Scrum :
+      - Scrum is a framework of agile methodology.
+      - Helps teams structure and manage their work through a set of values.
+
+Basic Rules in Scrum :
+      - Every Sprint is Four Weeks or Less in Duration
+      - There are no Breaks Between Sprints
+      - The Intention of Every Sprint is "Potentially Shippable" Software
+      - Every Sprint includes Sprint Review for stakeholder feedback on the product
+Roles in Scrum :
+      - Product owner,
+      - Scrum master,
+      - Development team members
+
+VIDEO NO.8
+
+
+
+
+
+
 
 
 
