@@ -132,6 +132,22 @@ What is Jira Instance ?
                     - best for learning -> create Account and setup project.
 
 
+PROJECT MENU AND OPTIONS
+-------------------------
+What is Epic ?
+Epic = Bada kaam / bada feature
+jisko baad me chhote-chhote tasks ya user stories me tod diya jata hai.
+Example
+Agar tum ek E-commerce project bana rahe ho:
+| Level            | Example                    |
+| ---------------- | -------------------------- |
+| **Epic**         | User Authentication System |
+| **Story / Task** | Login API banana           |
+| **Story / Task** | Registration API banana    |
+| **Story / Task** | Forgot Password feature    |
+
+
+
 
 
 
